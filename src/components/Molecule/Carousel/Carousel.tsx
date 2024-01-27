@@ -18,8 +18,8 @@ import {
 export default function Carousel() {
   const navigationNextRef = useRef(null);
   const navigationPrevRef = useRef(null);
-  const progressCircle = useRef(null);
-  const progressContent = useRef(null);
+  const progressCircle: React.RefObject<any> = React.createRef();
+  const progressContent: React.RefObject<any> = React.createRef();
   const onAutoplayTimeLeft = (s:any, time:any, progress:any) => {
     progressCircle.current.style.setProperty("--progress", 1 - progress);
     progressContent.current.textContent = `${Math.ceil(time / 1000)}s`;
