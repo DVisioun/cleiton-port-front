@@ -11,14 +11,18 @@
   --color-bg-primary: #232325;
   --color-text-primary: #F2F2F2;
   --color-text-secondary: #C4A567;
+  --color-text-hover: #C4A567;
   --color-bg-secondary: #323232;
+  --box-shadow-primary: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
 }
 
 .light{
   --color-bg-primary: #F2F2F2;
   --color-text-primary: #232325;
   --color-text-secondary: #323232;
+  --color-text-hover: #C4A567;
   --color-bg-secondary: #E9E9E9;
+  --box-shadow-primary: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
 :root {
