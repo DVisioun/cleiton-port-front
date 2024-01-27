@@ -9,8 +9,8 @@ export default function Home() {
       <ThemeProvider initialTheme='light'>
         <main>
           <div className="flex justify-center items-center flex-col min-h-screen">
-            <h1 className="text-3xl font-bold">Em breve</h1>
-            <h4 className="font-q text-secondary">Cleiton Moreira Portfólio</h4>
+            <h1 className="text-5xl font-bold">Em breve</h1>
+            <h4 className="text-2xl font-q text-secondary">Cleiton Moreira Portfólio</h4>
           </div>
         </main>
       </ThemeProvider>
