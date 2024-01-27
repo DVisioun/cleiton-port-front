@@ -20,7 +20,11 @@ const config: Config = {
       },
       textColor: {
         primary: 'var(--color-text-primary)',
-        secondary: 'var(--color-text-secondary)'
+        secondary: 'var(--color-text-secondary)',
+        hover: 'var(--color-text-hover)'
+      },
+      boxShadow: {
+        header: 'var(--box-shadow-primary)'
       }
     },
   },
