@@ -4,7 +4,6 @@ import React, { createContext, useEffect, useState } from "react";
 const getInitialTheme = () => {
     if(typeof window !== 'undefined' && window.localStorage) {
         const storedPrefs = window.localStorage.getItem('color-theme');
-        console.log(storedPrefs);
         if(typeof storedPrefs === 'string') {
             return storedPrefs;
         }

@@ -16,6 +16,7 @@ const config: Config = {
       },
       backgroundColor: {
         primary: 'var(--color-bg-primary)',
+        opacity: 'var(--color-bg-primary-opacity)',
         secondary: 'var(--color-bg-secondary)'
       },
       textColor: {
@@ -24,7 +25,8 @@ const config: Config = {
         hover: 'var(--color-text-hover)'
       },
       boxShadow: {
-        header: 'var(--box-shadow-primary)'
+        header: 'var(--box-shadow-primary)',
+        shadow: 'var(--box-shadow-secondary)'
       }
     },
   },
