@@ -20,7 +20,7 @@ export default function Carousel() {
   const navigationPrevRef = useRef(null);
   const progressCircle = useRef(null);
   const progressContent = useRef(null);
-  const onAutoplayTimeLeft = (s, time, progress) => {
+  const onAutoplayTimeLeft = (time, progress) => {
     progressCircle.current.style.setProperty("--progress", 1 - progress);
     progressContent.current.textContent = `${Math.ceil(time / 1000)}s`;
   };
