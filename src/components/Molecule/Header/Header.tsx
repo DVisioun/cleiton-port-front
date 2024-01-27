@@ -16,7 +16,7 @@ export default function Header() {
   },[theme]);
 
   return (
-    <div className='w-full h-24 bg-primary absolute top-0 px-20 flex items-center justify-between shadow-header'>
+    <div className='w-full h-24 bg-opacity hover:bg-primary absolute top-0 px-20 flex items-center justify-between shadow-header'>
         <div className='flex items-center'>
           {!darkMode && <Image src={BlackLogo} alt="Logo" height={64} width={55} />}
           {darkMode && <Image src={WhiteLogo} alt="Logo" height={64} width={55} />}
