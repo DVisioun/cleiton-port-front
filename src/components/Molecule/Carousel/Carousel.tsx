@@ -20,11 +20,8 @@ export default function Carousel() {
   const navigationPrevRef = useRef(null);
   const progressCircle = useRef(null);
   const progressContent = useRef(null);
-  const onAutoplayTimeLeft = (time: number, progress: number) => {
-    progressCircle.current.style.setProperty(
-      "--progress",
-      String(1 - progress)
-    );
+  const onAutoplayTimeLeft = (time, progress) => {
+    progressCircle.current.style.setProperty("--progress", 1 - progress);
     progressContent.current.textContent = `${Math.ceil(time / 1000)}s`;
   };
 
@@ -33,10 +30,6 @@ export default function Carousel() {
     renderBullet: function (index, className) {
       return '<span class="' + className + '">' + (index + 1) + "</span>";
     },
-  };
-
-  const goNext = () => {
-    console.log("teste");
   };
 
   return (
