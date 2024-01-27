@@ -1,6 +1,25 @@
+/*--------------------------- FONTS --------------------------*/
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Qwigley&display=swap&v=1');
+
+/*--------------------------- TailwindConfig --------------------------*/
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.dark{
+  --color-bg-primary: #232325;
+  --color-text-primary: #F2F2F2;
+  --color-text-secondary: #C4A567;
+  --color-bg-secondary: #323232;
+}
+
+.light{
+  --color-bg-primary: #F2F2F2;
+  --color-text-primary: #232325;
+  --color-text-secondary: #323232;
+  --color-bg-secondary: #E9E9E9;
+}
 
 :root {
   --foreground-rgb: 0, 0, 0;
@@ -8,7 +27,7 @@
   --background-end-rgb: 255, 255, 255;
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: light) {
   :root {
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 0, 0, 0;
@@ -16,12 +35,12 @@
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+*{
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+.font-q{
+  font-family: 'Qwigley', cursive;
 }
