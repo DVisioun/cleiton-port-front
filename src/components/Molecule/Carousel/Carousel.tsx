@@ -20,17 +20,21 @@ export default function Carousel() {
   const navigationPrevRef = useRef(null);
   const progressCircle = useRef(null);
   const progressContent = useRef(null);
-  const onAutoplayTimeLeft = (time, progress) => {
+  const onAutoplayTimeLeft = (s:any, time:any, progress:any) => {
     progressCircle.current.style.setProperty("--progress", 1 - progress);
     progressContent.current.textContent = `${Math.ceil(time / 1000)}s`;
   };
 
   const pagination = {
     clickable: true,
-    renderBullet: function (index, className) {
+    renderBullet: function (index:any, className:any) {
       return '<span class="' + className + '">' + (index + 1) + "</span>";
     },
   };
+
+  const goNext = () => {
+    console.log("teste");
+  }
 
   return (
     <>
