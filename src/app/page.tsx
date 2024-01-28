@@ -2,7 +2,10 @@
 import ThemeProvider from "@/hooks/ThemeContext";
 import Header from "@/components/Molecule/Header/Header";
 import ConfigContent from "@/components/Molecule/ConfigContent/ConfigContent";
+<<<<<<< Updated upstream
 import Carousel from "@/components/Molecule/Carousel/Carousel";
+=======
+>>>>>>> Stashed changes
 
 export default function Home() {
   return (
