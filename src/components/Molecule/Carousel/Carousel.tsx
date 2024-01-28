@@ -32,9 +32,13 @@ export default function Carousel() {
     },
   };
 
-  const goNext = () => {
-    console.log("teste");
-  }
+  const handlePrevClick = () => {
+    //Swiper.get('.home').slidePrev();
+  };
+  
+  const handleNextClick = () => {
+    //Swiper.get('.home').slideNext();
+  };
 
   return (
     <>
@@ -74,12 +78,12 @@ export default function Carousel() {
         </div>
       </Swiper>
       <div className="absolute bottom-[1.8rem] left-12">
-        <button ref={navigationPrevRef}>
+        <button ref={navigationPrevRef} onClick={handlePrevClick}>
           <FontAwesomeIcon icon={faChevronLeft} className="icon_navigation" />
         </button>
       </div>
       <div className="absolute bottom-[1.8rem] left-[9.5rem]">
-        <button ref={navigationNextRef}>
+        <button ref={navigationNextRef} onClick={handleNextClick}>
           <FontAwesomeIcon icon={faChevronRight} className="icon_navigation" />
         </button>
       </div>
