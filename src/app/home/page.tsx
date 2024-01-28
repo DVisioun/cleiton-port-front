@@ -1,5 +1,4 @@
 "use client";
-import ThemeProvider from "@/hooks/ThemeContext";
 import Header from "@/components/Molecule/Header/Header";
 import ConfigContent from "@/components/Molecule/ConfigContent/ConfigContent";
 import Carousel from "@/components/Molecule/Carousel/Carousel";
