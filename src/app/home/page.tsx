@@ -1,4 +1,4 @@
-"use client";
+/*"use client";
 import Header from "@/components/Molecule/Header/Header";
 import ConfigContent from "@/components/Molecule/ConfigContent/ConfigContent";
 import Carousel from "@/components/Molecule/Carousel/Carousel";
@@ -15,4 +15,14 @@ export default function Home() {
       </main>
     </div>
   );
+}*/
+
+import React from 'react'
+
+function page() {
+  return (
+    <div>page</div>
+  )
 }
+
+export default page
