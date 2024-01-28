@@ -8,7 +8,7 @@ import Navbar from '@/components/Atom/Navbar/Navbar';
 import NavbarSocial from '@/components/Atom/NavbarSocial/NavbarSocial';
 
 export default function Header() {
-  const { theme, setTheme } = useContext(ThemeContext);
+  const { theme, setTheme} = useContext(ThemeContext);
   const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
@@ -16,7 +16,7 @@ export default function Header() {
   },[theme]);
 
   return (
-    <div className='w-full h-24 bg-opacity hover:bg-primary absolute top-0 px-20 flex items-center justify-between shadow-header'>
+    <div className='w-full h-24 bg-opacity hover:bg-primary absolute top-0 px-20 flex items-center justify-between shadow-header text-primary'>
         <div className='flex items-center'>
           {!darkMode && <Image src={BlackLogo} alt="Logo" height={64} width={55} />}
           {darkMode && <Image src={WhiteLogo} alt="Logo" height={64} width={55} />}

@@ -26,7 +26,8 @@ const config: Config = {
       },
       boxShadow: {
         header: 'var(--box-shadow-primary)',
-        shadow: 'var(--box-shadow-secondary)'
+        shadow: 'var(--box-shadow-secondary)',
+        card: 'var(--box-shadow-card)'
       }
     },
   },

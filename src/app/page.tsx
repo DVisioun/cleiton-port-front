@@ -1,7 +1,7 @@
 "use client";
 import ThemeProvider from "@/hooks/ThemeContext";
 import ConfigContent from "@/components/Molecule/ConfigContent/ConfigContent";
-
+import Carousel from "@/components/Molecule/Carousel/Carousel";
 
 export default function Home() {
   return (
