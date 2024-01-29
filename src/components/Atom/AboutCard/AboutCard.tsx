@@ -9,10 +9,10 @@ import {
   Card,
   Image,
 } from "semantic-ui-react";
-import NavbarSocial from "../NavbarSocial/NavbarSocial";
+import NavbarSocialBlack from "../NavbarSocial/NavbarSocialBlack";
 
 const AboutCard = () => (
-  <Card className="!shadow-card sticky">
+  <Card className="!shadow-card !sticky !top-5">
     <div className="flex justify-center p-4">
       <Image src={"/images/avatar.jpg"} className="w-2/3 rounded-full"/>
     </div>
@@ -23,7 +23,7 @@ const AboutCard = () => (
       </CardMeta>
       <CardDescription className=" !mt-5 ">
         <div>
-            <NavbarSocial />
+            <NavbarSocialBlack />
         </div>
       </CardDescription>
     </CardContent>
