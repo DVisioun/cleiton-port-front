@@ -8,6 +8,9 @@ import Title from "@/components/Atom/Title/Title";
 import TextAbout from "@/components/Atom/TextAbout/TextAbout";
 import TextSkills from "@/components/Atom/TextSkills/TextSkills";
 import Softwares from "@/components/Molecule/Softwares/Softwares";
+import CardPortfolio from "@/components/Atom/CardPortfolio/CardPortfolio";
+import Experience from "@/components/Molecule/Experience/Experience";
+import Education from "@/components/Molecule/Education/Education";
 
 function page() {
   return (
@@ -16,7 +19,7 @@ function page() {
         <Header />
         <ConfigContent />
         <div className="px-20">
-          <div className="mt-40">
+          <div className="mt-40 pb-20">
             <Grid>
               <GridRow columns={2} only="large screen">
                 <GridColumn width={3}>
@@ -30,7 +33,9 @@ function page() {
                   <Title title="Softwares" />
                   <Softwares />
                   <Title title="Experience" />
+                  <Experience />
                   <Title title="Education" />
+                  <Education />
                 </GridColumn>
               </GridRow>
             </Grid>
