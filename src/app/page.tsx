@@ -9,9 +9,11 @@ export default function Home() {
       <ThemeProvider initialTheme="light">
         <main>
           <ConfigContent />
-          <div className="flex justify-center items-center flex-col min-h-screen">
+          <div className="flex min-h-screen flex-col items-center justify-center">
             <h1 className="text-8xl">Em breve</h1>
-            <h4 className="text-5xl font-q text-secondary">Kleytow Moreira Portfolio</h4>
+            <h4 className="font-alt text-5xl text-secondary">
+              Kleytow Moreira Portfolio
+            </h4>
           </div>
         </main>
       </ThemeProvider>

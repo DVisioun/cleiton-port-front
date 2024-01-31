@@ -29,7 +29,11 @@ const config: Config = {
         shadow: 'var(--box-shadow-secondary)',
         card: 'var(--box-shadow-card)',
         software: 'var(--box-shadow-software)'
-      }
+      },
+      fontFamily: {
+        sans: 'var(--font-poppins)',
+        alt: 'var(--font-qwigley)'
+      }, 
     },
   },
   plugins: [],
