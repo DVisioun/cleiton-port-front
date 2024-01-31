@@ -1,44 +1,42 @@
-import React, { useRef } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
-import "./index.css";
-import { Autoplay, Pagination, Navigation } from "swiper/modules";
-import Image from "next/image";
-import Slider1 from "../../../../public/images/background_home.jpg";
-import Slider2 from "../../../../public/images/background_home_2.jpg";
-import Slider3 from "../../../../public/images/background_home_3.jpg";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useRef } from 'react'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import 'swiper/css'
+import 'swiper/css/pagination'
+import 'swiper/css/navigation'
+import './index.css'
+import { Autoplay, Pagination, Navigation } from 'swiper/modules'
+import Image from 'next/image'
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faChevronLeft,
   faChevronRight,
-} from "@fortawesome/free-solid-svg-icons";
+} from '@fortawesome/free-solid-svg-icons'
 
 export default function Carousel() {
-  const navigationNextRef = useRef(null);
-  const navigationPrevRef = useRef(null);
-  const progressCircle: React.RefObject<any> = React.createRef();
-  const progressContent: React.RefObject<any> = React.createRef();
-  const onAutoplayTimeLeft = (s:any, time:any, progress:any) => {
-    progressCircle.current.style.setProperty("--progress", 1 - progress);
-    progressContent.current.textContent = `${Math.ceil(time / 1000)}s`;
-  };
+  const navigationNextRef = useRef(null)
+  const navigationPrevRef = useRef(null)
+  const progressCircle: React.RefObject<any> = React.createRef()
+  const progressContent: React.RefObject<any> = React.createRef()
+  const onAutoplayTimeLeft = (s: any, time: any, progress: any) => {
+    progressCircle.current.style.setProperty('--progress', 1 - progress)
+    progressContent.current.textContent = `${Math.ceil(time / 1000)}s`
+  }
 
   const pagination = {
     clickable: true,
-    renderBullet: function (index:any, className:any) {
-      return '<span class="' + className + '">' + (index + 1) + "</span>";
+    renderBullet: function (index: any, className: any) {
+      return '<span class="' + className + '">' + (index + 1) + '</span>'
     },
-  };
+  }
 
   const handlePrevClick = () => {
-    //Swiper.get('.home').slidePrev();
-  };
-  
+    // Swiper.get('.home').slidePrev();
+  }
+
   const handleNextClick = () => {
-    //Swiper.get('.home').slideNext();
-  };
+    // Swiper.get('.home').slideNext();
+  }
 
   return (
     <>
@@ -47,7 +45,7 @@ export default function Carousel() {
         slidesPerView={1}
         centeredSlides={true}
         loop={true}
-        style={{ height: "100vh" }}
+        style={{ height: '100vh' }}
         autoplay={{
           delay: 7000,
           disableOnInteraction: false,
@@ -62,13 +60,28 @@ export default function Carousel() {
         className="home"
       >
         <SwiperSlide>
-          <Image src={Slider1} alt="" />
+          <Image
+            src={'/images/background_home.jpg'}
+            className="h-screen w-screen object-cover"
+            fill={true}
+            alt=""
+          />
         </SwiperSlide>
         <SwiperSlide>
-          <Image src={Slider2} alt="" />
+          <Image
+            src={'/images/background_home_2.jpg'}
+            alt=""
+            className="h-screen w-screen object-cover"
+            fill={true}
+          />
         </SwiperSlide>
         <SwiperSlide>
-          <Image src={Slider3} alt="" />
+          <Image
+            src={'/images/background_home_3.jpg'}
+            className="h-screen w-screen object-cover"
+            fill={true}
+            alt=""
+          />
         </SwiperSlide>
         <div className="autoplay-progress" slot="container-end">
           <svg viewBox="0 0 48 48" ref={progressCircle}>
@@ -88,5 +101,5 @@ export default function Carousel() {
         </button>
       </div>
     </>
-  );
+  )
 }

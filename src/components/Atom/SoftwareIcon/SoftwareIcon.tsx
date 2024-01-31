@@ -1,18 +1,24 @@
-import Image from "next/image";
-import React from "react";
+import Image from 'next/image'
+import React from 'react'
 
 interface SoftwareIconProps {
-  title: string;
-  image: string;
+  title: string
+  image: string
 }
 
-function SoftwareIcon({ title='', image='' }: SoftwareIconProps) {
+function SoftwareIcon({ title = '', image = '' }: SoftwareIconProps) {
   return (
-    <div className="flex justify-center items-center gap-4 bg-primary p-3 rounded-lg shadow-software">
-      <Image src={image} alt={`Logo_${title}`} height={35} width={35} />
-      <p className="text-xl">{title}</p>
+    <div className="flex items-center justify-center gap-4 rounded-lg bg-secondary p-3 shadow-software duration-300 hover:scale-110">
+      <Image
+        src={image}
+        alt={`Logo_${title}`}
+        height={35}
+        width={35}
+        className="sm-1:w-8"
+      />
+      <p className="sm-1:text-base cursor-default text-xl">{title}</p>
     </div>
-  );
+  )
 }
 
-export default SoftwareIcon;
+export default SoftwareIcon

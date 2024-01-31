@@ -10,7 +10,7 @@ function CardExperience({
   date,
 }: About.CardExperienceProps) {
   return (
-    <div className="relative w-full pr-8">
+    <div className="relative w-full px-4">
       <Segment raised className="!relative !rounded-lg !bg-secondary">
         <Label
           as="a"

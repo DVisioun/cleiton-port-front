@@ -1,28 +1,22 @@
-/*"use client";
-import Header from "@/components/Molecule/Header/Header";
-import ConfigContent from "@/components/Molecule/ConfigContent/ConfigContent";
-import Carousel from "@/components/Molecule/Carousel/Carousel";
+'use client'
+
+import Header from '@/components/Molecule/Header/Header'
+import ConfigContent from '@/components/Molecule/ConfigContent/ConfigContent'
+import Carousel from '@/components/Molecule/Carousel/Carousel'
+import ThemeProvider from '@/hooks/ThemeContext'
 
 export default function Home() {
   return (
-    <div className="bg-primary text-primary">
-      <main>
-        <Carousel />
-        <div className="flex justify-center items-center flex-col min-h-screen">
-          <Header />
-          <ConfigContent />
-        </div>
-      </main>
+    <div className=" text-primary">
+      <ThemeProvider initialTheme="light">
+        <Header bgColor="bg-opacity" />
+        <main>
+          <Carousel />
+          <div className="flex min-h-screen flex-col items-center justify-center">
+            <ConfigContent />
+          </div>
+        </main>
+      </ThemeProvider>
     </div>
-  );
-}*/
-
-import React from 'react'
-
-function page() {
-  return (
-    <div>page</div>
   )
 }
-
-export default page

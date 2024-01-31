@@ -23,10 +23,16 @@ function Experience() {
   ]
 
   return (
-    <Grid className="flex flex-col flex-wrap gap-20 py-14">
-      <GridRow columns={2} only="large screen">
+    <Grid className="lg:!mx-auto lg:!py-4">
+      <GridRow columns={2}>
         {experiences.map((experience) => (
-          <GridColumn key={experience.id} columns={8} only="large screen">
+          <GridColumn
+            key={experience.id}
+            columns={8}
+            mobile={16}
+            computer={8}
+            className="pb-8"
+          >
             <CardExperience
               title={experience.title}
               company={experience.company}
