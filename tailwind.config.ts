@@ -8,6 +8,9 @@ const config: Config = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    screens: {
+      'sm-cardPortfolio-0': { min: '635px' },
+    },
     extend: {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
@@ -17,23 +20,23 @@ const config: Config = {
       backgroundColor: {
         primary: 'var(--color-bg-primary)',
         opacity: 'var(--color-bg-primary-opacity)',
-        secondary: 'var(--color-bg-secondary)'
+        secondary: 'var(--color-bg-secondary)',
       },
       textColor: {
         primary: 'var(--color-text-primary)',
         secondary: 'var(--color-text-secondary)',
-        hover: 'var(--color-text-hover)'
+        hover: 'var(--color-text-hover)',
       },
       boxShadow: {
         header: 'var(--box-shadow-primary)',
         shadow: 'var(--box-shadow-secondary)',
         card: 'var(--box-shadow-card)',
-        software: 'var(--box-shadow-software)'
+        software: 'var(--box-shadow-software)',
       },
       fontFamily: {
         sans: 'var(--font-poppins)',
-        alt: 'var(--font-qwigley)'
-      }, 
+        alt: 'var(--font-qwigley)',
+      },
     },
   },
   plugins: [],
