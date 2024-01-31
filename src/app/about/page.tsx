@@ -1,20 +1,19 @@
-import React from "react";
-import ThemeProvider from "@/hooks/ThemeContext";
-import Header from "@/components/Molecule/Header/Header";
-import { Grid, GridColumn, GridRow } from "semantic-ui-react";
-import CardExampleCard from "@/components/Atom/AboutCard/AboutCard";
-import ConfigContent from "@/components/Molecule/ConfigContent/ConfigContent";
-import Title from "@/components/Atom/Title/Title";
-import TextAbout from "@/components/Atom/TextAbout/TextAbout";
-import TextSkills from "@/components/Atom/TextSkills/TextSkills";
-import Softwares from "@/components/Molecule/Softwares/Softwares";
-import CardPortfolio from "@/components/Atom/CardPortfolio/CardPortfolio";
-import Experience from "@/components/Molecule/Experience/Experience";
-import Education from "@/components/Molecule/Education/Education";
+import React from 'react'
+import ThemeProvider from '@/hooks/ThemeContext'
+import Header from '@/components/Molecule/Header/Header'
+import { Grid, GridColumn, GridRow } from 'semantic-ui-react'
+import CardExampleCard from '@/components/Atom/AboutCard/AboutCard'
+import ConfigContent from '@/components/Molecule/ConfigContent/ConfigContent'
+import Title from '@/components/Atom/Title/Title'
+import TextAbout from '@/components/Atom/TextAbout/TextAbout'
+import TextSkills from '@/components/Atom/TextSkills/TextSkills'
+import Softwares from '@/components/Molecule/Softwares/Softwares'
+import Experience from '@/components/Molecule/Experience/Experience'
+import Education from '@/components/Molecule/Education/Education'
 
 function page() {
   return (
-    <div className="bg-primary text-primary h-full">
+    <div className="h-full bg-primary text-primary">
       <ThemeProvider initialTheme="light">
         <Header />
         <ConfigContent />
@@ -43,7 +42,7 @@ function page() {
         </div>
       </ThemeProvider>
     </div>
-  );
+  )
 }
 
-export default page;
+export default page

@@ -1,6 +1,6 @@
-import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import { faLocationDot } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import React from 'react'
 import {
   CardMeta,
   CardHeader,
@@ -8,13 +8,13 @@ import {
   CardContent,
   Card,
   Image,
-} from "semantic-ui-react";
-import NavbarSocialBlack from "../NavbarSocial/NavbarSocialBlack";
+} from 'semantic-ui-react'
+import NavbarSocialBlack from '../NavbarSocial/NavbarSocialBlack'
 
 const AboutCard = () => (
-  <Card className="!shadow-card !sticky !top-5">
+  <Card className="!sticky !top-5 !shadow-card">
     <div className="flex justify-center p-4">
-      <Image src={"/images/avatar.jpg"} className="w-2/3 rounded-full"/>
+      <Image src={'/images/avatar.jpg'} className="w-2/3 rounded-full" />
     </div>
     <CardContent>
       <CardHeader>Cleiton Moreira</CardHeader>
@@ -23,7 +23,7 @@ const AboutCard = () => (
       </CardMeta>
       <CardDescription className=" !mt-5 ">
         <div>
-            <NavbarSocialBlack />
+          <NavbarSocialBlack />
         </div>
       </CardDescription>
     </CardContent>
@@ -34,6 +34,6 @@ const AboutCard = () => (
       </div>
     </CardContent>
   </Card>
-);
+)
 
-export default AboutCard;
+export default AboutCard
