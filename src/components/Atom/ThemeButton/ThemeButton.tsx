@@ -17,7 +17,10 @@ function ThemeButton() {
       {theme === 'dark' ? (
         <FontAwesomeIcon icon={faSun} className="solid text-2xl" />
       ) : (
-        <FontAwesomeIcon icon={faMoon} className="solid text-2xl" />
+        <FontAwesomeIcon
+          icon={faMoon}
+          className="solid text-2xl text-[var(--white)]"
+        />
       )}
     </button>
   )

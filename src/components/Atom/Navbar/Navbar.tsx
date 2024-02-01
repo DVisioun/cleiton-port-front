@@ -1,9 +1,14 @@
 'use client'
 
-import { faBars } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
 import React, { useState } from 'react'
+import { Dropdown, DropdownItem, DropdownMenu, Icon } from 'semantic-ui-react'
+import {
+  faArtstation,
+  faInstagram,
+  faLinkedin,
+} from '@fortawesome/free-brands-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
@@ -14,64 +19,60 @@ function Navbar() {
 
   return (
     <nav className="ml-10 flex gap-5">
-      <div className="sm:hidden">
-        <div>
-          <FontAwesomeIcon
-            className="text-4xl text-primary duration-300 hover:text-hover hover:underline active:text-hover active:underline"
-            icon={faBars}
-            onClick={() => handleToggleHamburgerMenu()}
-          />
-          <nav
-            className={`w-full flex-col gap-2 ${isOpen ? 'flex' : 'hidden'}`}
-          >
+      <Dropdown
+        item
+        icon="list"
+        simple
+        className="sm:!hidden !z-20 pb-2 text-3xl sm-1:!flex"
+      >
+        <DropdownMenu className="!w-28 sm-1:!-translate-x-4">
+          <DropdownItem>
             <Link
-              href="/"
-              className="sm-0.1:text-sm text-xl text-primary duration-300 hover:text-hover hover:underline active:text-hover active:underline"
+              href="/home"
+              className="text-lg text-primary duration-300 hover:text-hover hover:underline active:text-hover active:underline sm-0.1:text-sm"
             >
               Home
             </Link>
+          </DropdownItem>
+          <DropdownItem>
             <Link
               href="/about"
-              className="sm-0.1:text-sm text-xl text-primary duration-300 hover:text-hover hover:underline"
+              className="text-lg text-primary duration-300 hover:text-hover hover:underline sm-0.1:text-sm"
             >
               About
             </Link>
-            <Link
-              href="/portfolio"
-              className="sm-0.1:text-sm text-xl text-primary duration-300 hover:text-hover hover:underline"
-            >
-              Portfolio
-            </Link>
+          </DropdownItem>
+          <DropdownItem>
             <Link
               href="/blog"
-              className="sm-0.1:text-sm text-xl text-primary duration-300 hover:text-hover hover:underline"
+              className="text-lg text-primary duration-300 hover:text-hover hover:underline sm-0.1:text-sm"
             >
               Blog
             </Link>
-          </nav>
-        </div>
-      </div>
+          </DropdownItem>
+        </DropdownMenu>
+      </Dropdown>
       <Link
         href="/home"
-        className="sm-1:hidden text-xl text-primary duration-300 hover:text-hover hover:underline active:text-hover active:underline"
+        className="text-xl text-primary duration-300 hover:text-hover hover:underline active:text-hover active:underline sm-1:hidden"
       >
         Home
       </Link>
       <Link
         href="/about"
-        className="sm-1:hidden text-xl text-primary duration-300 hover:text-hover hover:underline"
+        className="text-xl text-primary duration-300 hover:text-hover hover:underline sm-1:hidden"
       >
         About
       </Link>
       <Link
         href="/portfolio"
-        className="sm-1:hidden text-xl text-primary duration-300 hover:text-hover hover:underline"
+        className="text-xl text-primary duration-300 hover:text-hover hover:underline sm-1:hidden"
       >
         Portfolio
       </Link>
       <Link
         href="/blog"
-        className="sm-1:hidden text-xl text-primary duration-300 hover:text-hover hover:underline"
+        className="text-xl text-primary duration-300 hover:text-hover hover:underline sm-1:hidden"
       >
         Blog
       </Link>

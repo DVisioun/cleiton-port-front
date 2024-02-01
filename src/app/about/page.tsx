@@ -10,6 +10,7 @@ import TextSkills from '@/components/Atom/TextSkills/TextSkills'
 import Softwares from '@/components/Molecule/Softwares/Softwares'
 import Experience from '@/components/Molecule/Experience/Experience'
 import Education from '@/components/Molecule/Education/Education'
+import { Footer } from '@/components/Molecule/Footer/Footer'
 
 function page() {
   return (
@@ -17,8 +18,8 @@ function page() {
       <ThemeProvider initialTheme="light">
         <Header bgColor="bg-primary" />
         <ConfigContent />
-        <div className="sm-1:px-4 px-20">
-          <div className="sm-1:mt-20 mt-40 pb-20">
+        <div className="px-20 sm-1:px-4">
+          <div className="mt-40 pb-20 sm-1:mt-20">
             <Grid>
               <GridRow columns={2}>
                 <GridColumn
@@ -52,6 +53,7 @@ function page() {
             </Grid>
           </div>
         </div>
+        <Footer />
       </ThemeProvider>
     </div>
   )

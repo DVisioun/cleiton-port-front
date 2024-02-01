@@ -8,9 +8,6 @@ const config: Config = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
-    screens: {
-      'sm-cardPortfolio-0': { min: '635px' },
-    },
     extend: {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
@@ -21,6 +18,7 @@ const config: Config = {
         primary: 'var(--color-bg-primary)',
         opacity: 'var(--color-bg-primary-opacity)',
         secondary: 'var(--color-bg-secondary)',
+        content: 'var(--secondary)',
       },
       textColor: {
         primary: 'var(--color-text-primary)',
@@ -38,6 +36,7 @@ const config: Config = {
         alt: 'var(--font-qwigley)',
       },
       screens: {
+        'sm-cardPortfolio-0': { min: '635px' },
         'sm-0.1': { max: '320px' },
         'sm-0': { max: '480px' },
         'sm-1': { max: '640px' },

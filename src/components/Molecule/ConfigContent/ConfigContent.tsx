@@ -4,7 +4,7 @@ import React from 'react'
 
 function ConfigContent() {
   return (
-    <div className="sm-1:absolute fixed right-0 top-52 z-10 flex flex-col items-center justify-center gap-4 rounded-l-lg bg-secondary px-3 py-3 shadow lg:absolute">
+    <div className="lg:absolute bg-content fixed right-0 top-52 z-10 flex flex-col items-center justify-center gap-4 rounded-l-lg px-3 py-3 shadow sm-1:absolute">
       <LanguageButton />
       <ThemeButton />
     </div>
