@@ -21,10 +21,22 @@ function page() {
           <div className="sm-1:mt-20 mt-40 pb-20">
             <Grid>
               <GridRow columns={2}>
-                <GridColumn width={3} computer={3} mobile={16} tablet={16}>
+                <GridColumn
+                  mobile={16}
+                  tablet={16}
+                  computer={16}
+                  largeScreen={4}
+                  widescreen={3}
+                >
                   <AboutCard />
                 </GridColumn>
-                <GridColumn width={13} mobile={16} computer={13} tablet={16}>
+                <GridColumn
+                  mobile={16}
+                  tablet={16}
+                  computer={16}
+                  largeScreen={12}
+                  widescreen={13}
+                >
                   <Title title="About" />
                   <TextAbout />
                   <Title title="Skills" />

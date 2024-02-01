@@ -62,7 +62,7 @@ export default function Carousel() {
         <SwiperSlide>
           <Image
             src={'/images/background_home.jpg'}
-            className="h-screen w-screen object-cover"
+            className="sm-1:!object-center h-screen w-screen"
             fill={true}
             alt=""
           />
@@ -71,14 +71,14 @@ export default function Carousel() {
           <Image
             src={'/images/background_home_2.jpg'}
             alt=""
-            className="h-screen w-screen object-cover"
+            className="sm-1:!object-center h-screen w-screen"
             fill={true}
           />
         </SwiperSlide>
         <SwiperSlide>
           <Image
             src={'/images/background_home_3.jpg'}
-            className="h-screen w-screen object-cover"
+            className="sm-1:!object-center h-screen w-screen"
             fill={true}
             alt=""
           />

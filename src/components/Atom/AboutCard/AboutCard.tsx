@@ -12,7 +12,7 @@ import {
 import NavbarSocialBlack from '../NavbarSocial/NavbarSocialBlack'
 
 const AboutCard = () => (
-  <Card className="!top-15 sm-0:!max-w-[250px] sm-0:!mb-12 !mx-auto !mb-10 !rounded-lg !bg-primary !shadow-card sm:!mb-8 sm:flex sm:!max-w-[300px] lg:!fixed">
+  <Card className="!top-15 sm-0:!max-w-[250px] sm-0:!mb-12 !mx-auto !mb-10 !rounded-lg !bg-primary !shadow-card sm:!mb-8 sm:flex sm:!max-w-[300px] xl:!fixed">
     <div className="sm-1:px-0 flex justify-center px-4 py-8">
       <Image
         src={'/images/avatar.jpg'}
