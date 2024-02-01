@@ -11,11 +11,11 @@ function Softwares() {
     { title: 'Unreal Engine', image: '/images/softwares/unreal.png' },
     { title: 'Photoshop', image: '/images/softwares/photoshop.png' },
     { title: 'TopGun', image: '/images/softwares/topgun.png' },
-    { title: 'Unity', image: '/images/softwares/unity.png' },
+    { title: 'Unity', image: '/images/softwares/unity.svg' },
   ]
 
   return (
-    <div className="flex flex-wrap justify-center gap-7 py-14">
+    <div className="sm-1:justify-evenly flex flex-wrap justify-start gap-7 py-14 lg:justify-center lg:px-4 lg:py-4">
       {softwares.map((software, index) => (
         <div key={index}>
           <SoftwareIcon title={software.title} image={software.image} />

@@ -1,8 +1,8 @@
 import React from 'react'
+import { Grid, GridColumn, GridRow } from 'semantic-ui-react'
 import ThemeProvider from '@/hooks/ThemeContext'
 import Header from '@/components/Molecule/Header/Header'
-import { Grid, GridColumn, GridRow } from 'semantic-ui-react'
-import CardExampleCard from '@/components/Atom/AboutCard/AboutCard'
+import AboutCard from '@/components/Atom/AboutCard/AboutCard'
 import ConfigContent from '@/components/Molecule/ConfigContent/ConfigContent'
 import Title from '@/components/Atom/Title/Title'
 import TextAbout from '@/components/Atom/TextAbout/TextAbout'
@@ -15,16 +15,28 @@ function page() {
   return (
     <div className="h-full bg-primary text-primary">
       <ThemeProvider initialTheme="light">
-        <Header />
+        <Header bgColor="bg-primary" />
         <ConfigContent />
-        <div className="px-20">
-          <div className="mt-40 pb-20">
+        <div className="sm-1:px-4 px-20">
+          <div className="sm-1:mt-20 mt-40 pb-20">
             <Grid>
-              <GridRow columns={2} only="large screen">
-                <GridColumn width={3}>
-                  <CardExampleCard />
+              <GridRow columns={2}>
+                <GridColumn
+                  mobile={16}
+                  tablet={16}
+                  computer={16}
+                  largeScreen={4}
+                  widescreen={3}
+                >
+                  <AboutCard />
                 </GridColumn>
-                <GridColumn width={13}>
+                <GridColumn
+                  mobile={16}
+                  tablet={16}
+                  computer={16}
+                  largeScreen={12}
+                  widescreen={13}
+                >
                   <Title title="About" />
                   <TextAbout />
                   <Title title="Skills" />

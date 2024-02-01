@@ -4,9 +4,9 @@ import React from 'react'
 
 function ConfigContent() {
   return (
-    <div className='bg-opacity hover:bg-primary shadow absolute right-0 top-52 py-3 px-3 flex flex-col gap-2 items-center justify-center rounded-l-lg'>
-        <LanguageButton />
-        <ThemeButton />
+    <div className="sm-1:absolute fixed right-0 top-52 z-10 flex flex-col items-center justify-center gap-4 rounded-l-lg bg-secondary px-3 py-3 shadow lg:absolute">
+      <LanguageButton />
+      <ThemeButton />
     </div>
   )
 }

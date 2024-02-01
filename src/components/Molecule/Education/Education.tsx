@@ -9,22 +9,43 @@ function Education() {
       institution: 'Instituto Politécnico de Bragança',
       place: 'Mirandela - Portugal',
       text: 'Desenvolvimento de personagens 3D ...',
-      date: 'Sep 2018 - set 2021',
+      date: 'Sep 2018 - Sep 2021',
     },
     {
-      title: 'teste',
-      institution: 'Teste',
-      text: 'Teste2',
-      place: '',
-      date: 'May 2022 - Jul 2023',
+      title: 'Licentiate degree, Digital Games Design',
+      institution: 'Instituto Politécnico de Bragança',
+      place: 'Mirandela - Portugal',
+      text: 'Desenvolvimento de personagens 3D ...',
+      date: 'Sep 2018 - Sep 2021',
+    },
+    {
+      title: 'Licentiate degree, Digital Games Design',
+      institution: 'Instituto Politécnico de Bragança',
+      place: 'Mirandela - Portugal',
+      text: 'Desenvolvimento de personagens 3D ...',
+      date: 'Sep 2018 - Sep 2021',
+    },
+    {
+      title: 'Licentiate degree, Digital Games Design',
+      institution: 'Instituto Politécnico de Bragança',
+      place: 'Mirandela - Portugal',
+      text: 'Desenvolvimento de personagens 3D ...',
+      date: 'Sep 2018 - Sep 2021',
     },
   ]
 
   return (
-    <Grid className="flex flex-col flex-wrap gap-20 py-14">
-      <GridRow columns={2} only="large screen">
+    <Grid className="lg:!mx-auto lg:!py-4">
+      <GridRow columns={2}>
         {experiences.map((experience, index) => (
-          <GridColumn key={index} columns={8} only="large screen">
+          <GridColumn
+            key={index}
+            columns={8}
+            mobile={16}
+            computer={8}
+            tablet={16}
+            className="pb-8"
+          >
             <CardEducation
               title={experience.title}
               institution={experience.institution}

@@ -37,6 +37,11 @@ const config: Config = {
         sans: 'var(--font-poppins)',
         alt: 'var(--font-qwigley)',
       },
+      screens: {
+        'sm-0.1': { max: '320px' },
+        'sm-0': { max: '480px' },
+        'sm-1': { max: '640px' },
+      },
     },
   },
   plugins: [],
