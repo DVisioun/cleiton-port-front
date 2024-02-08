@@ -17,7 +17,6 @@ const AboutCard = () => (
       <Image
         src={'/images/avatar.jpg'}
         className="w-40 rounded-full sm-0:w-32"
-        className="w-40 rounded-full sm-0:w-32"
         alt=""
       />
     </div>
