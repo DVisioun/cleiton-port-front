@@ -21,14 +21,14 @@ function CardEducation({
           {date}
         </Label>
         <div className="min-h-40">
-          <h2 className="sm-0:text-xl mt-2 text-2xl text-primary">{title}</h2>
-          <h5 className="sm-0:text-base my-1 font-normal italic text-secondary">
+          <h2 className="mt-2 text-2xl text-primary sm-0:text-xl">{title}</h2>
+          <h5 className="my-1 font-normal italic text-secondary sm-0:text-base">
             {institution}
           </h5>
-          <h5 className="sm-0:text-sm my-1 font-normal text-primary">
+          <h5 className="my-1 font-normal text-primary sm-0:text-sm">
             {place}
           </h5>
-          <p className="sm-0:text-sm mt-1">{text}</p>
+          <p className="mt-1 sm-0:text-sm">{text}</p>
         </div>
       </Segment>
     </div>

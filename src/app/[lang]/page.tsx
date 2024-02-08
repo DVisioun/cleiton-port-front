@@ -1,13 +1,11 @@
-"use client";
-import ThemeProvider from "@/hooks/ThemeContext";
-import ConfigContent from "@/components/Molecule/ConfigContent/ConfigContent";
-import Carousel from "@/components/Molecule/Carousel/Carousel";
-import { getDictionaryUseClient } from "@/dictionaries/default-dictionaries-client";
-import { Locale } from "@/config/i18n.config";
+'use client'
+import ThemeProvider from '@/hooks/ThemeContext'
+import ConfigContent from '@/components/Molecule/ConfigContent/ConfigContent'
+import { getDictionaryUseClient } from '@/dictionaries/default-dictionaries-client'
+import { Locale } from '@/config/i18n.config'
 
-
-function Home({params}: {params: {lang: Locale}}) {
-  const t = getDictionaryUseClient(params.lang);
+function Home({ params }: { params: { lang: Locale } }) {
+  const t = getDictionaryUseClient(params.lang)
 
   return (
     <div className="bg-secondary text-primary">
@@ -23,7 +21,7 @@ function Home({params}: {params: {lang: Locale}}) {
         </main>
       </ThemeProvider>
     </div>
-  );
+  )
 }
 
-export default Home;
+export default Home

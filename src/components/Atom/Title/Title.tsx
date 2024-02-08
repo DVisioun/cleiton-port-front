@@ -16,7 +16,7 @@ function Title({ title }: TitleProps) {
             </div>
           </GridColumn>
           <GridColumn mobile={6} computer={4} tablet={6}>
-            <h4 className="sm-1:text-5xl m-0 text-center font-alt text-6xl font-medium text-secondary">
+            <h4 className="m-0 text-center font-alt text-6xl font-medium text-secondary sm-1:text-5xl">
               {title}
             </h4>
           </GridColumn>

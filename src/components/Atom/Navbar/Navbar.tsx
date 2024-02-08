@@ -26,25 +26,25 @@ function Navbar() {
           >
             <Link
               href="/"
-              className="sm-0.1:text-sm text-xl text-primary duration-300 hover:text-hover hover:underline active:text-hover active:underline"
+              className="text-xl text-primary duration-300 hover:text-hover hover:underline active:text-hover active:underline sm-0.1:text-sm"
             >
               Home
             </Link>
             <Link
               href="/about"
-              className="sm-0.1:text-sm text-xl text-primary duration-300 hover:text-hover hover:underline"
+              className="text-xl text-primary duration-300 hover:text-hover hover:underline sm-0.1:text-sm"
             >
               About
             </Link>
             <Link
               href="/portfolio"
-              className="sm-0.1:text-sm text-xl text-primary duration-300 hover:text-hover hover:underline"
+              className="text-xl text-primary duration-300 hover:text-hover hover:underline sm-0.1:text-sm"
             >
               Portfolio
             </Link>
             <Link
               href="/blog"
-              className="sm-0.1:text-sm text-xl text-primary duration-300 hover:text-hover hover:underline"
+              className="text-xl text-primary duration-300 hover:text-hover hover:underline sm-0.1:text-sm"
             >
               Blog
             </Link>
@@ -53,25 +53,25 @@ function Navbar() {
       </div>
       <Link
         href="/home"
-        className="sm-1:hidden text-xl text-primary duration-300 hover:text-hover hover:underline active:text-hover active:underline"
+        className="text-xl text-primary duration-300 hover:text-hover hover:underline active:text-hover active:underline sm-1:hidden"
       >
         Home
       </Link>
       <Link
         href="/about"
-        className="sm-1:hidden text-xl text-primary duration-300 hover:text-hover hover:underline"
+        className="text-xl text-primary duration-300 hover:text-hover hover:underline sm-1:hidden"
       >
         About
       </Link>
       <Link
         href="/portfolio"
-        className="sm-1:hidden text-xl text-primary duration-300 hover:text-hover hover:underline"
+        className="text-xl text-primary duration-300 hover:text-hover hover:underline sm-1:hidden"
       >
         Portfolio
       </Link>
       <Link
         href="/blog"
-        className="sm-1:hidden text-xl text-primary duration-300 hover:text-hover hover:underline"
+        className="text-xl text-primary duration-300 hover:text-hover hover:underline sm-1:hidden"
       >
         Blog
       </Link>
