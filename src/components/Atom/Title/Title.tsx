@@ -1,34 +1,34 @@
-import React from "react";
-import { Grid, GridColumn, GridRow } from "semantic-ui-react";
+import React from 'react'
+import { Grid, GridColumn, GridRow } from 'semantic-ui-react'
 
 interface TitleProps {
-  title: string;
+  title: string
 }
 
 function Title({ title }: TitleProps) {
   return (
-    <div className="w-full">
-      <Grid className="w-full items-center">
-        <GridRow columns={3} only="large screen">
-          <GridColumn width={6}>
-            <div className="flex items-center h-full">
+    <div className="my-4 w-full lg:flex lg:justify-center">
+      <Grid className="sm:flex sm:w-full">
+        <GridRow columns={3}>
+          <GridColumn mobile={5} computer={6} tablet={5}>
+            <div className="flex h-full items-center">
               <div className="h-[2px] w-full bg-[var(--secondary)] "></div>
             </div>
           </GridColumn>
-          <GridColumn width={4}>
-            <h4 className="m-0 font-q text-6xl font-medium text-secondary text-center">
+          <GridColumn mobile={6} computer={4} tablet={6}>
+            <h4 className="sm-1:text-5xl m-0 text-center font-alt text-6xl font-medium text-secondary">
               {title}
             </h4>
           </GridColumn>
-          <GridColumn width={6}>
-            <div className="flex items-center h-full">
+          <GridColumn mobile={5} computer={6} tablet={5}>
+            <div className="flex h-full items-center">
               <div className="h-[2px] w-full bg-[var(--secondary)]"></div>
             </div>
           </GridColumn>
         </GridRow>
       </Grid>
     </div>
-  );
+  )
 }
 
-export default Title;
+export default Title

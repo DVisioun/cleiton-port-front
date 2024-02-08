@@ -1,35 +1,38 @@
-import React from "react";
-import { Label, Segment } from "semantic-ui-react";
+import { About } from '@/@types/about'
+import React from 'react'
+import { Label, Segment } from 'semantic-ui-react'
 
-interface CardPortfolioProps {
-  title: string;
-  institution: string
-  place: string
-  text: string;
-  date: string;
-}
-
-function CardEducation({ title, institution, place, text, date }: CardPortfolioProps) {
+function CardEducation({
+  title,
+  institution,
+  place,
+  text,
+  date,
+}: About.CardEducationProps) {
   return (
-    <div className="w-full pr-8 relative">
-      <Segment raised className="!bg-secondary !rounded-lg !relative">
+    <div className="relative w-full px-4">
+      <Segment raised className="!relative !rounded-lg !bg-secondary">
         <Label
           as="a"
           color="black"
-          ribbon="right"
-          className="!absolute !top-[-15px] !left-[344px] text-primary !bg-primary"
+          ribbon
+          className="!absolute !left-[-15px] !top-[-15px] !bg-primary text-primary"
         >
           {date}
         </Label>
         <div className="min-h-40">
-          <h2 className="!mt-2 text-primary text-2xl">{title}</h2>
-          <h5 className="!my-1 text-secondary font-normal">{institution}</h5>
-          <h5 className="!my-1 text-primary font-normal">{place}</h5>
-          <p className="!mt-1">{text}</p>
+          <h2 className="mt-2 text-2xl text-primary sm-0:text-xl">{title}</h2>
+          <h5 className="my-1 font-normal italic text-secondary sm-0:text-base">
+            {institution}
+          </h5>
+          <h5 className="my-1 font-normal text-primary sm-0:text-sm">
+            {place}
+          </h5>
+          <p className="mt-1 sm-0:text-sm">{text}</p>
         </div>
       </Segment>
     </div>
-  );
+  )
 }
 
-export default CardEducation;
+export default CardEducation

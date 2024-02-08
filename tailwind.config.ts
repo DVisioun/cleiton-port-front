@@ -17,19 +17,32 @@ const config: Config = {
       backgroundColor: {
         primary: 'var(--color-bg-primary)',
         opacity: 'var(--color-bg-primary-opacity)',
-        secondary: 'var(--color-bg-secondary)'
+        secondary: 'var(--color-bg-secondary)',
+        content: 'var(--secondary)',
       },
       textColor: {
         primary: 'var(--color-text-primary)',
         secondary: 'var(--color-text-secondary)',
-        hover: 'var(--color-text-hover)'
+        hover: 'var(--color-text-hover)',
       },
       boxShadow: {
         header: 'var(--box-shadow-primary)',
         shadow: 'var(--box-shadow-secondary)',
         card: 'var(--box-shadow-card)',
-        software: 'var(--box-shadow-software)'
-      }
+        software: 'var(--box-shadow-software)',
+      },
+      fontFamily: {
+        sans: 'var(--font-poppins)',
+        alt: 'var(--font-qwigley)',
+      },
+      screens: {
+        'sm-cardPortfolio-0': { min: '635px' },
+        'sm-0.1': { max: '320px' },
+        'sm-0': { max: '480px' },
+        'sm-1': { max: '640px' },
+        'sm-cardPortfolio-0': { min: '635px' },
+        'md-1': { max: '991px' },
+      },
     },
   },
   plugins: [],
