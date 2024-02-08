@@ -40,6 +40,8 @@ const config: Config = {
         'sm-0.1': { max: '320px' },
         'sm-0': { max: '480px' },
         'sm-1': { max: '640px' },
+        'sm-cardPortfolio-0': { min: '635px' },
+        'md-1': { max: '991px' },
       },
     },
   },

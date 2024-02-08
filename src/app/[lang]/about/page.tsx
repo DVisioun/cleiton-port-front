@@ -10,9 +10,9 @@ import TextSkills from '@/components/Atom/TextSkills/TextSkills'
 import Softwares from '@/components/Molecule/Softwares/Softwares'
 import Experience from '@/components/Molecule/Experience/Experience'
 import Education from '@/components/Molecule/Education/Education'
-import { Footer } from '@/components/Molecule/Footer/Footer'
+import { Locale } from '@/config/i18n.config'
 
-function page() {
+function page({ params }: { params: { lang: Locale } }) {
   return (
     <div className="h-full bg-primary text-primary">
       <ThemeProvider initialTheme="light">
@@ -39,7 +39,7 @@ function page() {
                   widescreen={13}
                 >
                   <Title title="About" />
-                  <TextAbout />
+                  <TextAbout params={params} />
                   <Title title="Skills" />
                   <TextSkills />
                   <Title title="Softwares" />
@@ -53,7 +53,6 @@ function page() {
             </Grid>
           </div>
         </div>
-        <Footer />
       </ThemeProvider>
     </div>
   )
