@@ -8,9 +8,6 @@ const config: Config = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
-    screens: {
-      'sm-cardPortfolio-0': { min: '635px' },
-    },
     extend: {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
@@ -41,6 +38,8 @@ const config: Config = {
         'sm-0.1': { max: '320px' },
         'sm-0': { max: '480px' },
         'sm-1': { max: '640px' },
+        'sm-cardPortfolio-0': { min: '635px' },
+        'md-1': { max: '991px' },
       },
     },
   },
