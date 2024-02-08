@@ -17,11 +17,12 @@ const AboutCard = () => (
       <Image
         src={'/images/avatar.jpg'}
         className="w-40 rounded-full sm-0:w-32"
+        className="w-40 rounded-full sm-0:w-32"
         alt=""
       />
     </div>
     <CardContent>
-      <CardHeader>Cleiton Moreira</CardHeader>
+      <CardHeader className="!text-primary">Cleiton Moreira</CardHeader>
       <CardMeta>
         <span className="text-primary">3D Artist at Aden Interactive</span>
       </CardMeta>
@@ -33,7 +34,7 @@ const AboutCard = () => (
     </CardContent>
     <CardContent extra>
       <div className="flex gap-2">
-        <FontAwesomeIcon icon={faLocationDot} />
+        <FontAwesomeIcon icon={faLocationDot} className="text-primary" />
         <p className="text-primary">Porto - PT</p>
       </div>
     </CardContent>

@@ -21,9 +21,9 @@ export default function Header({ bgColor }: HeaderProps) {
 
   return (
     <div
-      className={`top-0 z-10 flex h-24 w-full items-center justify-between sm:fixed sm-0:justify-around sm-0:px-4 ${bgColor} px-20 text-primary shadow-header duration-300 hover:bg-primary`}
+      className={`top-0 z-10 flex h-24 w-full items-center justify-between sm:fixed sm-0:px-4 sm-1:justify-center ${bgColor} px-20 text-primary shadow-header duration-300 hover:bg-primary`}
     >
-      <div className="flex items-center">
+      <div className="flex items-center sm-1:gap-20">
         {!darkMode && (
           <Image src={BlackLogo} alt="Logo" height={64} width={55} />
         )}
@@ -32,9 +32,7 @@ export default function Header({ bgColor }: HeaderProps) {
         )}
         <Navbar />
       </div>
-      <div className="flex items-center">
-        <NavbarSocial />
-      </div>
+      <NavbarSocial />
     </div>
   )
 }
