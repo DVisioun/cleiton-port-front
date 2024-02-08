@@ -16,7 +16,7 @@ function SoftwareIcon({ title = '', image = '' }: SoftwareIconProps) {
         width={35}
         className="sm-1:w-8"
       />
-      <p className="sm-1:text-base cursor-default text-xl">{title}</p>
+      <p className="cursor-default text-xl sm-1:text-base">{title}</p>
     </div>
   )
 }

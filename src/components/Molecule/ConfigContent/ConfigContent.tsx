@@ -4,7 +4,7 @@ import ThemeButton from '@/components/Atom/ThemeButton/ThemeButton'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
-function ConfigContent({ lang }: any) {
+function ConfigContent() {
   const [language, setLanguage] = useState('')
   const pathname = usePathname()
 

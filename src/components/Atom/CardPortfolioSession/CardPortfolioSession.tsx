@@ -28,8 +28,9 @@ const CardPortfolioSession = () => {
         Geraldão{' '}
         <span className="hidden text-sm font-normal sm-cardPortfolio-0:block">
           Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry&#39;s standard dummy text
-          ever since the 1500s.
+          industry. Lorem Ipsum has been the industrys standard dummy text ever
+          since the 1500s. industry. Lorem Ipsum has been the industry&#39;s
+          standard dummy text ever since the 1500s.
         </span>
       </p>
     </div>

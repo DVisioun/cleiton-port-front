@@ -23,7 +23,7 @@ function Navbar() {
         item
         icon="list"
         simple
-        className="sm:!hidden !z-20 pb-2 text-3xl sm-1:!flex"
+        className="!z-20 pb-2 text-3xl sm:!hidden sm-1:!flex"
       >
         <DropdownMenu className="!w-28 sm-1:!-translate-x-4">
           <DropdownItem>
