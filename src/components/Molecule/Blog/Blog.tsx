@@ -5,7 +5,7 @@ import Title from '@/components/Atom/Title/Title'
 
 function Blog() {
   return (
-    <div className="mt-40 px-[80px] pb-20 sm-1:px-[20px]">
+    <div className="px-[80px] pb-20 pt-40 sm-1:px-[20px]">
       <Title title="Blog" />
       <Grid className="!my-10 px-0 lg:!mx-auto">
         <GridRow columns={2} className="!px-0 sm-1:!gap-10 md-1:!gap-10">
