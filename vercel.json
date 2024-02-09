@@ -2,7 +2,7 @@
     "redirects": [
         {
             "source": "/",
-            "destination": "/pt-BR/$1",
+            "destination": "/pt-BR",
             "permanent": true
         }
     ]
