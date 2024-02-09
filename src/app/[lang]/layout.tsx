@@ -34,7 +34,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang={params.lang}>
-      <body className={`${poppins.variable} ${qwigley.variable} font-sans`}>
+      <body
+        lang={params.lang}
+        className={`${poppins.variable} ${qwigley.variable} font-sans`}
+      >
         {children}
       </body>
     </html>

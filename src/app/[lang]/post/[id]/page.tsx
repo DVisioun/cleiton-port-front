@@ -3,12 +3,13 @@ import Header from '@/components/Molecule/Header/Header'
 import React from 'react'
 import ThemeProvider from '@/hooks/ThemeContext'
 import ConfigContent from '@/components/Molecule/ConfigContent/ConfigContent'
+import { Locale } from '@/config/i18n.config'
 
-function page() {
+function page({ params }: { params: { lang: Locale } }) {
   return (
     <div className="h-full bg-primary text-primary">
       <ThemeProvider initialTheme="light">
-        <Header bgColor="bg-primary" />
+        <Header lang={params.lang} bgColor="bg-primary" />
         <ConfigContent />
         <BlogPost />
       </ThemeProvider>

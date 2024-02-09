@@ -6,12 +6,14 @@ import WhiteLogo from '../../../../public/images/white_logo.svg'
 import { ThemeContext } from '@/hooks/ThemeContext'
 import Navbar from '@/components/Atom/Navbar/Navbar'
 import NavbarSocial from '@/components/Atom/NavbarSocial/NavbarSocial'
+import { Locale } from '@/config/i18n.config'
 
 interface HeaderProps {
   bgColor: string
+  lang: Locale
 }
 
-export default function Header({ bgColor }: HeaderProps) {
+export default function Header({ lang, bgColor }: HeaderProps) {
   const { theme, setTheme } = useContext(ThemeContext)
   const [darkMode, setDarkMode] = useState(false)
 
@@ -30,7 +32,7 @@ export default function Header({ bgColor }: HeaderProps) {
         {darkMode && (
           <Image src={WhiteLogo} alt="Logo" height={64} width={55} />
         )}
-        <Navbar />
+        <Navbar lang={lang} />
       </div>
       <NavbarSocial />
     </div>

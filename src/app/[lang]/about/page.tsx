@@ -16,7 +16,7 @@ function page({ params }: { params: { lang: Locale } }) {
   return (
     <div className="h-full bg-primary text-primary">
       <ThemeProvider initialTheme="light">
-        <Header bgColor="bg-primary" />
+        <Header lang={params.lang} bgColor="bg-primary" />
         <ConfigContent />
         <div className="px-20 sm-1:px-4">
           <div className="mt-40 pb-20 sm-1:mt-20">

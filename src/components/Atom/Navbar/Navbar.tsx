@@ -1,22 +1,14 @@
 'use client'
 
+import { Locale } from '@/config/i18n.config'
 import Link from 'next/link'
-import React, { useState } from 'react'
-import { Dropdown, DropdownItem, DropdownMenu, Icon } from 'semantic-ui-react'
-import {
-  faArtstation,
-  faInstagram,
-  faLinkedin,
-} from '@fortawesome/free-brands-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Dropdown, DropdownItem, DropdownMenu } from 'semantic-ui-react'
 
-function Navbar() {
-  const [isOpen, setIsOpen] = useState(false)
+interface NavBarProps {
+  lang: Locale
+}
 
-  const handleToggleHamburgerMenu = () => {
-    setIsOpen(!isOpen)
-  }
-
+function Navbar({ lang }: NavBarProps) {
   return (
     <nav className="ml-10 flex gap-5">
       <Dropdown
@@ -28,7 +20,7 @@ function Navbar() {
         <DropdownMenu className="!w-28 sm-1:!-translate-x-4">
           <DropdownItem>
             <Link
-              href="/home"
+              href={`/${lang}/home`}
               className="text-lg text-primary duration-300 hover:text-hover hover:underline active:text-hover active:underline sm-0.1:text-sm"
             >
               Home
@@ -36,7 +28,7 @@ function Navbar() {
           </DropdownItem>
           <DropdownItem>
             <Link
-              href="/about"
+              href={`/${lang}/about`}
               className="text-lg text-primary duration-300 hover:text-hover hover:underline sm-0.1:text-sm"
             >
               About
@@ -44,7 +36,7 @@ function Navbar() {
           </DropdownItem>
           <DropdownItem>
             <Link
-              href="/blog"
+              href={`/${lang}/blog`}
               className="text-lg text-primary duration-300 hover:text-hover hover:underline sm-0.1:text-sm"
             >
               Blog
@@ -53,25 +45,25 @@ function Navbar() {
         </DropdownMenu>
       </Dropdown>
       <Link
-        href="/home"
+        href={`/${lang}/home`}
         className="text-xl text-primary duration-300 hover:text-hover hover:underline active:text-hover active:underline sm-1:hidden"
       >
         Home
       </Link>
       <Link
-        href="/about"
+        href={`/${lang}/about`}
         className="text-xl text-primary duration-300 hover:text-hover hover:underline sm-1:hidden"
       >
         About
       </Link>
       <Link
-        href="/portfolio"
+        href={`/${lang}/portfolio`}
         className="text-xl text-primary duration-300 hover:text-hover hover:underline sm-1:hidden"
       >
         Portfolio
       </Link>
       <Link
-        href="/blog"
+        href={`/${lang}/blog`}
         className="text-xl text-primary duration-300 hover:text-hover hover:underline sm-1:hidden"
       >
         Blog
