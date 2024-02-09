@@ -1,0 +1,9 @@
+{
+    "redirects": [
+        {
+            "source": "/(.*)",
+            "destination": "/pt-BR/$1",
+            "permanent": true
+        }
+    ]
+}
