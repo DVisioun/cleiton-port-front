@@ -1,12 +1,12 @@
-'use client'
-import ThemeProvider from '@/hooks/ThemeContext'
-import ConfigContent from '@/components/Molecule/ConfigContent/ConfigContent'
-import { getDictionaryUseClient } from '@/dictionaries/default-dictionaries-client'
-import { Locale } from '@/config/i18n.config'
-import { Footer } from '@/components/Molecule/Footer/Footer'
+"use client";
+import ThemeProvider from "@/hooks/ThemeContext";
+import ConfigContent from "@/components/Molecule/ConfigContent/ConfigContent";
+import { getDictionaryUseClient } from "@/dictionaries/default-dictionaries-client";
+import { Locale } from "@/config/i18n.config";
+import { Footer } from "@/components/Molecule/Footer/Footer";
 
 function Home({ params }: { params: { lang: Locale } }) {
-  const t = getDictionaryUseClient(params.lang)
+  const t = getDictionaryUseClient(params.lang);
 
   return (
     <div className="bg-secondary text-primary">
@@ -20,10 +20,10 @@ function Home({ params }: { params: { lang: Locale } }) {
             </h4>
           </div>
         </main>
-        <Footer position='absolute' />
+        <Footer position="absolute" />
       </ThemeProvider>
     </div>
-  )
+  );
 }
 
-export default Home
+export default Home;
