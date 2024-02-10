@@ -1,4 +1,4 @@
-export const enUS = {
+export const en = {
   temporario: {
     em_breve: 'Comming Soon',
   },

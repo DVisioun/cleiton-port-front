@@ -1,7 +1,7 @@
-import { enUS } from './defaultLanguageCollections/default-en-US'
-import { ptBR } from './defaultLanguageCollections/default-pt-BR'
+import { en } from './defaultLanguageCollections/default-en'
+import { pt } from './defaultLanguageCollections/default-pt'
 
 export const defaultDictionary = {
-  'en-US': enUS,
-  'pt-BR': ptBR,
+  'en': en,
+  'pt': pt,
 }

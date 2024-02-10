@@ -32,10 +32,6 @@ function CardBlog() {
             </p>
             <p className="hidden sm-1:inline">24 de jan. de 2024</p>
           </div>
-          <div className="flex items-center gap-1">
-            <FontAwesomeIcon icon={faHeart} className="text-[var(--gold)]" />
-            <p>25</p>
-          </div>
         </div>
       </Segment>
     </div>
