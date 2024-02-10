@@ -18,7 +18,7 @@ export default function Home({ params }: { params: { lang: Locale } }) {
             <ConfigContent />
           </div>
         </main>
-        <Footer position='absolute' />
+        <Footer position="absolute" />
       </ThemeProvider>
     </div>
   )

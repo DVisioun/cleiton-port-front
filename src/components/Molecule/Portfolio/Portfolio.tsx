@@ -1,6 +1,6 @@
-import React from "react";
-import CardPortfolioSession from "@/components/Atom/CardPortfolioSession/CardPortfolioSession";
-import Title from "@/components/Atom/Title/Title";
+import React from 'react'
+import CardPortfolioSession from '@/components/Atom/CardPortfolioSession/CardPortfolioSession'
+import Title from '@/components/Atom/Title/Title'
 
 const Portfolio = () => {
   return (
@@ -11,7 +11,7 @@ const Portfolio = () => {
         <CardPortfolioSession />
       </section>
     </main>
-  );
-};
+  )
+}
 
-export default Portfolio;
+export default Portfolio

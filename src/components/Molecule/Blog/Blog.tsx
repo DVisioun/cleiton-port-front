@@ -1,8 +1,8 @@
-import React from "react";
-import { Grid, GridColumn, GridRow } from "semantic-ui-react";
-import CardBlog from "@/components/Atom/CardBlog/CardBlog";
-import Title from "@/components/Atom/Title/Title";
-import { Footer } from "../Footer/Footer";
+import React from 'react'
+import { Grid, GridColumn, GridRow } from 'semantic-ui-react'
+import CardBlog from '@/components/Atom/CardBlog/CardBlog'
+import Title from '@/components/Atom/Title/Title'
+import { Footer } from '../Footer/Footer'
 
 function Blog() {
   return (
@@ -31,7 +31,7 @@ function Blog() {
         </GridRow>
       </Grid>
     </div>
-  );
+  )
 }
 
-export default Blog;
+export default Blog

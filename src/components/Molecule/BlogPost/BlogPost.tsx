@@ -1,5 +1,5 @@
-import BlogHero from "@/components/Atom/BlogHero/BlogHero";
-import React from "react";
+import BlogHero from '@/components/Atom/BlogHero/BlogHero'
+import React from 'react'
 
 function BlogPost() {
   return (
@@ -59,7 +59,7 @@ function BlogPost() {
         </p>
       </div>
     </div>
-  );
+  )
 }
 
-export default BlogPost;
+export default BlogPost
