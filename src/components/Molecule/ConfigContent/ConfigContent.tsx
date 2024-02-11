@@ -13,7 +13,7 @@ function ConfigContent() {
     const currentLanguage = pathSplit[1]
     const page = pathSplit[2] ? pathSplit[2] : ''
     const param = pathSplit[3] ? pathSplit[3] : ''
-    const newLanguage = currentLanguage === 'en-US' ? 'pt-BR' : 'en-US'
+    const newLanguage = currentLanguage === 'en' ? 'pt' : 'en'
     window.location.href = `/${newLanguage}/${page}/${param}`
   }
 
@@ -24,7 +24,7 @@ function ConfigContent() {
   }, [pathname])
 
   return (
-    <div className="fixed right-0 top-52 z-0 flex flex-col items-center justify-center gap-4 rounded-l-lg bg-content px-3 py-3 shadow lg:absolute sm-1:absolute">
+    <div className="fixed right-0 top-52 z-50 flex flex-col items-center justify-center gap-4 rounded-l-lg bg-content px-3 py-3 shadow sm-1:absolute">
       <button onClick={getHrefLink}>
         <LanguageButton country={language} />
       </button>

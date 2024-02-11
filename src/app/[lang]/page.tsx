@@ -3,6 +3,7 @@ import ThemeProvider from '@/hooks/ThemeContext'
 import ConfigContent from '@/components/Molecule/ConfigContent/ConfigContent'
 import { getDictionaryUseClient } from '@/dictionaries/default-dictionaries-client'
 import { Locale } from '@/config/i18n.config'
+import { Footer } from '@/components/Molecule/Footer/Footer'
 
 function Home({ params }: { params: { lang: Locale } }) {
   const t = getDictionaryUseClient(params.lang)
@@ -19,6 +20,7 @@ function Home({ params }: { params: { lang: Locale } }) {
             </h4>
           </div>
         </main>
+        <Footer position="absolute" />
       </ThemeProvider>
     </div>
   )
