@@ -1,6 +1,7 @@
 import { Poppins, Qwigley } from 'next/font/google'
 import '@/app/globals.css'
 import 'semantic-ui-css/semantic.min.css'
+import { SideBarCMS } from '@/components/Molecule/SideBarCMS/SideBarCMS'
 
 const poppins = Poppins({
   weight: ['400', '500', '600', '700', '800'],
@@ -21,7 +22,10 @@ export default function RootLayout({
   return (
     <html lang="pt">
       <body className={`${poppins.variable} ${qwigley.variable} font-sans`}>
-        {children}
+        <div className="flex">
+          <SideBarCMS />
+          {children}
+        </div>
       </body>
     </html>
   )

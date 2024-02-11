@@ -4,6 +4,7 @@ import ThemeProvider from '@/hooks/ThemeContext'
 import Header from '@/components/Molecule/Header/Header'
 import ConfigContent from '@/components/Molecule/ConfigContent/ConfigContent'
 import { Locale } from '@/config/i18n.config'
+import { Footer } from '@/components/Molecule/Footer/Footer'
 
 function page({ params }: { params: { lang: Locale } }) {
   return (
@@ -12,6 +13,7 @@ function page({ params }: { params: { lang: Locale } }) {
         <Header lang={params.lang} bgColor="bg-primary" />
         <ConfigContent />
         <Blog />
+        <Footer position="" />
       </ThemeProvider>
     </div>
   )

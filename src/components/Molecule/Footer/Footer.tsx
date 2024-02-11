@@ -1,42 +1,28 @@
-import NavbarSocial from '@/components/Atom/NavbarSocial/NavbarSocial'
 import { TeamLogo } from '@/components/Atom/TeamLogo/TeamLogo'
-import { Grid, GridColumn, GridRow } from 'semantic-ui-react'
+import Image from 'next/image'
 
-export const Footer = () => {
+interface FooterProps {
+  position: string
+}
+
+export const Footer = ({ position }: FooterProps) => {
   return (
-    <footer className="bg-secondary py-8">
-      <Grid className="!mx-auto">
-        <GridRow columns={3}>
-          <GridColumn
-            className="!p-0"
-            mobile={1}
-            tablet={5}
-            computer={5}
-            largeScreen={5}
-            widescreen={5}
-          ></GridColumn>
-          <GridColumn
-            className="!p-0"
-            mobile={1}
-            tablet={6}
-            computer={6}
-            largeScreen={6}
-            widescreen={6}
-          >
-            <NavbarSocial />
-          </GridColumn>
-          <GridColumn
-            className="!p-0"
-            mobile={16}
-            tablet={5}
-            computer={5}
-            largeScreen={5}
-            widescreen={5}
-          >
-            <TeamLogo />
-          </GridColumn>
-        </GridRow>
-      </Grid>
+    <footer className={`flex w-full justify-center p-8 ${position} bottom-0`}>
+      {position === '' && <TeamLogo />}
+      {position === 'absolute' && (
+        <div className="flex gap-3 sm-1:justify-center">
+          <span className="text-lg text-[var(--white)]">
+            © 2024 - Developed by{' '}
+          </span>
+          <Image
+            src="/images/dvision-logo-white.svg"
+            alt=""
+            width={120}
+            height={120}
+            className="max-w-28"
+          />
+        </div>
+      )}
     </footer>
   )
 }

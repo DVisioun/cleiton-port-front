@@ -1,4 +1,4 @@
-export const ptBR = {
+export const pt = {
   temporario: {
     em_breve: 'Em breve',
   },
