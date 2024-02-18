@@ -54,3 +54,7 @@ html, body {
   background-color: var(--color-bg-primary);
   color: var(--color-text-primary);
 }
+
+.ui.input{
+  width: 100% !important;
+}
