@@ -1,6 +1,4 @@
 'use client'
-import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import { Grid, GridColumn, GridRow, Segment, Table, TableBody, TableHeader, TableHeaderCell, TableRow, TableCell } from 'semantic-ui-react'
 import AboutEdit from '@/components/Molecule/AboutEdit/AboutEdit'
