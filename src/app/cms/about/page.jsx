@@ -8,7 +8,6 @@ import SkillsEdit from '@/components/Molecule/SkillsEdit/SkillsEdit'
 import SoftwareEdit from '@/components/Molecule/SoftwareEdit/SoftwareEdit'
 import ExperienceEdit from '@/components/Molecule/ExperienceEdit/ExperienceEdit'
 import EducationEdit from '@/components/Molecule/EducationEdit/EducationEdit'
-import ModalEditEducation from '@/components/Atom/ModalEditEducation/ModalEditEducation'
 
 function page() {
   return (
