@@ -1,14 +1,6 @@
-import SoftwareIcon from '@/components/Atom/SoftwareIcon/SoftwareIcon'
+import AboutCard from '@/components/Atom/AboutCard/AboutCard'
 import Image from 'next/image'
 import React from 'react'
-import {
-  CardMeta,
-  CardHeader,
-  CardDescription,
-  CardContent,
-  Card,
-  Icon,
-} from 'semantic-ui-react'
 
 const BodyPortfolioPost = () => {
   return (
@@ -46,30 +38,7 @@ const BodyPortfolioPost = () => {
       </section>
       <aside className="flex w-[30%] flex-col items-start justify-center gap-6">
         <div className="flex w-full flex-col items-center justify-start bg-secondary px-12 py-4 shadow-card">
-          <Card>
-            <Image
-              src="/images/avatar.jpg"
-              alt="Avatar Example"
-              aria-label="Avatar Example"
-              width={300}
-              height={250}
-            />
-            <CardContent>
-              <CardHeader>Cleiton Moreira</CardHeader>
-              <CardMeta>
-                <span>Joined in 2015</span>
-              </CardMeta>
-              <CardDescription>
-                Matthew is a musician living in Nashville.
-              </CardDescription>
-            </CardContent>
-            <CardContent extra>
-              <a>
-                <Icon name="user" />
-                99 Friends
-              </a>
-            </CardContent>
-          </Card>
+          <AboutCard position="relative" />
           <h2 className="w-full text-left text-primary">Geraldão</h2>
           <p className="w-full text-left text-primary">
             Lorem Ipsum is simply dummy text of the printing and typesetting

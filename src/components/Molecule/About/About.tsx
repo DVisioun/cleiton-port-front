@@ -21,7 +21,7 @@ function About({ params }: any) {
               largeScreen={4}
               widescreen={3}
             >
-              <AboutCard />
+              <AboutCard position="fixed" />
             </GridColumn>
             <GridColumn
               mobile={16}
