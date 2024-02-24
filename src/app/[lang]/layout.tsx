@@ -3,6 +3,8 @@ import { Poppins, Qwigley } from 'next/font/google'
 import '@/app/globals.css'
 import 'semantic-ui-css/semantic.min.css'
 import { i18n } from '@/config/i18n.config'
+import getLabel from '@/getLabels'
+
 
 const poppins = Poppins({
   weight: ['400', '500', '600', '700', '800'],
@@ -16,7 +18,7 @@ const qwigley = Qwigley({
 })
 
 export async function generateStaticParams() {
-  const languages = i18n.locales.map((lang) => ({ lang }))
+  const languages:any = i18n.locales.map((lang) => ({ lang }))
   return languages
 }
 
@@ -32,6 +34,7 @@ export default function RootLayout({
   children: React.ReactNode
   params: { lang: string }
 }) {
+  const {} = getLabel();
   return (
     <html lang={params.lang}>
       <body
