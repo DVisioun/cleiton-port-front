@@ -1,18 +1,18 @@
+import Header from '@/components/Molecule/Header/Header'
+import React from 'react'
 import ConfigContent from '@/components/Molecule/ConfigContent/ConfigContent'
 import { Locale } from '@/config/i18n.config'
 import ThemeProvider from '@/hooks/ThemeContext'
 import { Footer } from '@/components/Molecule/Footer/Footer'
-import Header from '@/components/Molecule/Header/Header'
-import Portfolio from '@/components/Molecule/Portfolio/Portfolio'
-import React from 'react'
+import BodyPortfolioPost from '@/components/Molecule/BodyPortfolioPost/BodyPortfolioPost'
 
-function page({ params }: { params: { lang: Locale } }) {
+const page = ({ params }: { params: { lang: Locale } }) => {
   return (
-    <div className="h-full bg-primary text-primary">
+    <div className="flex w-full flex-col items-center justify-center bg-primary px-20 pt-24">
       <ThemeProvider initialTheme="light">
         <Header lang={params.lang} bgColor="bg-primary" />
         <ConfigContent />
-        <Portfolio />
+        <BodyPortfolioPost />
         <Footer position="" />
       </ThemeProvider>
     </div>
