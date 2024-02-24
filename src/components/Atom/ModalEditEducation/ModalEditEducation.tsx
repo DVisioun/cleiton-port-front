@@ -29,7 +29,7 @@ function ModalEditEducation({}) {
       open={open}
       trigger={
         <button className="mr-2">
-          <FontAwesomeIcon icon={faEdit} />
+          <FontAwesomeIcon icon={faEdit} height={12} />
         </button>
       }
     >

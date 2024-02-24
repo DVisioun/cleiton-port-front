@@ -1,6 +1,8 @@
+import type { Metadata } from "next";
 import { Poppins, Qwigley } from "next/font/google";
 import "@/app/globals.css";
 import "semantic-ui-css/semantic.min.css";
+import { i18n } from "@/config/i18n.config";
 import { SideBarCMS } from "@/components/Molecule/SideBarCMS/SideBarCMS";
 
 const poppins = Poppins({

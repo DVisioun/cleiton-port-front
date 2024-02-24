@@ -2,6 +2,7 @@ import ModalEditEducation from "@/components/Atom/ModalEditEducation/ModalEditEd
 import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
+import Flag from "react-flagkit";
 import {
   Grid,
   GridColumn,
@@ -19,7 +20,7 @@ function EducationEdit() {
     <Grid>
       <GridRow columns={2}>
         <GridColumn mobile={16} computer={8} tablet={16}>
-          <h3>Education - EN</h3>
+          <Flag country="US" size={25} className="mb-2" />
           <Table celled structured>
             <TableHeader>
               <TableRow>
@@ -32,7 +33,7 @@ function EducationEdit() {
                 <TableCell>Aden</TableCell>
                 <TableCell textAlign="right">
                   <ModalEditEducation />
-                  <FontAwesomeIcon icon={faTrash} />
+                  <FontAwesomeIcon icon={faTrash} height={12} />
                 </TableCell>
               </TableRow>
             </TableBody>
@@ -44,7 +45,7 @@ function EducationEdit() {
           tablet={16}
           className="sm-1:!mt-10 md-1:!mt-10"
         >
-          <h3>Education - PT</h3>
+          <Flag country="BR" size={25} className="mb-2" />
           <Table celled structured>
             <TableHeader>
               <TableRow>
@@ -57,7 +58,7 @@ function EducationEdit() {
                 <TableCell>Aden</TableCell>
                 <TableCell textAlign="right">
                   <ModalEditEducation />
-                  <FontAwesomeIcon icon={faTrash} />
+                  <FontAwesomeIcon icon={faTrash} height={12} />
                 </TableCell>
               </TableRow>
             </TableBody>
