@@ -1,7 +1,17 @@
-import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
-import { Button, Grid, GridColumn, GridRow, Icon, Table, TableBody, TableCell, TableHeader, TableHeaderCell, TableRow } from "semantic-ui-react";
+import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import React from 'react'
+import {
+  Grid,
+  GridColumn,
+  GridRow,
+  Table,
+  TableBody,
+  TableCell,
+  TableHeader,
+  TableHeaderCell,
+  TableRow,
+} from 'semantic-ui-react'
 
 function ExperienceEdit() {
   return (
@@ -54,7 +64,7 @@ function ExperienceEdit() {
         </GridColumn>
       </GridRow>
     </Grid>
-  );
+  )
 }
 
-export default ExperienceEdit;
+export default ExperienceEdit

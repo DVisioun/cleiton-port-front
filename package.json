@@ -16,6 +16,7 @@
     "@fortawesome/react-fontawesome": "^0.2.0",
     "axios": "^1.6.7",
     "beta": "^0.0.1",
+    "jotai": "^2.6.5",
     "lucide-react": "^0.331.0",
     "next": "14.0.4",
     "next-intl": "^3.5.4",

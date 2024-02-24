@@ -1,7 +1,7 @@
-import ModalEditEducation from "@/components/Atom/ModalEditEducation/ModalEditEducation";
-import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import ModalEditEducation from '@/components/Atom/ModalEditEducation/ModalEditEducation'
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import React from 'react'
 import {
   Grid,
   GridColumn,
@@ -12,7 +12,7 @@ import {
   TableHeader,
   TableHeaderCell,
   TableRow,
-} from "semantic-ui-react";
+} from 'semantic-ui-react'
 
 function EducationEdit() {
   return (
@@ -65,7 +65,7 @@ function EducationEdit() {
         </GridColumn>
       </GridRow>
     </Grid>
-  );
+  )
 }
 
-export default EducationEdit;
+export default EducationEdit

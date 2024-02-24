@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import { Grid, GridColumn, GridRow, Segment, Table, TableBody, TableHeader, TableHeaderCell, TableRow, TableCell } from 'semantic-ui-react'
+import { Grid, GridColumn, GridRow, Segment } from 'semantic-ui-react'
 import AboutEdit from '@/components/Molecule/AboutEdit/AboutEdit'
 import SkillsEdit from '@/components/Molecule/SkillsEdit/SkillsEdit'
 import SoftwareEdit from '@/components/Molecule/SoftwareEdit/SoftwareEdit'
@@ -9,7 +9,7 @@ import EducationEdit from '@/components/Molecule/EducationEdit/EducationEdit'
 
 function page() {
   return (
-    <div className='w-full'>
+    <div className="w-full">
       <Segment>
         <AboutEdit />
         <Grid>
