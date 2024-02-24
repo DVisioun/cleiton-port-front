@@ -13,7 +13,7 @@ import {
   TableHeader,
   TableHeaderCell,
   TableRow,
-} from "semantic-ui-react";
+} from 'semantic-ui-react'
 
 function EducationEdit() {
   return (
@@ -66,7 +66,7 @@ function EducationEdit() {
         </GridColumn>
       </GridRow>
     </Grid>
-  );
+  )
 }
 
-export default EducationEdit;
+export default EducationEdit

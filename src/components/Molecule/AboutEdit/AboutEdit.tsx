@@ -30,7 +30,7 @@ function AboutEdit() {
         </GridColumn>
       </GridRow>
     </Grid>
-  );
+  )
 }
 
-export default AboutEdit;
+export default AboutEdit

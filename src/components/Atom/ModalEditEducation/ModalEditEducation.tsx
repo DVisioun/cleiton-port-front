@@ -1,6 +1,6 @@
-import { faEdit } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useState } from "react";
+import { faEdit } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import React, { useState } from 'react'
 import {
   Button,
   Form,
@@ -17,10 +17,10 @@ import {
   ModalDescription,
   ModalHeader,
   TextArea,
-} from "semantic-ui-react";
+} from 'semantic-ui-react'
 
-function ModalEditEducation({}) {
-  const [open, setOpen] = useState(false);
+function ModalEditEducation() {
+  const [open, setOpen] = useState(false)
 
   return (
     <Modal
@@ -89,7 +89,7 @@ function ModalEditEducation({}) {
         />
       </ModalActions>
     </Modal>
-  );
+  )
 }
 
-export default ModalEditEducation;
+export default ModalEditEducation
