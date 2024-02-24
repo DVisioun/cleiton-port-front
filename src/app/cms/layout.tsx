@@ -24,7 +24,7 @@ export default function RootLayout({
       <body className={`${poppins.variable} ${qwigley.variable} font-sans`}>
         <div className="flex">
           <SideBarCMS />
-          <div className="pl-60 pt-5">{children}</div>
+          <div className="pl-60 pt-5 w-full">{children}</div>
         </div>
       </body>
     </html>
