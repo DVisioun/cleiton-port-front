@@ -113,4 +113,17 @@ export namespace API {
     data: BlogPostSchema
     success: boolean
   }
+
+  export interface LabelSchema extends FieldValues {
+    id: string
+    label: string
+    description: string
+    pt_content: string
+    en_content: string
+  }
+
+  export interface FetchLabelsResponseProps {
+    data: LabelSchema[] | []
+    success: boolean
+  }
 }

@@ -1,6 +1,7 @@
-import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React from 'react'
+import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React from "react";
+import Flag from "react-flagkit";
 import {
   Grid,
   GridColumn,
@@ -18,7 +19,7 @@ function ExperienceEdit() {
     <Grid>
       <GridRow columns={2}>
         <GridColumn mobile={16} computer={8} tablet={16}>
-          <h3>Experience - EN</h3>
+          <Flag country="US" size={25} className="mb-2" />
           <Table celled structured>
             <TableHeader>
               <TableRow>
@@ -30,8 +31,8 @@ function ExperienceEdit() {
               <TableRow>
                 <TableCell>Aden</TableCell>
                 <TableCell textAlign="right">
-                  <FontAwesomeIcon icon={faEdit} className="mr-3" />
-                  <FontAwesomeIcon icon={faTrash} />
+                  <FontAwesomeIcon icon={faEdit} className="mr-3" height={12} />
+                  <FontAwesomeIcon icon={faTrash} height={12} />
                 </TableCell>
               </TableRow>
             </TableBody>
@@ -43,7 +44,7 @@ function ExperienceEdit() {
           tablet={16}
           className="sm-1:!mt-10 md-1:!mt-10"
         >
-          <h3>Experience - PT</h3>
+          <Flag country="BR" size={25} className="mb-2" />
           <Table celled structured>
             <TableHeader>
               <TableRow>
@@ -56,7 +57,7 @@ function ExperienceEdit() {
                 <TableCell>Aden</TableCell>
                 <TableCell textAlign="right">
                   <button></button>
-                  <FontAwesomeIcon icon={faTrash} />
+                  <FontAwesomeIcon icon={faTrash} height={12} />
                 </TableCell>
               </TableRow>
             </TableBody>
