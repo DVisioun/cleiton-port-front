@@ -6,7 +6,7 @@ import { Mail, LockIcon } from 'lucide-react'
 import { Button } from '@/components/Atom/Button/Button'
 import * as Input from '@/components/Atom/FormInput/FormInput'
 
-import { UserAuthentication } from '@/api/user-authentication'
+import { UserAuthentication } from '@/api/User/user-authentication'
 
 import { API } from '@/@types/api'
 import { useRouter } from 'next/navigation'
