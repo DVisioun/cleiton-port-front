@@ -22,9 +22,11 @@ export const SideBarCMS = () => {
             Portfolio Projects
           </li>
         </Link>
-        <li className="cursor-pointer py-2 text-base text-white duration-300 hover:bg-gray-400">
-          Blog Posts
-        </li>
+        <Link href="/cms/blog-post">
+          <li className="cursor-pointer py-2 text-base text-white duration-300 hover:bg-gray-400">
+            Blog Posts
+          </li>
+        </Link>
         <Link href="/cms/about">
           <li className="cursor-pointer py-2 text-base text-white duration-300 hover:bg-gray-400">
             About Information
