@@ -1,24 +1,24 @@
 'use client'
-import { API } from "@/@types/api";
-import { fetchAbout } from "@/api/User/fetch-about";
-import React, {useEffect} from "react";
-import Flag from "react-flagkit";
-import { Form, Grid, GridColumn, GridRow, TextArea } from "semantic-ui-react";
+import { API } from '@/@types/api'
+import { fetchAbout } from '@/api/User/fetch-about'
+import React, { useEffect } from 'react'
+import Flag from 'react-flagkit'
+import { Form, Grid, GridColumn, GridRow, TextArea } from 'semantic-ui-react'
 
 function AboutEdit() {
-  const labelsData = localStorage.getItem("labels");
+  const labelsData = localStorage.getItem('labels')
 
   const handleFetchAbout = async () => {
     const response: API.FetchSoftwareResponseProps = await fetchAbout()
     if (response?.success) {
-      console.log("labels: " + labelsData);
-      console.log("response: " + response.data)
+      console.log('labels: ' + labelsData)
+      console.log('response: ' + response.data)
     }
   }
 
   useEffect(() => {
-    handleFetchAbout();
-  });
+    handleFetchAbout()
+  })
 
   return (
     <Grid>
