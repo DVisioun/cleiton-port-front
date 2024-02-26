@@ -3,7 +3,7 @@ import { Poppins, Qwigley } from 'next/font/google'
 import '@/app/globals.css'
 import 'semantic-ui-css/semantic.min.css'
 import { i18n } from '@/config/i18n.config'
-import getLabel from '@/getLabels'
+import getLabel from '@/api/Labels/getLabels'
 
 
 const poppins = Poppins({

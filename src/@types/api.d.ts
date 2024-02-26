@@ -114,6 +114,7 @@ export namespace API {
     success: boolean
   }
 
+  //Labels
   export interface LabelSchema extends FieldValues {
     id: string
     label: string
@@ -125,5 +126,15 @@ export namespace API {
   export interface FetchLabelsResponseProps {
     data: LabelSchema[] | []
     success: boolean
+  }
+
+  //AboutEdit
+  export interface FetchAboutResponseProps {
+    data: AboutEditSchema[] | []
+    success: boolean
+  }
+
+  export interface AboutEditSchema extends FieldValues {
+    about: string
   }
 }
