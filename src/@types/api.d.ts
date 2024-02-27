@@ -77,11 +77,13 @@ export namespace API {
   }
 
   // BLOG POSTS
-  interface BlogImage {
-    id?: string
-    file_name: string
-    image: string
-    format_type: string
+
+  export interface BlogPostCreateFormProps extends FieldValues {
+    name: string
+    content: string
+    order: number
+    flag_home: boolean
+    image: ImageFileProps
   }
 
   export interface BlogPostSchema extends FieldValues {
@@ -89,7 +91,8 @@ export namespace API {
     content: string
     order: number
     flag_home: boolean
-    images?: BlogImage[]
+    image: string
+    created_at: Date
   }
 
   export interface BlogPostCreateProps extends FieldValues {
@@ -97,7 +100,8 @@ export namespace API {
     content: string
     order: number
     flag_home: boolean
-    images?: BlogImage[]
+    image: string
+    created_at: Date
   }
 
   export interface FetchBlogPostsResponseProps {

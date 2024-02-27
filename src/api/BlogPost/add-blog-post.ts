@@ -8,7 +8,7 @@ export const addBlogPost = async (blogPost: API.BlogPostCreateProps) => {
       content: blogPost.content,
       order: blogPost.order,
       flag_home: blogPost.flag_home,
-      images: blogPost?.images,
+      image: blogPost.image,
     })
 
     return response.data

@@ -33,7 +33,7 @@ export default function RootLayout({
   children: React.ReactNode
   params: { lang: string }
 }) {
-  const {} = fetchAndSaveLabels()
+  fetchAndSaveLabels()
   return (
     <html lang={params.lang}>
       <body

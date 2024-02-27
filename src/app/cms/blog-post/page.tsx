@@ -1,13 +1,6 @@
 import PostEdit from '@/components/Molecule/PostEdit/PostEdit'
 import React from 'react'
-import {
-  Divider,
-  Grid,
-  GridColumn,
-  GridRow,
-  Header,
-  Segment,
-} from 'semantic-ui-react'
+import { Divider, Header, Segment } from 'semantic-ui-react'
 
 function page() {
   return (

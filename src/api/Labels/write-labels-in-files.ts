@@ -7,6 +7,7 @@ const pt: { [label: string]: string } = {}
 
 const fetchAndSaveLabels = async () => {
   const response: API.FetchLabelsResponseProps = await fetchLabels()
+
   if (response?.success) {
     const data = response.data
 
