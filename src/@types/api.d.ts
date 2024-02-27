@@ -87,6 +87,7 @@ export namespace API {
   }
 
   export interface BlogPostSchema extends FieldValues {
+    id: string
     name: string
     content: string
     order: number
@@ -96,6 +97,7 @@ export namespace API {
   }
 
   export interface BlogPostCreateProps extends FieldValues {
+    id?: string
     name: string
     content: string
     order: number
@@ -105,7 +107,7 @@ export namespace API {
   }
 
   export interface FetchBlogPostsResponseProps {
-    data: BlogPostSchema[] | []
+    data: BlogPostCreateProps[] | []
     success: boolean
   }
 

@@ -1,3 +1,4 @@
+import { TableBlogPost } from '@/components/Atom/TableBlogPost/TableBlogPost'
 import PostEdit from '@/components/Molecule/PostEdit/PostEdit'
 import React from 'react'
 import { Divider, Header, Segment } from 'semantic-ui-react'
@@ -15,7 +16,8 @@ function page() {
               Blog Post
             </Header>
           </Divider>
-          <PostEdit />
+          <TableBlogPost />
+          {/* {<PostEdit />} */}
         </Segment>
       </Segment>
     </div>

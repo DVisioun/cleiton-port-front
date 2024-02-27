@@ -7,13 +7,13 @@ import Title from '@/components/Atom/Title/Title'
 import { fetchBlogPosts } from '@/api/BlogPost/fetch-blog-post'
 import { blogPostAtom } from '@/states/blogPostAtom'
 import { useAtom } from 'jotai'
+import { API } from '@/@types/api'
 
 function Blog() {
   const [blogPosts, setBlogPosts] = useAtom(blogPostAtom)
   const handleBlogPostsFetch = async () => {
-    const response = await fetchBlogPosts()
-    console.log(response)
-    setBlogPosts([...blogPosts, ...response.data])
+    const response: API.FetchBlogPostsResponseProps = await fetchBlogPosts()
+    setBlogPosts(response.data)
   }
 
   useEffect(() => {
