@@ -8,50 +8,121 @@ import { blogPostAtom } from '@/states/blogPostAtom'
 import { addBlogPost } from '@/api/BlogPost/add-blog-post'
 import { BlogTextEditor } from '@/components/Atom/BlogTextEditor/BlogTextEditor'
 import { notifySuccess, notifyFailure } from '@/utils/toastify'
-import { readFileToBase64 } from '@/utils/base64-converter'
+import { readBase64ToFile, readFileToBase64 } from '@/utils/base64-converter'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
+import { editBlogPost } from '@/api/BlogPost/edit-blog-post'
+import { fetchBlogPosts } from '@/api/BlogPost/fetch-blog-post'
 
-const PostEdit = () => {
+interface PostEditProps {
+  editPost: boolean
+  setEditPost: Dispatch<SetStateAction<boolean>>
+  setAddPost: Dispatch<SetStateAction<boolean>>
+  postId: string
+}
+
+const PostEdit = ({
+  editPost,
+  setEditPost,
+  setAddPost,
+  postId,
+}: PostEditProps) => {
   const [blogPost, setBlogPost] = useAtom(blogPostAtom)
-  const { register, reset, handleSubmit, control } =
-    useForm<API.BlogPostCreateFormProps>()
+  const [blogIndex, setBlogIndex] = useState<number>(0)
 
-  const onSubmit = async (data: API.BlogPostCreateFormProps) => {
-    const file = data.image[0]
-    const imageConverted = await readFileToBase64(file)
+  const { register, reset, handleSubmit, control, setValue } = useForm<
+    API.BlogPostCreateFormProps | API.BlogPostEditFormProps
+  >()
 
-    const currentDate = new Date()
+  // completa os dados do formulário caso o usuário queira editar o post
+  const fillBlogPostData = async () => {
+    const blogPostData = blogPost.find((item) => item.id === postId)
+    if (blogPostData) {
+      const imageFile = await readBase64ToFile(blogPostData.image)
+      const index = blogPost.findIndex((item) => item.id === postId)
+      setBlogIndex(index)
 
-    const requestBlogPostObject = {
-      name: data.name,
-      content: data.content,
-      order: data.order,
-      flag_home: data.flag_home,
-      image: imageConverted,
-      created_at: currentDate,
-    }
-
-    const response: API.CreateAndUpdateBlogPostResponseProps =
-      await addBlogPost(requestBlogPostObject)
-    console.log(response)
-    if (response && response.success) {
-      setBlogPost([...blogPost, response.data])
-      notifySuccess('Post created successfully')
-      reset()
-    } else {
-      notifyFailure('Failed to create post, please try again..')
+      setValue('title', blogPostData.title)
+      setValue('description', blogPostData.description)
+      setValue('image', imageFile)
+      setValue('flag_home', blogPostData.flag_home)
+      setValue('order', blogPostData.order)
+      setValue('name', blogPostData.name)
     }
   }
+
+  const onSubmit = async (
+    data: API.BlogPostCreateFormProps | API.BlogPostEditFormProps,
+  ) => {
+    const currentDate = new Date()
+
+    if (editPost) {
+      const file = data.image as File
+      const imageConverted = await readFileToBase64(file)
+
+      const requestBlogPostEditObject = {
+        id: data.id,
+        name: data.name,
+        content: data.content,
+        order: data.order,
+        flag_home: data.flag_home,
+        image: imageConverted,
+        created_at: currentDate,
+      }
+
+      const response: API.CreateAndUpdateBlogPostResponseProps =
+        await editBlogPost(requestBlogPostEditObject)
+      if (response && response.success) {
+        await fetchBlogPosts()
+        notifySuccess('Post edited successfully')
+        reset()
+        setEditPost(false)
+        setAddPost(false)
+      } else {
+        notifyFailure('Failed to edit post, please try again..')
+      }
+    } else {
+      const file = data.image as File
+      const imageConverted = await readFileToBase64(file)
+
+      const requestBlogPostCreateObject = {
+        name: data.name,
+        content: data.content,
+        order: data.order,
+        flag_home: data.flag_home,
+        image: imageConverted,
+        created_at: currentDate,
+      } as API.BlogPostCreateProps
+
+      const response: API.CreateAndUpdateBlogPostResponseProps =
+        await addBlogPost(requestBlogPostCreateObject)
+      if (response && response.success) {
+        setBlogPost([...blogPost, response.data])
+        notifySuccess('Post created successfully')
+        reset()
+        setAddPost(false)
+      } else {
+        notifyFailure('Failed to create post, please try again..')
+      }
+    }
+  }
+
+  useEffect(() => {
+    if (editPost) {
+      fillBlogPostData()
+    } else {
+      reset()
+    }
+  }, [])
 
   return (
     <div>
       <form
-        action=""
         className="flex flex-col items-start justify-center gap-4"
         onSubmit={handleSubmit(onSubmit)}
       >
         <label
           htmlFor="title"
-          className="flex w-full flex-col items-start justify-center gap-2 font-semibold"
+          className="mt-4 flex w-full flex-col items-start justify-center gap-2 font-semibold"
         >
           Title
           <Input placeholder="Enter title your post...">
@@ -69,7 +140,7 @@ const PostEdit = () => {
         </label>
         <BlogTextEditor
           name="content"
-          defaultValue="<p>Enter content your post...</p>"
+          defaultValue={`${!editPost ? '<p>Enter content your post...</p>' : blogPost[blogIndex].content}`}
           control={control}
         />
         <label
@@ -99,14 +170,17 @@ const PostEdit = () => {
           className="flex w-full flex-col items-start justify-center gap-2 font-semibold"
         >
           Image
+        </label>
+        <div>
           <Input placeholder="">
             <input
               type="file"
               placeholder="Enter image of your post..."
               {...register('image', { required: 'Required field!' })}
+              draggable
             />
           </Input>
-        </label>
+        </div>
         <Button
           type="submit"
           content="Gravar"

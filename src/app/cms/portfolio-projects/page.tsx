@@ -1,4 +1,4 @@
-import { TableBlogPost } from '@/components/Atom/TableBlogPost/TableBlogPost'
+import { TablePortfolioProject } from '@/components/Atom/TablePortfolioProject/TablePortfolioProject'
 import { Divider, Header } from 'semantic-ui-react'
 
 export default function PortfolioPage() {
@@ -12,7 +12,7 @@ export default function PortfolioPage() {
           Portfolio Projects
         </Header>
       </Divider>
-      <TableBlogPost />
+      <TablePortfolioProject />
     </section>
   )
 }

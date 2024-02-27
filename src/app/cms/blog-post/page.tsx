@@ -1,9 +1,15 @@
+'use client'
+
 import { TableBlogPost } from '@/components/Atom/TableBlogPost/TableBlogPost'
 import PostEdit from '@/components/Molecule/PostEdit/PostEdit'
-import React from 'react'
-import { Divider, Header, Segment } from 'semantic-ui-react'
+import { useState } from 'react'
+import { Divider, Header, Segment, Button } from 'semantic-ui-react'
 
-function page() {
+function BlogPostPage() {
+  const [addPost, setAddPost] = useState(false)
+  const [editPost, setEditPost] = useState(false)
+  const [postId, setPostId] = useState<string>('')
+
   return (
     <div className="w-full">
       <Segment>
@@ -16,12 +22,44 @@ function page() {
               Blog Post
             </Header>
           </Divider>
-          <TableBlogPost />
-          {/* {<PostEdit />} */}
+
+          {!addPost && (
+            <Button
+              content="Create a New Blog Post"
+              primary
+              onClick={() => setAddPost(!addPost)}
+            />
+          )}
+          {addPost && (
+            <Button
+              content="View All Blog Posts"
+              secondary
+              onClick={() => {
+                setEditPost(false)
+                setAddPost(!addPost)
+              }}
+            />
+          )}
+
+          {!addPost && (
+            <TableBlogPost
+              setPostId={setPostId}
+              setEditPost={setEditPost}
+              setAddPost={setAddPost}
+            />
+          )}
+          {addPost && (
+            <PostEdit
+              editPost={editPost}
+              setEditPost={setEditPost}
+              setAddPost={setAddPost}
+              postId={postId}
+            />
+          )}
         </Segment>
       </Segment>
     </div>
   )
 }
 
-export default page
+export default BlogPostPage

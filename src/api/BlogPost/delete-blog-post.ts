@@ -1,8 +1,8 @@
 import { connection } from '@/utils/axios'
 
-export const deleteSoftwares = async (id: string) => {
+export const deleteBlogPost = async (id: string) => {
   try {
-    const response = await connection.delete(`/software/${id}`)
+    const response = await connection.delete(`/blog/${id}`)
     return response.data
   } catch (error) {
     console.log(error)

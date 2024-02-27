@@ -8,7 +8,7 @@ import { useAtom } from 'jotai'
 import { faEdit, faFlag, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { faFlag as faFlagTwo } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useEffect } from 'react'
+import { Dispatch, SetStateAction, useEffect } from 'react'
 import {
   Icon,
   Menu,
@@ -21,22 +21,40 @@ import {
   TableHeaderCell,
   TableRow,
 } from 'semantic-ui-react'
-import { API } from '@/@types/api'
 
 dayjs.locale(ptBr)
 
-export const TableBlogPost = () => {
+interface PostEditProps {
+  setEditPost: Dispatch<SetStateAction<boolean>>
+  setAddPost: Dispatch<SetStateAction<boolean>>
+  setPostId: Dispatch<SetStateAction<string>>
+}
+
+export const TableBlogPost = ({
+  setPostId,
+  setEditPost,
+  setAddPost,
+}: PostEditProps) => {
   const [blogPosts, setBlogPosts] = useAtom(blogPostAtom)
 
+  const handleBlogPostEdit = (id: string) => {
+    setPostId(id)
+    setEditPost(true)
+    setAddPost(true)
+  }
+
   const handleBlogPostsFetch = async () => {
-    const response: API.FetchBlogPostsResponseProps = await fetchBlogPosts()
-    const orderedBlogPosts = response.data.sort((a, b) => a.order - b.order)
+    const response = await fetchBlogPosts()
+    const orderedBlogPosts = response.data.sort(
+      (a: { order: number }, b: { order: number }) => a.order - b.order,
+    )
     setBlogPosts(orderedBlogPosts)
   }
 
   useEffect(() => {
     handleBlogPostsFetch()
   }, [])
+
   return (
     <Table celled textAlign="center">
       <TableHeader>
@@ -69,15 +87,16 @@ export const TableBlogPost = () => {
               <TableCell textAlign="center">
                 <FontAwesomeIcon
                   className="cursor-pointer duration-300 hover:scale-125"
-                  icon={faTrash}
+                  icon={faEdit}
                   height={30}
                   fontSize={18}
+                  onClick={() => handleBlogPostEdit(item.id)}
                 />
               </TableCell>
               <TableCell textAlign="center">
                 <FontAwesomeIcon
                   className="cursor-pointer duration-300 hover:scale-125"
-                  icon={faEdit}
+                  icon={faTrash}
                   height={30}
                   fontSize={18}
                 />
