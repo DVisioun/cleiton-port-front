@@ -3,6 +3,8 @@ import { deleteSoftwares } from '@/api/Software/delete-software'
 import { fetchSoftwares } from '@/api/Software/fetch-softwares'
 import { softwareAtom } from '@/states/softwareAtom'
 import { useAtom } from 'jotai'
+import { X } from 'lucide-react'
+import Image from 'next/image'
 import { useEffect } from 'react'
 
 export const SoftwareList = () => {
@@ -36,14 +38,23 @@ export const SoftwareList = () => {
     <ul className="flex flex-wrap gap-3">
       {softwares.map((item) => {
         return (
-          <li key={item.id} className="relative mb-2 border py-2 pl-2 pr-10">
-            {item.name}
-            <button
-              onClick={() => handleDeleteSoftware(item.id)}
-              className="absolute right-3"
-            >
-              x
-            </button>
+          <li key={item.id} className="relative mb-2 border p-2 px-4">
+            <div className="flex items-center gap-3">
+              <Image
+                src={'data:image/png;base64,' + item.image}
+                alt={`${item.name} software image`}
+                width={24}
+                height={24}
+              />
+              <p className="m-0">{item.name}</p>
+              <button onClick={() => handleDeleteSoftware(item.id)}>
+                <X
+                  size={18}
+                  strokeWidth={2.5}
+                  className="duration-300 hover:scale-110"
+                />
+              </button>
+            </div>
           </li>
         )
       })}

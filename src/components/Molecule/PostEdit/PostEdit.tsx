@@ -1,65 +1,135 @@
 'use client'
-import React, { useRef } from 'react'
-import { Button, Input } from 'semantic-ui-react'
-import { Editor } from '@tinymce/tinymce-react'
+
 import { useForm } from 'react-hook-form'
-import { API } from '@/@types/api'
 import { useAtom } from 'jotai'
+import { Button, Input } from 'semantic-ui-react'
+import { API } from '@/@types/api'
 import { blogPostAtom } from '@/states/blogPostAtom'
-import { notifyFailure } from '@/utils/toastify'
 import { addBlogPost } from '@/api/BlogPost/add-blog-post'
-import { Editor as TinyMCEEditor } from 'tinymce'
+import { BlogTextEditor } from '@/components/Atom/BlogTextEditor/BlogTextEditor'
+import { notifySuccess, notifyFailure } from '@/utils/toastify'
+import { readBase64ToFile, readFileToBase64 } from '@/utils/base64-converter'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
+import { editBlogPost } from '@/api/BlogPost/edit-blog-post'
+import { fetchBlogPosts } from '@/api/BlogPost/fetch-blog-post'
 
-const PostEdit = () => {
+interface PostEditProps {
+  editPost: boolean
+  setEditPost: Dispatch<SetStateAction<boolean>>
+  setAddPost: Dispatch<SetStateAction<boolean>>
+  postId: string
+}
+
+const PostEdit = ({
+  editPost,
+  setEditPost,
+  setAddPost,
+  postId,
+}: PostEditProps) => {
   const [blogPost, setBlogPost] = useAtom(blogPostAtom)
-  const editorRef = useRef<TinyMCEEditor | null>(null)
-  const { register, reset, handleSubmit } = useForm<API.BlogPostCreateProps>()
+  const [blogIndex, setBlogIndex] = useState<number>(0)
 
-  // const log = () => {
-  //   if (editorRef.current) {
-  //     const currentValue = editorRef.current.getContent()
-  //     console.log(currentValue)
-  //   }
-  // }
+  const { register, reset, handleSubmit, control, setValue } = useForm<
+    API.BlogPostCreateFormProps | API.BlogPostEditFormProps
+  >()
 
-  const onSubmit = async (data: API.BlogPostCreateProps) => {
-    const editorContent = editorRef.current?.getContent() || ''
+  // completa os dados do formulário caso o usuário queira editar o post
+  const fillBlogPostData = async () => {
+    const blogPostData = blogPost.find((item) => item.id === postId)
+    if (blogPostData) {
+      const imageFile = await readBase64ToFile(blogPostData.image)
+      const index = blogPost.findIndex((item) => item.id === postId)
+      setBlogIndex(index)
 
-    if (data) {
-      const requestBlogPostObject = {
+      setValue('title', blogPostData.title)
+      setValue('description', blogPostData.description)
+      setValue('image', imageFile)
+      setValue('flag_home', blogPostData.flag_home)
+      setValue('order', blogPostData.order)
+      setValue('name', blogPostData.name)
+    }
+  }
+
+  const onSubmit = async (
+    data: API.BlogPostCreateFormProps | API.BlogPostEditFormProps,
+  ) => {
+    const currentDate = new Date()
+
+    if (editPost) {
+      const file = data.image as File
+      const imageConverted = await readFileToBase64(file)
+
+      const requestBlogPostEditObject = {
+        id: data.id,
         name: data.name,
-        content: editorContent,
+        content: data.content,
         order: data.order,
         flag_home: data.flag_home,
-        image: data.images,
+        image: imageConverted,
+        created_at: currentDate,
       }
 
       const response: API.CreateAndUpdateBlogPostResponseProps =
-        await addBlogPost(requestBlogPostObject)
+        await editBlogPost(requestBlogPostEditObject)
       if (response && response.success) {
-        setBlogPost([...blogPost, response.data])
+        await fetchBlogPosts()
+        notifySuccess('Post edited successfully')
         reset()
+        setEditPost(false)
+        setAddPost(false)
+      } else {
+        notifyFailure('Failed to edit post, please try again..')
       }
     } else {
-      notifyFailure(data)
+      const file = data.image as File
+      const imageConverted = await readFileToBase64(file)
+
+      const requestBlogPostCreateObject = {
+        name: data.name,
+        content: data.content,
+        order: data.order,
+        flag_home: data.flag_home,
+        image: imageConverted,
+        created_at: currentDate,
+      } as API.BlogPostCreateProps
+
+      const response: API.CreateAndUpdateBlogPostResponseProps =
+        await addBlogPost(requestBlogPostCreateObject)
+      if (response && response.success) {
+        setBlogPost([...blogPost, response.data])
+        notifySuccess('Post created successfully')
+        reset()
+        setAddPost(false)
+      } else {
+        notifyFailure('Failed to create post, please try again..')
+      }
     }
-    console.log(data)
   }
+
+  useEffect(() => {
+    if (editPost) {
+      fillBlogPostData()
+    } else {
+      reset()
+    }
+  }, [])
 
   return (
     <div>
       <form
-        action=""
         className="flex flex-col items-start justify-center gap-4"
         onSubmit={handleSubmit(onSubmit)}
       >
         <label
           htmlFor="title"
-          className="flex w-full flex-col items-start justify-center gap-2 font-semibold"
+          className="mt-4 flex w-full flex-col items-start justify-center gap-2 font-semibold"
         >
           Title
           <Input placeholder="Enter title your post...">
-            <input type="text" {...register('name')} />
+            <input
+              type="text"
+              {...register('name', { required: 'Required field!' })}
+            />
           </Input>
         </label>
         <label
@@ -67,52 +137,12 @@ const PostEdit = () => {
           className="flex w-full flex-col items-start justify-center gap-2 font-semibold"
         >
           Content
-          <Input placeholder="Enter content your post...">
-            <Editor
-              {...register('content')}
-              apiKey="tfmq1j07cvajzw1tp50gyiyjsse6d5waafutvxi43r6137ro"
-              initialValue="<p>Enter content your post...</p>"
-              onInit={(evt, editor) => (editorRef.current = editor)}
-              init={{
-                height: 300,
-                width: '100%',
-                menubar: false,
-                plugins: [
-                  'advlist',
-                  'autolink',
-                  'lists',
-                  'link',
-                  'image',
-                  'charmap',
-                  'preview',
-                  'anchor',
-                  'searchreplace',
-                  'visualblocks',
-                  'code',
-                  'fullscreen',
-                  'insertdatetime',
-                  'media',
-                  'table',
-                  'code',
-                  'help',
-                  'wordcount',
-                ],
-                toolbar:
-                  'undo redo | blocks | ' +
-                  ' image ' +
-                  ' anchor ' +
-                  ' Table ' +
-                  ' media ' +
-                  'bold italic forecolor | alignleft aligncenter ' +
-                  'alignright alignjustify | bullist numlist outdent indent | ' +
-                  'removeformat | help',
-                content_style:
-                  'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
-                images_file_types: 'jpg,svg,webp,png,jpeg,ico',
-              }}
-            />
-          </Input>
         </label>
+        <BlogTextEditor
+          name="content"
+          defaultValue={`${!editPost ? '<p>Enter content your post...</p>' : blogPost[blogIndex].content}`}
+          control={control}
+        />
         <label
           htmlFor="title"
           className="flex w-full flex-col items-start justify-center gap-2 font-semibold"
@@ -121,37 +151,36 @@ const PostEdit = () => {
           <Input placeholder="">
             <input
               type="number"
-              {...register('order')}
-              placeholder="Enter order your post..."
+              {...register('order', { required: 'Required field!' })}
+              placeholder="Enter order of your post..."
             />
           </Input>
         </label>
+        <fieldset className="flex gap-2">
+          <input {...register('flag_home')} type="checkbox" />
+          <label
+            htmlFor="title"
+            className="flex w-full flex-col items-start justify-center gap-2 font-semibold"
+          >
+            Flag Home
+          </label>
+        </fieldset>
         <label
           htmlFor="title"
           className="flex w-full flex-col items-start justify-center gap-2 font-semibold"
         >
-          Flag Home
-          <Input placeholder="">
-            <input
-              {...register('flag_home')}
-              type="text"
-              placeholder="Enter the flag your post..."
-            />
-          </Input>
+          Image
         </label>
-        <label
-          htmlFor="title"
-          className="flex w-full flex-col items-start justify-center gap-2 font-semibold"
-        >
-          Images
+        <div>
           <Input placeholder="">
             <input
               type="file"
-              placeholder="Enter images your post..."
-              {...register('image')}
+              placeholder="Enter image of your post..."
+              {...register('image', { required: 'Required field!' })}
+              draggable
             />
           </Input>
-        </label>
+        </div>
         <Button
           type="submit"
           content="Gravar"

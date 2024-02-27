@@ -7,7 +7,6 @@ export namespace API {
   }
 
   // SOFTWARE
-
   export interface SoftwareSchema extends FieldValues {
     id: string
     name: string
@@ -52,7 +51,6 @@ export namespace API {
   }
 
   // SKILLs
-
   export interface SkillSchema extends FieldValues {
     id: string
     name: string
@@ -80,19 +78,32 @@ export namespace API {
 
   // BLOG POSTS
 
-  interface BlogImage {
-    id?: string
-    file_name: string
-    image: string
-    format_type: string
-  }
-
-  export interface BlogPostSchema extends FieldValues {
+  export interface BlogPostCreateFormProps extends FieldValues {
+    id: string
     name: string
     content: string
     order: number
     flag_home: boolean
-    images?: BlogImage[]
+    image: ImageFileProps
+  }
+
+  export interface BlogPostEditFormProps extends FieldValues {
+    id: string
+    name?: string
+    content?: string
+    order?: number
+    flag_home?: boolean
+    image?: File
+  }
+
+  export interface BlogPostSchema extends FieldValues {
+    id: string
+    name: string
+    content: string
+    order: number
+    flag_home: boolean
+    image: string
+    created_at: Date
   }
 
   export interface BlogPostCreateProps extends FieldValues {
@@ -100,11 +111,22 @@ export namespace API {
     content: string
     order: number
     flag_home: boolean
-    images?: BlogImage[]
+    image: string
+    created_at: Date
+  }
+
+  export interface BlogPostEditProps extends FieldValues {
+    id: string
+    name?: string
+    content?: string
+    order?: number
+    flag_home?: boolean
+    image?: string
+    created_at?: Date
   }
 
   export interface FetchBlogPostsResponseProps {
-    data: BlogPostSchema[] | []
+    data: BlogPostCreateProps[] | []
     success: boolean
   }
 
@@ -114,9 +136,9 @@ export namespace API {
     success: boolean
   }
 
-  //Labels
+  // Labels
   export interface LabelSchema extends FieldValues {
-    id: string
+    id?: string
     label: string
     description: string
     pt_content: string
@@ -128,13 +150,12 @@ export namespace API {
     success: boolean
   }
 
-  //AboutEdit
+  interface AboutEditSchema extends FieldValues {
+    about: string
+  }
+  // AboutEdit
   export interface FetchAboutResponseProps {
     data: AboutEditSchema[] | []
     success: boolean
-  }
-
-  export interface AboutEditSchema extends FieldValues {
-    about: string
   }
 }

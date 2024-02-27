@@ -1,66 +1,18 @@
-import {
-  Icon,
-  Menu,
-  MenuItem,
-  Table,
-  TableBody,
-  TableCell,
-  TableFooter,
-  TableHeader,
-  TableHeaderCell,
-  TableRow,
-} from 'semantic-ui-react'
+import { TablePortfolioProject } from '@/components/Atom/TablePortfolioProject/TablePortfolioProject'
+import { Divider, Header } from 'semantic-ui-react'
 
 export default function PortfolioPage() {
   return (
-    <section>
-      <h1 className="font-alt text-6xl">Projects Portfolio</h1>
-      <Table celled>
-        <TableHeader>
-          <TableRow>
-            <TableHeaderCell>Header</TableHeaderCell>
-            <TableHeaderCell>Header</TableHeaderCell>
-            <TableHeaderCell>Header</TableHeaderCell>
-          </TableRow>
-        </TableHeader>
-
-        <TableBody>
-          <TableRow>
-            <TableCell>Cell</TableCell>
-            <TableCell>Cell</TableCell>
-            <TableCell>Cell</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>Cell</TableCell>
-            <TableCell>Cell</TableCell>
-            <TableCell>Cell</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>Cell</TableCell>
-            <TableCell>Cell</TableCell>
-            <TableCell>Cell</TableCell>
-          </TableRow>
-        </TableBody>
-
-        <TableFooter>
-          <TableRow>
-            <TableHeaderCell colSpan="3">
-              <Menu floated="right" pagination>
-                <MenuItem as="a" icon>
-                  <Icon name="chevron left" />
-                </MenuItem>
-                <MenuItem as="a">1</MenuItem>
-                <MenuItem as="a">2</MenuItem>
-                <MenuItem as="a">3</MenuItem>
-                <MenuItem as="a">4</MenuItem>
-                <MenuItem as="a" icon>
-                  <Icon name="chevron right" />
-                </MenuItem>
-              </Menu>
-            </TableHeaderCell>
-          </TableRow>
-        </TableFooter>
-      </Table>
+    <section className="pl-2 pr-6">
+      <Divider horizontal>
+        <Header
+          as="h4"
+          className="!sm-1:text-5xl !m-0 !text-center !font-alt !text-6xl !font-medium !text-secondary"
+        >
+          Portfolio Projects
+        </Header>
+      </Divider>
+      <TablePortfolioProject />
     </section>
   )
 }

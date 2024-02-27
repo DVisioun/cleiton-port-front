@@ -1,9 +1,9 @@
 import { API } from '@/@types/api'
 import { connection } from '@/utils/axios'
 
-export const addBlogPost = async (blogPost: API.BlogPostCreateProps) => {
+export const editBlogPost = async (blogPost: API.BlogPostEditProps) => {
   try {
-    const response = await connection.post('/blog', {
+    const response = await connection.post(`/blog/${blogPost.id}`, {
       name: blogPost.name,
       content: blogPost.content,
       order: blogPost.order,

@@ -1,8 +1,8 @@
-import ModalEditEducation from "@/components/Atom/ModalEditEducation/ModalEditEducation";
-import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
-import Flag from "react-flagkit";
+import ModalEditEducation from '@/components/Atom/ModalEditEducation/ModalEditEducation'
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import React from 'react'
+import Flag from 'react-flagkit'
 import {
   Grid,
   GridColumn,
