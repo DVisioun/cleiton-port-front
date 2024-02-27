@@ -89,11 +89,11 @@ export namespace API {
 
   export interface BlogPostEditFormProps extends FieldValues {
     id: string
-    name?: string
-    content?: string
-    order?: number
-    flag_home?: boolean
-    image?: File
+    name: string
+    content: string
+    order: number
+    flag_home: boolean
+    image: File
   }
 
   export interface BlogPostSchema extends FieldValues {

@@ -29,9 +29,8 @@ const PostEdit = ({
   const [blogPost, setBlogPost] = useAtom(blogPostAtom)
   const [blogIndex, setBlogIndex] = useState<number>(0)
 
-  const { register, reset, handleSubmit, control, setValue } = useForm<
-    API.BlogPostCreateFormProps | API.BlogPostEditFormProps
-  >()
+  const { register, reset, handleSubmit, control, setValue } =
+    useForm<API.BlogPostCreateFormProps>()
 
   // completa os dados do formulário caso o usuário queira editar o post
   const fillBlogPostData = async () => {
@@ -43,22 +42,19 @@ const PostEdit = ({
 
       setValue('title', blogPostData.title)
       setValue('description', blogPostData.description)
-      setValue('image', imageFile)
+      // setValue('image', imageFile)
       setValue('flag_home', blogPostData.flag_home)
       setValue('order', blogPostData.order)
       setValue('name', blogPostData.name)
     }
   }
 
-  const onSubmit = async (
-    data: API.BlogPostCreateFormProps | API.BlogPostEditFormProps,
-  ) => {
+  const onSubmit = async (data: API.BlogPostCreateFormProps) => {
     const currentDate = new Date()
 
     if (editPost) {
-      const file = data.image as File
+      const file = data.image[0]
       const imageConverted = await readFileToBase64(file)
-
       const requestBlogPostEditObject = {
         id: data.id,
         name: data.name,
@@ -70,7 +66,7 @@ const PostEdit = ({
       }
 
       const response: API.CreateAndUpdateBlogPostResponseProps =
-        await editBlogPost(requestBlogPostEditObject)
+        await editBlogPost(requestBlogPostEditObject, postId)
       if (response && response.success) {
         await fetchBlogPosts()
         notifySuccess('Post edited successfully')
@@ -81,7 +77,7 @@ const PostEdit = ({
         notifyFailure('Failed to edit post, please try again..')
       }
     } else {
-      const file = data.image as File
+      const file = data.image[0]
       const imageConverted = await readFileToBase64(file)
 
       const requestBlogPostCreateObject = {

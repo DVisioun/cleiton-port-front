@@ -4,7 +4,7 @@ import { API } from '@/@types/api'
 
 interface BlogTextEditorProps {
   name: string
-  control: Control<API.BlogPostCreateFormProps | API.BlogPostEditFormProps>
+  control: Control<API.BlogPostCreateFormProps>
   defaultValue: string
 }
 
