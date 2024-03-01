@@ -1,6 +1,6 @@
 import { Poppins, Qwigley } from 'next/font/google'
 import '@/app/globals.css'
-import { ToastContainer, toast } from 'react-toastify'
+import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 const poppins = Poppins({

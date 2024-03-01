@@ -32,8 +32,8 @@ function AboutEdit() {
       const textAreaPT = document.getElementById('about-pt')
       const textAreaEN = document.getElementById('about-en')
 
-      if (textAreaPT) textAreaPT.innerText = labels[0].pt_content
-      if (textAreaEN) textAreaEN.innerText = labels[0].en_content
+      if (textAreaPT) textAreaPT.innerText = labels[0]?.pt_content
+      if (textAreaEN) textAreaEN.innerText = labels[0]?.en_content
     }
   }
 

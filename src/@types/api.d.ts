@@ -77,41 +77,28 @@ export namespace API {
   }
 
   // BLOG POSTS
-
   export interface BlogPostCreateFormProps extends FieldValues {
     id: string
     name: string
     content: string
-    order: number
-    flag_home: boolean
-    image: ImageFileProps
   }
 
   export interface BlogPostEditFormProps extends FieldValues {
     id: string
     name?: string
     content?: string
-    order?: number
-    flag_home?: boolean
-    image?: File
   }
 
   export interface BlogPostSchema extends FieldValues {
     id: string
     name: string
     content: string
-    order: number
-    flag_home: boolean
-    image: string
     created_at: Date
   }
 
   export interface BlogPostCreateProps extends FieldValues {
     name: string
     content: string
-    order: number
-    flag_home: boolean
-    image: string
     created_at: Date
   }
 
@@ -119,9 +106,6 @@ export namespace API {
     id: string
     name?: string
     content?: string
-    order?: number
-    flag_home?: boolean
-    image?: string
     created_at?: Date
   }
 
@@ -136,7 +120,7 @@ export namespace API {
     success: boolean
   }
 
-  // Labels
+  // LABELS
   export interface LabelSchema extends FieldValues {
     id?: string
     label: string
@@ -153,7 +137,8 @@ export namespace API {
   interface AboutEditSchema extends FieldValues {
     about: string
   }
-  // AboutEdit
+
+  // USER ABOUT INFORMATION
   export interface FetchAboutResponseProps {
     data: AboutEditSchema[] | []
     success: boolean

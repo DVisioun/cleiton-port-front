@@ -1,9 +1,9 @@
 import dayjs from 'dayjs'
 import ptBr from 'dayjs/locale/pt-br'
-import { faCircle } from '@fortawesome/free-solid-svg-icons'
-import { Blog } from '@/@types/blog'
 import { Segment } from 'semantic-ui-react'
+import { faCircle } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Blog } from '@/@types/blog'
 
 dayjs.locale(ptBr)
 

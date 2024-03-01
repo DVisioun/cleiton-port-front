@@ -1,18 +1,18 @@
 import { Controller, Control } from 'react-hook-form'
 import { Editor } from '@tinymce/tinymce-react'
-import { API } from '@/@types/api'
+import { Portfolio } from '@/@types/project'
 
-interface BlogTextEditorProps {
+interface PortfolioTextEditorProps {
   name: string
-  control: Control<API.BlogPostCreateFormProps>
+  control: Control<Portfolio.CreatePortfolioProjectFormProps>
   defaultValue: string
 }
 
-export const BlogTextEditor = ({
+export const PortfolioTextEditor = ({
   control,
   defaultValue,
   name,
-}: BlogTextEditorProps) => {
+}: PortfolioTextEditorProps) => {
   return (
     <div className="w-full">
       <Controller

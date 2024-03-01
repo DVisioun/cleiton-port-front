@@ -1,7 +1,28 @@
+'use client'
+
+import { useEffect, useState } from 'react'
+import { useAtom } from 'jotai'
+import { Button, Divider, Header } from 'semantic-ui-react'
+import { fetchSoftwares } from '@/api/Software/fetch-softwares'
 import { TablePortfolioProject } from '@/components/Atom/TablePortfolioProject/TablePortfolioProject'
-import { Divider, Header } from 'semantic-ui-react'
+import ProjectEdit from '@/components/Molecule/ProjectEdit/ProjectEdit'
+import { softwareAtom } from '@/states/softwareAtom'
 
 export default function PortfolioPage() {
+  const [addProject, setAddProject] = useState(false)
+  const [editProject, setEditProject] = useState(false)
+  const [projectId, setProjectId] = useState<string>('')
+  const [softwares, setSoftwares] = useAtom(softwareAtom)
+
+  const handleFetchSoftwares = async () => {
+    const response = await fetchSoftwares()
+    setSoftwares(response.data)
+  }
+
+  useEffect(() => {
+    handleFetchSoftwares()
+  }, [])
+
   return (
     <section className="pl-2 pr-6">
       <Divider horizontal>
@@ -12,7 +33,39 @@ export default function PortfolioPage() {
           Portfolio Projects
         </Header>
       </Divider>
-      <TablePortfolioProject />
+      {!addProject && (
+        <Button
+          content="Create a New Portfolio Project"
+          primary
+          onClick={() => setAddProject(!addProject)}
+        />
+      )}
+      {addProject && (
+        <Button
+          content="View All Portfolio Projects"
+          secondary
+          onClick={() => {
+            setEditProject(false)
+            setAddProject(!addProject)
+          }}
+        />
+      )}
+
+      {!addProject && (
+        <TablePortfolioProject
+          setProjectId={setProjectId}
+          setEditProject={setEditProject}
+          setAddProject={setAddProject}
+        />
+      )}
+      {addProject && (
+        <ProjectEdit
+          editProject={editProject}
+          setEditProject={setEditProject}
+          setAddProject={setAddProject}
+          projectId={projectId}
+        />
+      )}
     </section>
   )
 }

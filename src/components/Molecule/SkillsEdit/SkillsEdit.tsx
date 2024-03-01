@@ -1,11 +1,11 @@
-import { API } from '@/@types/api'
+import { useAtom } from 'jotai'
+import { useForm } from 'react-hook-form'
+import { Button, Input } from 'semantic-ui-react'
 import { addSkill } from '@/api/Skill/add-skill'
 import { SkillsList } from '@/components/Atom/SkillList/SkillList'
 import { skillAtom } from '@/states/skillAtom'
-import { useAtom } from 'jotai'
-import React from 'react'
-import { useForm } from 'react-hook-form'
-import { Button, Input } from 'semantic-ui-react'
+import { API } from '@/@types/api'
+import { notifyFailure, notifySuccess } from '@/utils/toastify'
 
 function SkillsEdit() {
   const [skills, setSkills] = useAtom(skillAtom)
@@ -15,7 +15,10 @@ function SkillsEdit() {
     const response: API.CreateAndUpdateSkillResponseProps = await addSkill(data)
     if (response?.success) {
       setSkills([...skills, response.data])
+      notifySuccess(response.message)
       reset()
+    } else {
+      notifyFailure(response.message)
     }
   }
 
