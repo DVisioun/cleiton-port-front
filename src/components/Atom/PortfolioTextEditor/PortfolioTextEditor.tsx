@@ -3,7 +3,6 @@ import { Editor } from '@tinymce/tinymce-react'
 import { Portfolio } from '@/@types/project'
 
 interface PortfolioTextEditorProps {
-  name: string
   control: Control<Portfolio.CreatePortfolioProjectFormProps>
   defaultValue: string
 }
@@ -11,13 +10,12 @@ interface PortfolioTextEditorProps {
 export const PortfolioTextEditor = ({
   control,
   defaultValue,
-  name,
 }: PortfolioTextEditorProps) => {
   return (
     <div className="w-full">
       <Controller
+        name="content"
         control={control}
-        name={name}
         render={({ field: { onChange } }) => (
           <Editor
             apiKey={process.env.NEXT_PUBLIC_TINY_KEY}

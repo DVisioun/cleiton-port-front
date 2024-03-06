@@ -11,6 +11,7 @@ import { notifySuccess, notifyFailure } from '@/utils/toastify'
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { editBlogPost } from '@/api/BlogPost/edit-blog-post'
 import { fetchBlogPosts } from '@/api/BlogPost/fetch-blog-post'
+import { readFileToBase64 } from '@/utils/base64-converter'
 
 interface PostEditProps {
   editPost: boolean
@@ -30,8 +31,6 @@ const PostEdit = ({
 
   const { register, reset, handleSubmit, control, setValue } =
     useForm<API.BlogPostCreateFormProps>()
-  const { register, reset, handleSubmit, control, setValue } =
-    useForm<API.BlogPostCreateFormProps>()
 
   // completa os dados do formulário caso o usuário queira editar o post
   const fillBlogPostData = async () => {
@@ -42,20 +41,21 @@ const PostEdit = ({
 
       setValue('title', blogPostData.title)
       setValue('description', blogPostData.description)
-
       setValue('order', blogPostData.order)
       setValue('name', blogPostData.name)
     }
   }
 
   const onSubmit = async (data: API.BlogPostCreateFormProps) => {
-  const onSubmit = async (data: API.BlogPostCreateFormProps) => {
     const currentDate = new Date()
 
     if (editPost) {
+      const imgConverted = await readFileToBase64(data.image[0])
+
       const requestBlogPostEditObject = {
         id: data.id,
         name: data.name,
+        image: imgConverted,
         content: data.content,
         created_at: currentDate,
       }
@@ -72,9 +72,12 @@ const PostEdit = ({
         notifyFailure('Failed to edit post, please try again..')
       }
     } else {
+      const imgConverted = await readFileToBase64(data.image[0])
+
       const requestBlogPostCreateObject = {
         name: data.name,
         content: data.content,
+        image: imgConverted,
         created_at: currentDate,
       }
 

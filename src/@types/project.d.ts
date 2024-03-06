@@ -1,16 +1,9 @@
 export namespace Portfolio {
-  // PORTFOLIO PROJECTS
-  interface ImagePortfolioSchema {
-    id: string
-    image: string
-    format_type: string
-    project_id: string
-  }
-
   export interface PortfolioProjectSchema {
     id: string
     name: string
     description: string
+    content: string
     order?: number
     created_at: Date
     image: string
@@ -23,16 +16,29 @@ export namespace Portfolio {
     id: string
     name: string
     description: string
+    content: string
     order?: number
     created_at: Date
-    image: File
+    image: FileList
     softwares: string[]
+  }
+
+  export interface CreatePortfolioProjectRequestProps extends FieldsValue {
+    name: string
+    description: string
+    content: string
+    created_at: Date
+    image: string
+    softwares: {
+      id: string
+    }[]
   }
 
   export interface PortfolioFetchSchema {
     id: string
     name: string
     description: string
+    content: string
     order?: number
     created_at: Date
     image: string
@@ -49,6 +55,7 @@ export namespace Portfolio {
   export interface CreateUpdatePortfolioProjectResponseProps {
     id: string
     name: string
+    content: string
     description: string
     order: number
     created_at: Date

@@ -3,6 +3,7 @@ export namespace Blog {
     data: {
       name: string
       content: string
+      image: string
       created_at: Date
     }
   }

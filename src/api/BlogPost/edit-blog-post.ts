@@ -9,8 +9,6 @@ export const editBlogPost = async (
     const response = await connection.put(`/blog/${id}`, {
       name: blogPost.name,
       content: blogPost.content,
-      order: Number(blogPost.order),
-      flag_home: blogPost.flag_home,
       image: blogPost.image,
     })
 

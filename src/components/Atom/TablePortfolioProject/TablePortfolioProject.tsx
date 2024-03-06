@@ -5,8 +5,7 @@ import dayjs from 'dayjs'
 import ptBr from 'dayjs/locale/pt-br'
 import { portfolioProjectAtom } from '@/states/portfolioProjectAtom'
 import { useAtom } from 'jotai'
-import { faEdit, faFlag, faTrash } from '@fortawesome/free-solid-svg-icons'
-import { faFlag as faFlagTwo } from '@fortawesome/free-regular-svg-icons'
+import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { fetchPortfolioProjects } from '@/api/PortfolioProject/fetch-portfolio-project'
 import {
@@ -21,6 +20,8 @@ import {
   TableHeaderCell,
   TableRow,
 } from 'semantic-ui-react'
+import { deletePortfolioProject } from '@/api/PortfolioProject/delete-portfolio-project'
+import { notifyFailure, notifySuccess } from '@/utils/toastify'
 
 dayjs.locale(ptBr)
 
@@ -51,6 +52,19 @@ export const TablePortfolioProject = ({
         (a: { order: number }, b: { order: number }) => a.order - b.order,
       )
       setPortfolioProjects(orderedPortfolioProjects)
+    }
+  }
+
+  const handlePortfolioProjectDelete = async (id: string) => {
+    const response = await deletePortfolioProject(id)
+    if (response?.success) {
+      notifySuccess(response.message)
+      const portfolioProjectsFiltered = portfolioProjects.filter(
+        (item) => item.id !== id,
+      )
+      setPortfolioProjects(portfolioProjectsFiltered)
+    } else {
+      notifyFailure(response.message)
     }
   }
 
@@ -94,6 +108,7 @@ export const TablePortfolioProject = ({
                   icon={faTrash}
                   height={30}
                   fontSize={18}
+                  onClick={() => handlePortfolioProjectDelete(item.id)}
                 />
               </TableCell>
             </TableRow>

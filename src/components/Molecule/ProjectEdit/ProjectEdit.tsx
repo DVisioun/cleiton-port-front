@@ -2,7 +2,7 @@
 
 import { useForm } from 'react-hook-form'
 import { useAtom } from 'jotai'
-import { Button, Input } from 'semantic-ui-react'
+import { Button, Form, Input, TextArea } from 'semantic-ui-react'
 import { portfolioProjectAtom } from '@/states/portfolioProjectAtom'
 import { addPortfolioProject } from '@/api/PortfolioProject/add-portfolio-project'
 import { PortfolioTextEditor } from '@/components/Atom/PortfolioTextEditor/PortfolioTextEditor'
@@ -14,6 +14,7 @@ import { fetchPortfolioProjects } from '@/api/PortfolioProject/fetch-portfolio-p
 import { Portfolio } from '@/@types/project'
 import { softwareAtom } from '@/states/softwareAtom'
 import Image from 'next/image'
+import { API } from '@/@types/api'
 
 interface ProjectEditProps {
   editProject: boolean
@@ -33,8 +34,12 @@ const ProjectEdit = ({
   const [portfolioIndex, setPortfolioIndex] = useState<number>(0)
   const [imagePreview, setImagePreview] = useState<string>('')
 
-  const { register, reset, handleSubmit, control, setValue } =
+  const imagePreviewElement = document.getElementById('file')
+
+  const { register, reset, handleSubmit, control, setValue, watch } =
     useForm<Portfolio.CreatePortfolioProjectFormProps>()
+
+  const watchImage = watch('image')
 
   // completa os dados do formulário caso o usuário queira editar o project
   const fillPortfolioProjectData = async () => {
@@ -47,12 +52,13 @@ const ProjectEdit = ({
 
       const imageConverted = await readBase64ToFile(portfolioProjectData.image)
       const previewURL = URL.createObjectURL(imageConverted)
-      setImagePreview(previewURL)
+      if (previewURL) setImagePreview(previewURL)
 
-      const softwaresUsedInProject = softwares.filter((item) =>
-        portfolioProjectData.softwares.some(
-          (software) => software.software_id === item.id,
-        ),
+      const softwaresUsedInProject: API.SoftwareSchema[] = softwares.filter(
+        (item) =>
+          portfolioProjectData.softwares.some(
+            (software) => software.software_id === item.id,
+          ),
       )
 
       const selectedSoftwares = softwaresUsedInProject.map((item) => {
@@ -70,13 +76,13 @@ const ProjectEdit = ({
     const currentDate = new Date()
 
     if (editProject) {
-      const imageConverter = await readFileToBase64(data.image)
+      const imageConverter = await readFileToBase64(data.image[0])
 
       const requestPortfolioProjectEditObject = {
         id: data.id,
         name: data.name,
         description: data.description,
-        order: data.order,
+        content: data.content,
         softwares: data.softwares,
         image: imageConverter,
         created_at: currentDate,
@@ -96,13 +102,18 @@ const ProjectEdit = ({
         notifyFailure('Failed to edit project, please try again..')
       }
     } else {
-      const imageConverter = await readFileToBase64(data.image)
+      const imageConverted = await readFileToBase64(data.image[0])
+
+      const softwaresArray = data.softwares.map((item) => {
+        return { id: item }
+      })
 
       const requestPortfolioProjectCreateObject = {
         name: data.name,
         description: data.description,
-        softwares: data.softwares,
-        image: imageConverter,
+        content: data.content,
+        softwares: softwaresArray,
+        image: imageConverted,
         created_at: currentDate,
       }
 
@@ -128,8 +139,15 @@ const ProjectEdit = ({
     }
   }, [editProject])
 
+  useEffect(() => {
+    if (watchImage[0]) {
+      const previewURL = URL.createObjectURL(watchImage[0])
+      if (previewURL) setImagePreview(previewURL)
+    }
+  }, [watchImage])
+
   return (
-    <div>
+    <div className="pb-4">
       <form
         className="flex flex-col items-start justify-center gap-4"
         onSubmit={handleSubmit(onSubmit)}
@@ -139,7 +157,7 @@ const ProjectEdit = ({
           className="mt-4 flex w-full flex-col items-start justify-center gap-2 font-semibold"
         >
           Title
-          <Input placeholder="Enter title your project...">
+          <Input placeholder="Enter title of your project...">
             <input
               type="text"
               {...register('name', { required: 'Required field!' })}
@@ -147,18 +165,30 @@ const ProjectEdit = ({
           </Input>
         </label>
         <label
-          htmlFor="title"
+          htmlFor="description"
+          className="flex w-full flex-col items-start justify-center gap-2 font-semibold"
+        >
+          Description
+        </label>
+        <Form className="w-full">
+          <TextArea
+            placeholder="Write a short summary about your portfolio"
+            style={{ minHeight: 100, maxHeight: 100 }}
+            {...register('description', { required: 'Required field!' })}
+          />
+        </Form>
+        <label
+          htmlFor="content"
           className="flex w-full flex-col items-start justify-center gap-2 font-semibold"
         >
           Content
         </label>
         <PortfolioTextEditor
-          name="description"
-          defaultValue={`${!editProject ? '<p>Enter content your project...</p>' : portfolioProject[portfolioIndex].description}`}
+          defaultValue={`${!editProject ? '<p>Enter content your project...</p>' : portfolioProject[portfolioIndex].content}`}
           control={control}
         />
         <label
-          htmlFor="title"
+          htmlFor="softwares"
           className="flex w-full flex-col items-start justify-center gap-2 font-semibold"
         >
           Softwares
@@ -177,29 +207,29 @@ const ProjectEdit = ({
           })}
         </select>
         <label
-          htmlFor="title"
+          htmlFor="image"
           className="flex w-full flex-col items-start justify-center gap-2 font-semibold"
         >
-          Image
+          Cover Image
         </label>
-        <div>
+        <div className="flex items-center gap-16">
           <Input placeholder="">
             <input
+              id="file"
               type="file"
               placeholder="Enter image of your project..."
               {...register('image', { required: 'Required field!' })}
-              draggable
             />
           </Input>
-          {imagePreview ?? (
+          {imagePreview ? (
             <Image
-              className="h-20 rounded-full"
-              width={100}
-              height={100}
+              width={320}
+              height={200}
+              className="h-60 w-60 rounded-full"
               alt=""
               src={imagePreview}
             />
-          )}
+          ) : null}
         </div>
         <Button
           type="submit"
