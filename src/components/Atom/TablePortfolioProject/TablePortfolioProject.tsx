@@ -46,10 +46,12 @@ export const TablePortfolioProject = ({
 
   const handlePortfolioProjectsFetch = async () => {
     const response = await fetchPortfolioProjects()
-    const orderedPortfolioProjects = response.data.sort(
-      (a: { order: number }, b: { order: number }) => a.order - b.order,
-    )
-    setPortfolioProjects(orderedPortfolioProjects)
+    if (response.data) {
+      const orderedPortfolioProjects = response.data.sort(
+        (a: { order: number }, b: { order: number }) => a.order - b.order,
+      )
+      setPortfolioProjects(orderedPortfolioProjects)
+    }
   }
 
   useEffect(() => {
@@ -62,7 +64,6 @@ export const TablePortfolioProject = ({
         <TableRow>
           <TableHeaderCell>Name</TableHeaderCell>
           <TableHeaderCell>Order</TableHeaderCell>
-          <TableHeaderCell>Flag Home</TableHeaderCell>
           <TableHeaderCell>Date Created</TableHeaderCell>
           <TableHeaderCell>Edit</TableHeaderCell>
           <TableHeaderCell>Remove</TableHeaderCell>
@@ -75,13 +76,6 @@ export const TablePortfolioProject = ({
             <TableRow key={item.id}>
               <TableCell>{item.name}</TableCell>
               <TableCell>{item.order}</TableCell>
-              <TableCell>
-                {item.flag_home ? (
-                  <FontAwesomeIcon icon={faFlag} height={30} fontSize={18} />
-                ) : (
-                  <FontAwesomeIcon icon={faFlagTwo} height={30} fontSize={18} />
-                )}
-              </TableCell>
               <TableCell>
                 {dayjs(item.created_at).format('D[ de ]MMMM[, ]YYYY')}
               </TableCell>

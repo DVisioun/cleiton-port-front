@@ -44,10 +44,12 @@ export const TableBlogPost = ({
 
   const handleBlogPostsFetch = async () => {
     const response = await fetchBlogPosts()
-    const orderedBlogPosts = response.data.sort(
-      (a: { order: number }, b: { order: number }) => a.order - b.order,
-    )
-    setBlogPosts(orderedBlogPosts)
+    if (response.data) {
+      const orderedBlogPosts = response.data.sort(
+        (a: { order: number }, b: { order: number }) => a.order - b.order,
+      )
+      setBlogPosts(orderedBlogPosts)
+    }
   }
 
   useEffect(() => {

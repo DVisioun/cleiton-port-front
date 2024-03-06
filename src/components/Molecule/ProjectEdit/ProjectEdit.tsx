@@ -61,7 +61,6 @@ const ProjectEdit = ({
 
       setValue('name', portfolioProjectData.name)
       setValue('description', portfolioProjectData.description)
-      setValue('flag_home', portfolioProjectData.flag_home)
       setValue('name', portfolioProjectData.name)
       setValue('softwares', selectedSoftwares)
     }
@@ -78,7 +77,6 @@ const ProjectEdit = ({
         name: data.name,
         description: data.description,
         order: data.order,
-        flag_home: data.flag_home,
         softwares: data.softwares,
         image: imageConverter,
         created_at: currentDate,
@@ -103,7 +101,6 @@ const ProjectEdit = ({
       const requestPortfolioProjectCreateObject = {
         name: data.name,
         description: data.description,
-        flag_home: data.flag_home,
         softwares: data.softwares,
         image: imageConverter,
         created_at: currentDate,
@@ -179,15 +176,6 @@ const ProjectEdit = ({
             )
           })}
         </select>
-        <fieldset className="flex gap-2">
-          <input {...register('flag_home')} type="checkbox" />
-          <label
-            htmlFor="title"
-            className="flex w-full flex-col items-start justify-center gap-2 font-semibold"
-          >
-            Flag Home
-          </label>
-        </fieldset>
         <label
           htmlFor="title"
           className="flex w-full flex-col items-start justify-center gap-2 font-semibold"

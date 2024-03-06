@@ -12,7 +12,6 @@ export namespace Portfolio {
     name: string
     description: string
     order?: number
-    flag_home: boolean
     created_at: Date
     image: string
     softwares: {
@@ -25,7 +24,6 @@ export namespace Portfolio {
     name: string
     description: string
     order?: number
-    flag_home: boolean
     created_at: Date
     image: File
     softwares: string[]
@@ -36,7 +34,6 @@ export namespace Portfolio {
     name: string
     description: string
     order?: number
-    flag_home: boolean
     created_at: Date
     image: string
     softwares: {
@@ -54,7 +51,6 @@ export namespace Portfolio {
     name: string
     description: string
     order: number
-    flag_home: boolean
     created_at: Date
   }
 }
