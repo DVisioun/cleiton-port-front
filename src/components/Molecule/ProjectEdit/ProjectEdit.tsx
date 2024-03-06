@@ -78,12 +78,20 @@ const ProjectEdit = ({
     if (editProject) {
       const imageConverter = await readFileToBase64(data.image[0])
 
+      const softwaresUsedInProject: API.SoftwareSchema[] = softwares.filter(
+        (item) => data.softwares.some((software) => software === item.id),
+      )
+
+      const selectedSoftwares = softwaresUsedInProject.map((item) => {
+        return { id: item.id }
+      })
+
       const requestPortfolioProjectEditObject = {
         id: data.id,
         name: data.name,
         description: data.description,
         content: data.content,
-        softwares: data.softwares,
+        softwares: selectedSoftwares,
         image: imageConverter,
         created_at: currentDate,
       }

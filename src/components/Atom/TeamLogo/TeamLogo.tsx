@@ -5,7 +5,10 @@ import Image from 'next/image'
 import { ThemeContext } from '@/hooks/ThemeContext'
 
 export const TeamLogo = () => {
-  const { theme, setTheme } = useContext(ThemeContext)
+  const { theme, setTheme } = useContext(ThemeContext) || {
+    theme: 'light',
+    setTheme: () => {},
+  }
   const [darkMode, setDarkMode] = useState(false)
 
   useEffect(() => {
