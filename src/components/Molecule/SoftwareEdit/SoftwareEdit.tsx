@@ -7,7 +7,7 @@ import React from 'react'
 import { Button, Input } from 'semantic-ui-react'
 import { useForm } from 'react-hook-form'
 import { readFileToBase64 } from '@/utils/base64-converter'
-import { notifyFailure } from '@/utils/toastify'
+import { notifyFailure, notifySuccess } from '@/utils/toastify'
 
 function SoftwareEdit() {
   const [softwares, setSoftwares] = useAtom(softwareAtom)
@@ -28,7 +28,10 @@ function SoftwareEdit() {
         await addSoftware(requestSoftwareObject)
       if (response && response.success) {
         setSoftwares([...softwares, response.data])
+        notifySuccess(response.message)
         reset()
+      } else {
+        notifyFailure(response.message)
       }
     } else {
       notifyFailure(fileConverted)

@@ -14,7 +14,10 @@ interface HeaderProps {
 }
 
 export default function Header({ lang, bgColor }: HeaderProps) {
-  const { theme, setTheme } = useContext(ThemeContext)
+  const { theme } = useContext(ThemeContext) || {
+    theme: 'light',
+    setTheme: () => {},
+  }
   const [darkMode, setDarkMode] = useState(false)
 
   useEffect(() => {

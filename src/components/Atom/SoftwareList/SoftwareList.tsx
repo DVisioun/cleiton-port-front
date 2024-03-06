@@ -1,11 +1,13 @@
-import { API } from '@/@types/api'
+import { useEffect } from 'react'
+import { useAtom } from 'jotai'
+import Image from 'next/image'
+import { faXmark } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { deleteSoftwares } from '@/api/Software/delete-software'
 import { fetchSoftwares } from '@/api/Software/fetch-softwares'
 import { softwareAtom } from '@/states/softwareAtom'
-import { useAtom } from 'jotai'
-import { X } from 'lucide-react'
-import Image from 'next/image'
-import { useEffect } from 'react'
+import { notifyFailure, notifySuccess } from '@/utils/toastify'
+import { API } from '@/@types/api'
 
 export const SoftwareList = () => {
   const [softwares, setSoftwares] = useAtom(softwareAtom)
@@ -21,6 +23,9 @@ export const SoftwareList = () => {
     const response = await deleteSoftwares(id)
     if (response?.success) {
       setSoftwares(softwares.filter((item) => item.id !== id))
+      notifySuccess(response.message)
+    } else {
+      notifyFailure(response.message)
     }
   }
 
@@ -48,10 +53,10 @@ export const SoftwareList = () => {
               />
               <p className="m-0">{item.name}</p>
               <button onClick={() => handleDeleteSoftware(item.id)}>
-                <X
-                  size={18}
-                  strokeWidth={2.5}
-                  className="duration-300 hover:scale-110"
+                <FontAwesomeIcon
+                  icon={faXmark}
+                  height={12}
+                  className="duration-300 hover:scale-125"
                 />
               </button>
             </div>

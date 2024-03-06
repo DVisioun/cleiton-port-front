@@ -18,6 +18,7 @@
     "axios": "^1.6.7",
     "beta": "^0.0.1",
     "dayjs": "^1.11.10",
+    "dompurify": "^3.0.9",
     "jotai": "^2.6.5",
     "lucide-react": "^0.331.0",
     "next": "14.0.4",
@@ -37,6 +38,7 @@
   },
   "devDependencies": {
     "@rocketseat/eslint-config": "^2.1.0",
+    "@types/dompurify": "^3.0.5",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

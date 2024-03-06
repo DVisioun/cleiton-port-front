@@ -8,10 +8,10 @@ import { blogPostAtom } from '@/states/blogPostAtom'
 import { addBlogPost } from '@/api/BlogPost/add-blog-post'
 import { BlogTextEditor } from '@/components/Atom/BlogTextEditor/BlogTextEditor'
 import { notifySuccess, notifyFailure } from '@/utils/toastify'
-import { readBase64ToFile, readFileToBase64 } from '@/utils/base64-converter'
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { editBlogPost } from '@/api/BlogPost/edit-blog-post'
 import { fetchBlogPosts } from '@/api/BlogPost/fetch-blog-post'
+import { readFileToBase64 } from '@/utils/base64-converter'
 
 interface PostEditProps {
   editPost: boolean
@@ -36,14 +36,11 @@ const PostEdit = ({
   const fillBlogPostData = async () => {
     const blogPostData = blogPost.find((item) => item.id === postId)
     if (blogPostData) {
-      const imageFile = await readBase64ToFile(blogPostData.image)
       const index = blogPost.findIndex((item) => item.id === postId)
       setBlogIndex(index)
 
       setValue('title', blogPostData.title)
       setValue('description', blogPostData.description)
-      // setValue('image', imageFile)
-      setValue('flag_home', blogPostData.flag_home)
       setValue('order', blogPostData.order)
       setValue('name', blogPostData.name)
     }
@@ -53,15 +50,13 @@ const PostEdit = ({
     const currentDate = new Date()
 
     if (editPost) {
-      const file = data.image[0]
-      const imageConverted = await readFileToBase64(file)
+      const imgConverted = await readFileToBase64(data.image[0])
+
       const requestBlogPostEditObject = {
         id: data.id,
         name: data.name,
+        image: imgConverted,
         content: data.content,
-        order: data.order,
-        flag_home: data.flag_home,
-        image: imageConverted,
         created_at: currentDate,
       }
 
@@ -77,17 +72,14 @@ const PostEdit = ({
         notifyFailure('Failed to edit post, please try again..')
       }
     } else {
-      const file = data.image[0]
-      const imageConverted = await readFileToBase64(file)
+      const imgConverted = await readFileToBase64(data.image[0])
 
       const requestBlogPostCreateObject = {
         name: data.name,
         content: data.content,
-        order: data.order,
-        flag_home: data.flag_home,
-        image: imageConverted,
+        image: imgConverted,
         created_at: currentDate,
-      } as API.BlogPostCreateProps
+      }
 
       const response: API.CreateAndUpdateBlogPostResponseProps =
         await addBlogPost(requestBlogPostCreateObject)
@@ -108,7 +100,7 @@ const PostEdit = ({
     } else {
       reset()
     }
-  }, [])
+  }, [editPost])
 
   return (
     <div>

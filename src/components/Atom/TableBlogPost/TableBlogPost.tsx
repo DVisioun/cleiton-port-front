@@ -5,8 +5,7 @@ import ptBr from 'dayjs/locale/pt-br'
 import { fetchBlogPosts } from '@/api/BlogPost/fetch-blog-post'
 import { blogPostAtom } from '@/states/blogPostAtom'
 import { useAtom } from 'jotai'
-import { faEdit, faFlag, faTrash } from '@fortawesome/free-solid-svg-icons'
-import { faFlag as faFlagTwo } from '@fortawesome/free-regular-svg-icons'
+import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Dispatch, SetStateAction, useEffect } from 'react'
 import {
@@ -25,7 +24,7 @@ import { deleteBlogPost } from '@/api/BlogPost/delete-blog-post'
 
 dayjs.locale(ptBr)
 
-interface PostEditProps {
+interface TableBlogPostProps {
   setEditPost: Dispatch<SetStateAction<boolean>>
   setAddPost: Dispatch<SetStateAction<boolean>>
   setPostId: Dispatch<SetStateAction<string>>
@@ -35,7 +34,7 @@ export const TableBlogPost = ({
   setPostId,
   setEditPost,
   setAddPost,
-}: PostEditProps) => {
+}: TableBlogPostProps) => {
   const [blogPosts, setBlogPosts] = useAtom(blogPostAtom)
 
   const handleBlogPostEdit = (id: string) => {
@@ -46,10 +45,12 @@ export const TableBlogPost = ({
 
   const handleBlogPostsFetch = async () => {
     const response = await fetchBlogPosts()
-    const orderedBlogPosts = response.data.sort(
-      (a: { order: number }, b: { order: number }) => a.order - b.order,
-    )
-    setBlogPosts(orderedBlogPosts)
+    if (response.data) {
+      const orderedBlogPosts = response.data.sort(
+        (a: { order: number }, b: { order: number }) => a.order - b.order,
+      )
+      setBlogPosts(orderedBlogPosts)
+    }
   }
 
   const handleDelete = async (id: string) => {
@@ -68,8 +69,6 @@ export const TableBlogPost = ({
       <TableHeader>
         <TableRow>
           <TableHeaderCell>Name</TableHeaderCell>
-          <TableHeaderCell>Order</TableHeaderCell>
-          <TableHeaderCell>Flag Home</TableHeaderCell>
           <TableHeaderCell>Date Created</TableHeaderCell>
           <TableHeaderCell>Edit</TableHeaderCell>
           <TableHeaderCell>Remove</TableHeaderCell>
@@ -81,14 +80,6 @@ export const TableBlogPost = ({
           return (
             <TableRow key={item.id}>
               <TableCell>{item.name}</TableCell>
-              <TableCell>{item.order}</TableCell>
-              <TableCell>
-                {item.flag_home ? (
-                  <FontAwesomeIcon icon={faFlag} height={30} fontSize={18} />
-                ) : (
-                  <FontAwesomeIcon icon={faFlagTwo} height={30} fontSize={18} />
-                )}
-              </TableCell>
               <TableCell>
                 {dayjs(item.created_at).format('D[ de ]MMMM[, ]YYYY')}
               </TableCell>
