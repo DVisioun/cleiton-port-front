@@ -25,15 +25,19 @@ function EducationEdit() {
             <TableHeader>
               <TableRow>
                 <TableHeaderCell width={13}>Name</TableHeaderCell>
-                <TableHeaderCell width={3}>Operação</TableHeaderCell>
+                <TableHeaderCell width={3}>Operation</TableHeaderCell>
               </TableRow>
             </TableHeader>
             <TableBody>
               <TableRow>
                 <TableCell>Aden</TableCell>
-                <TableCell textAlign="right">
-                  <ModalEditEducation />
-                  <FontAwesomeIcon icon={faTrash} height={12} />
+                <TableCell textAlign="center">
+                  <ModalEditEducation language={true} />
+                  <FontAwesomeIcon
+                    icon={faTrash}
+                    height={12}
+                    className="cursor-pointer"
+                  />
                 </TableCell>
               </TableRow>
             </TableBody>
@@ -49,16 +53,20 @@ function EducationEdit() {
           <Table celled structured>
             <TableHeader>
               <TableRow>
-                <TableHeaderCell width={13}>Name</TableHeaderCell>
+                <TableHeaderCell width={13}>Nome</TableHeaderCell>
                 <TableHeaderCell width={3}>Operação</TableHeaderCell>
               </TableRow>
             </TableHeader>
             <TableBody>
               <TableRow>
                 <TableCell>Aden</TableCell>
-                <TableCell textAlign="right">
-                  <ModalEditEducation />
-                  <FontAwesomeIcon icon={faTrash} height={12} />
+                <TableCell textAlign="center">
+                  <ModalEditEducation language={false} />
+                  <FontAwesomeIcon
+                    icon={faTrash}
+                    height={12}
+                    className="cursor-pointer"
+                  />
                 </TableCell>
               </TableRow>
             </TableBody>

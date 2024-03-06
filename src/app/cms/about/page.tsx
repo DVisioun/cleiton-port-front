@@ -29,9 +29,25 @@ function page() {
           <SoftwareEdit />
         </Segment>
         <Segment>
+          <Divider horizontal>
+            <Header
+              as="h4"
+              className="!sm-1:text-5xl !m-0 !font-alt !text-6xl !font-medium !text-secondary"
+            >
+              Experience
+            </Header>
+          </Divider>
           <ExperienceEdit />
         </Segment>
         <Segment>
+          <Divider horizontal>
+            <Header
+              as="h4"
+              className="!sm-1:text-5xl !m-0 !font-alt !text-6xl !font-medium !text-secondary"
+            >
+              Education
+            </Header>
+          </Divider>
           <EducationEdit />
         </Segment>
       </Segment>
