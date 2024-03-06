@@ -20,6 +20,7 @@ import {
   TableHeaderCell,
   TableRow,
 } from 'semantic-ui-react'
+import { deleteBlogPost } from '@/api/BlogPost/delete-blog-post'
 
 dayjs.locale(ptBr)
 
@@ -50,6 +51,13 @@ export const TableBlogPost = ({
       )
       setBlogPosts(orderedBlogPosts)
     }
+  }
+
+  const handleDelete = async (id: string) => {
+    await deleteBlogPost(id)
+    setBlogPosts((prevItems) => {
+      return prevItems.filter((item) => item.id !== id)
+    })
   }
 
   useEffect(() => {
@@ -90,6 +98,7 @@ export const TableBlogPost = ({
                   icon={faTrash}
                   height={30}
                   fontSize={18}
+                  onClick={() => handleDelete(item.id)}
                 />
               </TableCell>
             </TableRow>

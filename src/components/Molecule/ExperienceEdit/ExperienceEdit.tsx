@@ -1,3 +1,4 @@
+import ModalEditExperience from '@/components/Atom/ModalEditExperience/ModalEditExperience'
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
@@ -24,15 +25,19 @@ function ExperienceEdit() {
             <TableHeader>
               <TableRow>
                 <TableHeaderCell width={13}>Name</TableHeaderCell>
-                <TableHeaderCell width={3}>Operação</TableHeaderCell>
+                <TableHeaderCell width={3}>Operation</TableHeaderCell>
               </TableRow>
             </TableHeader>
             <TableBody>
               <TableRow>
                 <TableCell>Aden</TableCell>
-                <TableCell textAlign="right">
-                  <FontAwesomeIcon icon={faEdit} className="mr-3" height={12} />
-                  <FontAwesomeIcon icon={faTrash} height={12} />
+                <TableCell textAlign="center">
+                  <ModalEditExperience language={true} />
+                  <FontAwesomeIcon
+                    icon={faTrash}
+                    height={12}
+                    className="cursor-pointer"
+                  />
                 </TableCell>
               </TableRow>
             </TableBody>
@@ -55,9 +60,13 @@ function ExperienceEdit() {
             <TableBody>
               <TableRow>
                 <TableCell>Aden</TableCell>
-                <TableCell textAlign="right">
-                  <button></button>
-                  <FontAwesomeIcon icon={faTrash} height={12} />
+                <TableCell textAlign="center">
+                  <ModalEditExperience language={false} />
+                  <FontAwesomeIcon
+                    icon={faTrash}
+                    height={12}
+                    className="cursor-pointer"
+                  />
                 </TableCell>
               </TableRow>
             </TableBody>

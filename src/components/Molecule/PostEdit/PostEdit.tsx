@@ -30,6 +30,8 @@ const PostEdit = ({
 
   const { register, reset, handleSubmit, control, setValue } =
     useForm<API.BlogPostCreateFormProps>()
+  const { register, reset, handleSubmit, control, setValue } =
+    useForm<API.BlogPostCreateFormProps>()
 
   // completa os dados do formulário caso o usuário queira editar o post
   const fillBlogPostData = async () => {
@@ -47,6 +49,7 @@ const PostEdit = ({
   }
 
   const onSubmit = async (data: API.BlogPostCreateFormProps) => {
+  const onSubmit = async (data: API.BlogPostCreateFormProps) => {
     const currentDate = new Date()
 
     if (editPost) {
@@ -58,7 +61,7 @@ const PostEdit = ({
       }
 
       const response: API.CreateAndUpdateBlogPostResponseProps =
-        await editBlogPost(requestBlogPostEditObject)
+        await editBlogPost(requestBlogPostEditObject, postId)
       if (response && response.success) {
         await fetchBlogPosts()
         notifySuccess('Post edited successfully')

@@ -19,7 +19,11 @@ import {
   TextArea,
 } from 'semantic-ui-react'
 
-function ModalEditEducation() {
+interface ModalEditEducationProps {
+  language: boolean
+}
+
+function ModalEditEducation({ language }: ModalEditEducationProps) {
   const [open, setOpen] = useState(false)
 
   return (
@@ -33,19 +37,21 @@ function ModalEditEducation() {
         </button>
       }
     >
-      <ModalHeader>Editing Education</ModalHeader>
+      <ModalHeader>
+        {language ? 'Editing Education' : 'Editando Educação'}
+      </ModalHeader>
       <ModalContent>
         <ModalDescription>
           <Grid>
             <GridRow columns={2}>
               <GridColumn mobile={16} computer={8} tablet={16}>
-                <h4 className="mb-0">Date</h4>
+                <h4 className="mb-0">{language ? 'Date' : 'Data'}</h4>
                 <Input>
                   <input type="text" />
                 </Input>
               </GridColumn>
               <GridColumn mobile={16} computer={8} tablet={16}>
-                <h4 className="mb-0">Title</h4>
+                <h4 className="mb-0">{language ? 'Title' : 'Título'}</h4>
                 <Input>
                   <input type="text" />
                 </Input>
@@ -53,13 +59,17 @@ function ModalEditEducation() {
             </GridRow>
             <GridRow columns={2}>
               <GridColumn mobile={16} computer={8} tablet={16}>
-                <h4 className="mb-0">Instituition</h4>
+                <h4 className="mb-0">
+                  {language ? 'Institution' : 'Instituição'}
+                </h4>
                 <Input>
                   <input type="text" />
                 </Input>
               </GridColumn>
               <GridColumn mobile={16} computer={8} tablet={16}>
-                <h4 className="mb-0">Location</h4>
+                <h4 className="mb-0">
+                  {language ? 'Location' : 'Localização'}
+                </h4>
                 <Input>
                   <input type="text" />
                 </Input>
@@ -67,7 +77,9 @@ function ModalEditEducation() {
             </GridRow>
             <GridRow columns={1}>
               <GridColumn mobile={16} computer={16} tablet={16}>
-                <h4 className="mb-0">Description</h4>
+                <h4 className="mb-0">
+                  {language ? 'Description' : 'Descrição'}
+                </h4>
                 <Form>
                   <TextArea />
                 </Form>
@@ -78,10 +90,10 @@ function ModalEditEducation() {
       </ModalContent>
       <ModalActions>
         <Button color="black" onClick={() => setOpen(false)}>
-          Nope
+          {language ? 'Nope' : 'Não'}
         </Button>
         <Button
-          content="Yep, that's me"
+          content={language ? "Yep, it's alright!" : 'Sim, está tudo certo!'}
           labelPosition="right"
           icon="checkmark"
           onClick={() => setOpen(false)}
