@@ -1,16 +1,16 @@
-import { API } from '@/@types/api'
+import { Portfolio } from '@/@types/project'
 import { connection } from '@/utils/axios'
 
 export const editPortfolioProject = async (
-  portfolioProject: API.CreatePortfolioProjectFormProps,
+  portfolioProject: Portfolio.CreatePortfolioProjectRequestProps,
   id: string,
 ) => {
   try {
-    const response = await connection.post(`/portfolio/${id}`, {
+    const response = await connection.put(`/portfolio/${id}`, {
       name: portfolioProject.name,
-      order: portfolioProject.order,
-      flag_home: portfolioProject.flag_home,
-      images: portfolioProject.images,
+      description: portfolioProject.description,
+      content: portfolioProject.content,
+      image: portfolioProject.image,
       softwares: portfolioProject.softwares,
     })
 
