@@ -25,7 +25,7 @@ function ExperienceEdit() {
             <TableHeader>
               <TableRow>
                 <TableHeaderCell width={13}>Name</TableHeaderCell>
-                <TableHeaderCell width={3}>Operação</TableHeaderCell>
+                <TableHeaderCell width={3}>Operation</TableHeaderCell>
               </TableRow>
             </TableHeader>
             <TableBody>
