@@ -87,13 +87,11 @@ const ProjectEdit = ({
       })
 
       const requestPortfolioProjectEditObject = {
-        id: data.id,
         name: data.name,
         description: data.description,
         content: data.content,
         softwares: selectedSoftwares,
         image: imageConverter,
-        created_at: currentDate,
       }
 
       const response = await editPortfolioProject(
@@ -148,7 +146,7 @@ const ProjectEdit = ({
   }, [editProject])
 
   useEffect(() => {
-    if (watchImage[0]) {
+    if (watchImage && watchImage[0]) {
       const previewURL = URL.createObjectURL(watchImage[0])
       if (previewURL) setImagePreview(previewURL)
     }

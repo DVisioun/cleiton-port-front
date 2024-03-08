@@ -11,7 +11,8 @@ import { notifySuccess, notifyFailure } from '@/utils/toastify'
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { editBlogPost } from '@/api/BlogPost/edit-blog-post'
 import { fetchBlogPosts } from '@/api/BlogPost/fetch-blog-post'
-import { readFileToBase64 } from '@/utils/base64-converter'
+import { readBase64ToFile, readFileToBase64 } from '@/utils/base64-converter'
+import Image from 'next/image'
 
 interface PostEditProps {
   editPost: boolean
@@ -28,9 +29,12 @@ const PostEdit = ({
 }: PostEditProps) => {
   const [blogPost, setBlogPost] = useAtom(blogPostAtom)
   const [blogIndex, setBlogIndex] = useState<number>(0)
+  const [imagePreview, setImagePreview] = useState<string>('')
 
-  const { register, reset, handleSubmit, control, setValue } =
+  const { register, reset, handleSubmit, control, setValue, watch } =
     useForm<API.BlogPostCreateFormProps>()
+
+  const watchImage = watch('image')
 
   // completa os dados do formulário caso o usuário queira editar o post
   const fillBlogPostData = async () => {
@@ -38,6 +42,10 @@ const PostEdit = ({
     if (blogPostData) {
       const index = blogPost.findIndex((item) => item.id === postId)
       setBlogIndex(index)
+
+      const imageConverted = await readBase64ToFile(blogPostData.image)
+      const previewURL = URL.createObjectURL(imageConverted)
+      if (previewURL) setImagePreview(previewURL)
 
       setValue('title', blogPostData.title)
       setValue('description', blogPostData.description)
@@ -102,6 +110,13 @@ const PostEdit = ({
     }
   }, [editPost])
 
+  useEffect(() => {
+    if (watchImage && watchImage[0]) {
+      const previewURL = URL.createObjectURL(watchImage[0])
+      if (previewURL) setImagePreview(previewURL)
+    }
+  }, [watchImage])
+
   return (
     <div>
       <form
@@ -135,39 +150,25 @@ const PostEdit = ({
           htmlFor="title"
           className="flex w-full flex-col items-start justify-center gap-2 font-semibold"
         >
-          Order
+          Cover Image
+        </label>
+        <div className="flex items-center gap-16">
           <Input placeholder="">
             <input
-              type="number"
-              {...register('order', { required: 'Required field!' })}
-              placeholder="Enter order of your post..."
-            />
-          </Input>
-        </label>
-        <fieldset className="flex gap-2">
-          <input {...register('flag_home')} type="checkbox" />
-          <label
-            htmlFor="title"
-            className="flex w-full flex-col items-start justify-center gap-2 font-semibold"
-          >
-            Flag Home
-          </label>
-        </fieldset>
-        <label
-          htmlFor="title"
-          className="flex w-full flex-col items-start justify-center gap-2 font-semibold"
-        >
-          Image
-        </label>
-        <div>
-          <Input placeholder="">
-            <input
+              id="file"
               type="file"
-              placeholder="Enter image of your post..."
               {...register('image', { required: 'Required field!' })}
-              draggable
             />
           </Input>
+          {imagePreview ? (
+            <Image
+              width={320}
+              height={200}
+              className="h-60 w-60 rounded-full"
+              alt=""
+              src={imagePreview}
+            />
+          ) : null}
         </div>
         <Button
           type="submit"

@@ -6,6 +6,7 @@ export const addBlogPost = async (blogPost: API.BlogPostCreateProps) => {
     const response = await connection.post('/blog', {
       name: blogPost.name,
       content: blogPost.content,
+      image: blogPost.image,
     })
 
     return response.data
