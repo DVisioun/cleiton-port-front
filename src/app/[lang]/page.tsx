@@ -7,7 +7,6 @@ import { Footer } from '@/components/Molecule/Footer/Footer'
 
 function Home({ params }: { params: { lang: Locale } }) {
   const t = getDictionaryUseClient(params.lang)
-
   return (
     <div className="bg-secondary text-primary">
       <ThemeProvider initialTheme="light">

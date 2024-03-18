@@ -34,7 +34,7 @@ function Blog() {
                 computer={8}
                 tablet={16}
                 largeScreen={8}
-                className="!px-0 !py-4"
+                className="!flex !px-0 !py-4"
               >
                 <CardBlog data={item} />
               </GridColumn>

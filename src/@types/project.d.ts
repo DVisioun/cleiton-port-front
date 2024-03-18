@@ -27,7 +27,6 @@ export namespace Portfolio {
     name: string
     description: string
     content: string
-    created_at: Date
     image: string
     softwares: {
       id: string
