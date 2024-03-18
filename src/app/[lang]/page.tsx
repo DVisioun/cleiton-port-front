@@ -4,9 +4,13 @@ import ConfigContent from '@/components/Molecule/ConfigContent/ConfigContent'
 import { getDictionaryUseClient } from '@/dictionaries/default-dictionaries-client'
 import { Locale } from '@/config/i18n.config'
 import { Footer } from '@/components/Molecule/Footer/Footer'
+import { useRouter } from 'next/navigation'
 
 function Home({ params }: { params: { lang: Locale } }) {
   const t = getDictionaryUseClient(params.lang)
+  const router = useRouter()
+
+  router.push('/pt/home')
 
   return (
     <div className="bg-secondary text-primary">
