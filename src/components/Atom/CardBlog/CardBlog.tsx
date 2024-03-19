@@ -13,18 +13,20 @@ function CardBlog({ data }: Blog.CardBlogProps) {
   lang === 'pt' ? dayjs.locale(ptBr) : dayjs.locale(en)
 
   return (
-    <div className="relative w-full px-4">
+    <div className="w-full px-4">
       <Segment
         raised
-        className="!sm-1:p-5 !relative h-[350px] overflow-hidden !rounded-2xl !bg-secondary !p-10"
+        className="!sm-1:p-5 !flex h-[350px] !flex-col !justify-between overflow-hidden !rounded-2xl !bg-secondary !p-10"
       >
-        <h1>{data.name}</h1>
-        <span
-          className="line-clamp-6"
-          dangerouslySetInnerHTML={{ __html: data.content }}
-        />
-        <div className="mt-20 h-[2px] w-full bg-[var(--gold)] sm-1:mt-14"></div>
-        <div className="mb-4 flex justify-between">
+        <div className="flex flex-col gap-2">
+          <h1 className="m-0">{data.name}</h1>
+          <span
+            className="line-clamp-6"
+            dangerouslySetInnerHTML={{ __html: data.content }}
+          />
+        </div>
+        <div className="mb-4 flex flex-col gap-2">
+          <div className="mt-20 h-[2px] w-full bg-[var(--gold)] sm-1:mt-14"></div>
           <div>
             <p className="m-0">
               Cleiton Moreira
