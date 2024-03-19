@@ -33,7 +33,7 @@ function About({ params }: any) {
               <Title title="About" />
               <TextAbout params={params} />
               <Title title="Skills" />
-              <TextSkills />
+              <TextSkills params={params} />
               <Title title="Softwares" />
               <Softwares />
               <Title title="Experience" />
