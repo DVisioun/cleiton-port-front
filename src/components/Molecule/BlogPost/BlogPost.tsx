@@ -1,7 +1,19 @@
-import BlogHero from '@/components/Atom/BlogHero/BlogHero'
-import React from 'react'
+"use client";
 
-function BlogPost() {
+import BlogHero from '@/components/Atom/BlogHero/BlogHero'
+import { blogPostAtom } from '@/states/blogPostAtom'
+import { useAtom } from 'jotai'
+import React, { useEffect, useState } from 'react'
+
+function BlogPost({ id }:any) {
+  const [blogPosts, setBlogPosts] = useAtom(blogPostAtom);
+  const [blogPost, setBlogPost] = useState();
+
+  useEffect(() => {
+    const filteredPosts = blogPosts.filter(post => post.id == id);
+    setBlogPost(filteredPosts);
+  },[blogPosts]);
+
   return (
     <div>
       <BlogHero />

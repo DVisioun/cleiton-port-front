@@ -17,7 +17,6 @@ function About({ params }: any) {
             <GridColumn
               mobile={16}
               tablet={16}
-              computer={16}
               largeScreen={4}
               widescreen={3}
             >
@@ -26,7 +25,6 @@ function About({ params }: any) {
             <GridColumn
               mobile={16}
               tablet={16}
-              computer={16}
               largeScreen={12}
               widescreen={13}
             >
