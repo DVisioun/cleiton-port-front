@@ -21,19 +21,18 @@ function About({ params }: any) {
               largeScreen={4}
               widescreen={3}
             >
-              <AboutCard />
+              <AboutCard position="fixed" />
             </GridColumn>
             <GridColumn
               mobile={16}
               tablet={16}
-              computer={16}
               largeScreen={12}
               widescreen={13}
             >
               <Title title="About" />
               <TextAbout params={params} />
               <Title title="Skills" />
-              <TextSkills />
+              <TextSkills params={params} />
               <Title title="Softwares" />
               <Softwares />
               <Title title="Experience" />

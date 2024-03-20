@@ -5,7 +5,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMoon, faSun } from '@fortawesome/free-solid-svg-icons'
 
 function ThemeButton() {
-  const { theme, setTheme } = useContext(ThemeContext)
+  const { theme, setTheme } = useContext(ThemeContext) || {
+    theme: 'light',
+    setTheme: () => {},
+  }
   return (
     <button
       onClick={() => {

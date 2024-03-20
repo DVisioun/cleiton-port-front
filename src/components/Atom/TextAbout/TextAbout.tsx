@@ -5,9 +5,9 @@ function TextAbout({ params }: any) {
   const t = getDictionaryServerOnly(params.lang)
 
   return (
-    <div className="py-14 sm-1:py-8">
-      <p className="pr-8 text-justify text-lg leading-relaxed 2xl:text-xl sm-1:px-2 sm-1:text-base">
-        {t.about.texto_sobre}
+    <div className="px-3 py-14 sm-1:py-8">
+      <p className="text-justify text-lg leading-relaxed 2xl:text-xl sm-1:px-2 sm-1:text-base">
+        {t['about-me']}
       </p>
     </div>
   )

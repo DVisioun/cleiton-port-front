@@ -15,3 +15,7 @@ export namespace About {
     date: string
   }
 }
+
+export interface AboutCardTypes {
+  position: string
+}

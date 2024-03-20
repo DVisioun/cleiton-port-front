@@ -7,14 +7,13 @@ import { Footer } from '@/components/Molecule/Footer/Footer'
 
 function Home({ params }: { params: { lang: Locale } }) {
   const t = getDictionaryUseClient(params.lang)
-
   return (
     <div className="bg-secondary text-primary">
       <ThemeProvider initialTheme="light">
         <main>
           <ConfigContent />
           <div className="flex min-h-screen flex-col items-center justify-center">
-            <h1 className="text-8xl">{t.temporario.em_breve}</h1>
+            <h1 className="text-8xl">Soon!</h1>
             <h4 className="font-alt text-5xl text-secondary">
               Kleytow Moreira Portfolio
             </h4>
