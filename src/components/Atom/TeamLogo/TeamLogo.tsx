@@ -16,7 +16,7 @@ export const TeamLogo = () => {
   }, [theme])
 
   return (
-    <div className="flex gap-3 sm-1:justify-center">
+    <div className="sm-0.2:flex-col sm-0.2:items-center flex gap-3 sm-1:justify-center">
       <span className="text-lg sm-1:text-base">© 2024 - Developed by </span>
       {darkMode ? (
         <Image

@@ -7,11 +7,11 @@ import ThemeProvider from '@/hooks/ThemeContext'
 import ConfigContent from '@/components/Molecule/ConfigContent/ConfigContent'
 import { Locale } from '@/config/i18n.config'
 import { Footer } from '@/components/Molecule/Footer/Footer'
-import { useParams } from 'next/navigation';
+import { useParams } from 'next/navigation'
 
-function page({ params }: { params: { lang: Locale } }) {
-  const { id } = useParams();
-  
+function Page({ params }: { params: { lang: Locale; id: string } }) {
+  const { id } = useParams()
+
   return (
     <div className="h-full bg-primary text-primary">
       <ThemeProvider initialTheme="light">
@@ -24,4 +24,4 @@ function page({ params }: { params: { lang: Locale } }) {
   )
 }
 
-export default page
+export default Page
