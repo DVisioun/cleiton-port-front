@@ -16,7 +16,7 @@ function CardBlog({ data }: Blog.CardBlogProps) {
     <div className="w-full px-4">
       <Segment
         raised
-        className="!sm-1:p-5 !flex h-[350px] !flex-col !justify-between overflow-hidden !rounded-2xl !bg-secondary !p-10"
+        className="!sm-1:p-5 !flex h-[350px] w-[550px] !flex-col !justify-between overflow-hidden !rounded-2xl !bg-secondary !p-10"
       >
         <div className="flex flex-col gap-2">
           <h1 className="m-0">{data.name}</h1>
@@ -26,7 +26,7 @@ function CardBlog({ data }: Blog.CardBlogProps) {
           />
         </div>
         <div className="mb-4 flex flex-col gap-2">
-          <div className="mt-20 h-[2px] w-full bg-[var(--gold)] sm-1:mt-14"></div>
+          <div className="mt-14 h-[2px] w-full bg-[var(--gold)] sm-1:mt-14"></div>
           <div>
             <p className="m-0">
               Cleiton Moreira

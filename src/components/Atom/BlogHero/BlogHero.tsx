@@ -1,15 +1,34 @@
+import { readBase64ToFile } from '@/utils/base64-converter'
 import Image from 'next/image'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
-function BlogHero() {
+interface BlogHeroProps {
+  imageHeader: string
+}
+
+function BlogHero({ imageHeader }: BlogHeroProps) {
+  const [imageCover, setImageCover] = useState<string>()
+
+  useEffect(() => {
+    const handleFetchImages = async () => {
+      const imageCoverAux = await readBase64ToFile(imageHeader)
+      const previewURL = URL.createObjectURL(imageCoverAux)
+      if (previewURL) setImageCover(previewURL)
+    }
+    handleFetchImages()
+  }, [])
+
   return (
     <div className="mx-20 mt-24 h-2/4 bg-secondary">
-      <Image
-        src="/images/blog/hero.png"
-        alt="hero_blog"
-        fill={true}
-        className="!relative h-full w-full"
-      />
+      {imageCover ? (
+        <Image
+          src={imageCover}
+          alt="Image Header Blog"
+          aria-label="Image Header Blog"
+          fill={true}
+          className="!relative h-full w-full"
+        />
+      ) : null}
     </div>
   )
 }
