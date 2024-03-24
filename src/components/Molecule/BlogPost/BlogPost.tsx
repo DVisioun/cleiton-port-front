@@ -39,7 +39,7 @@ function BlogPost({ id }: BlogPostProps) {
             <div className="mt-10 px-40 pb-10 sm-0:px-7">
               <h2 className="text-5xl sm-1:text-3xl">{item.name}</h2>
               <p>
-                <b>Ceiton Moreira</b> - <span>03/02/2024</span>
+                <b>Cleiton Moreira</b> - <span>03/02/2024</span>
               </p>
               <div className="mt-5 h-[2px] w-[100%] bg-[var(--gold)]"></div>
               <div
