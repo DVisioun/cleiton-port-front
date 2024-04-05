@@ -23,9 +23,25 @@ function page() {
           <AboutEdit />
         </Segment>
         <Segment>
+          <Divider horizontal>
+            <Header
+              as="h4"
+              className="!sm-1:text-5xl !m-0 !text-center !font-alt !text-6xl !font-medium !text-secondary"
+            >
+              Skills
+            </Header>
+          </Divider>
           <SkillsEdit />
         </Segment>
         <Segment>
+          <Divider horizontal>
+            <Header
+              as="h4"
+              className="!sm-1:text-5xl !m-0 !text-center !font-alt !text-6xl !font-medium !text-secondary"
+            >
+              Softwares
+            </Header>
+          </Divider>
           <SoftwareEdit />
         </Segment>
         <Segment>

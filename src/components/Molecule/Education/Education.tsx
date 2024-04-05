@@ -6,31 +6,39 @@ function Education() {
   const experiences = [
     {
       title: 'Licentiate degree, Digital Games Design',
-      institution: 'Instituto Politécnico de Bragança',
-      place: 'Mirandela - Portugal',
-      text: 'Desenvolvimento de personagens 3D ...',
-      date: 'Sep 2018 - Sep 2021',
+      organization: 'Instituto Politécnico de Bragança',
+      location: 'Mirandela - Portugal',
+      description: 'Desenvolvimento de personagens 3D ...',
+      initial_date: 'Sep 2018',
+      final_date: 'Sep 2021',
+      type: 'EDUCATION',
     },
     {
       title: 'Licentiate degree, Digital Games Design',
-      institution: 'Instituto Politécnico de Bragança',
-      place: 'Mirandela - Portugal',
-      text: 'Desenvolvimento de personagens 3D ...',
-      date: 'Sep 2018 - Sep 2021',
+      organization: 'Instituto Politécnico de Bragança',
+      location: 'Mirandela - Portugal',
+      description: 'Desenvolvimento de personagens 3D ...',
+      initial_date: 'Sep 2018',
+      final_date: 'Sep 2021',
+      type: 'EDUCATION',
     },
     {
       title: 'Licentiate degree, Digital Games Design',
-      institution: 'Instituto Politécnico de Bragança',
-      place: 'Mirandela - Portugal',
-      text: 'Desenvolvimento de personagens 3D ...',
-      date: 'Sep 2018 - Sep 2021',
+      organization: 'Instituto Politécnico de Bragança',
+      location: 'Mirandela - Portugal',
+      description: 'Desenvolvimento de personagens 3D ...',
+      initial_date: 'Sep 2018',
+      final_date: 'Sep 2021',
+      type: 'EDUCATION',
     },
     {
       title: 'Licentiate degree, Digital Games Design',
-      institution: 'Instituto Politécnico de Bragança',
-      place: 'Mirandela - Portugal',
-      text: 'Desenvolvimento de personagens 3D ...',
-      date: 'Sep 2018 - Sep 2021',
+      organization: 'Instituto Politécnico de Bragança',
+      location: 'Mirandela - Portugal',
+      description: 'Desenvolvimento de personagens 3D ...',
+      initial_date: 'Sep 2018',
+      final_date: 'Sep 2021',
+      type: 'EDUCATION',
     },
   ]
 
@@ -48,10 +56,11 @@ function Education() {
           >
             <CardEducation
               title={experience.title}
-              institution={experience.institution}
-              place={experience.place}
-              text={experience.text}
-              date={experience.date}
+              organization={experience.organization}
+              location={experience.location}
+              description={experience.description}
+              initial_date={experience.initial_date}
+              final_date={experience.final_date}
             />
           </GridColumn>
         ))}
