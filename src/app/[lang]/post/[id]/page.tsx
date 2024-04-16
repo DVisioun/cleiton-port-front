@@ -17,7 +17,7 @@ function Page({ params }: { params: { lang: Locale; id: string } }) {
       <ThemeProvider initialTheme="light">
         <Header lang={params.lang} bgColor="bg-primary" />
         <ConfigContent />
-        <BlogPost id={id} />
+        <BlogPost id={id.toString()} />
         <Footer position="" />
       </ThemeProvider>
     </div>
