@@ -26,14 +26,26 @@ export default function Header({ lang, bgColor }: HeaderProps) {
 
   return (
     <div
-      className={`top-0 z-10 flex h-24 w-full items-center justify-between sm:fixed sm-1:justify-center sm-1:px-4 ${bgColor} px-20 text-primary shadow-header duration-300 hover:bg-primary`}
+      className={`top-0 z-10 flex h-24 w-full items-center justify-between sm:fixed sm-1:h-16 ${bgColor} px-20 text-primary shadow-header duration-300 hover:bg-primary`}
     >
       <div className="flex items-center sm-1:w-full sm-1:justify-between">
         {!darkMode && (
-          <Image src={BlackLogo} alt="Logo" height={64} width={55} />
+          <Image
+            src={BlackLogo}
+            alt="Logo"
+            className="sm-1:h-10 sm-1:w-10"
+            height={64}
+            width={55}
+          />
         )}
         {darkMode && (
-          <Image src={WhiteLogo} alt="Logo" height={64} width={55} />
+          <Image
+            src={WhiteLogo}
+            alt="Logo"
+            className="sm-1:h-10 sm-1:w-10"
+            height={64}
+            width={55}
+          />
         )}
         <Navbar lang={lang} />
       </div>

@@ -7,8 +7,14 @@ import Title from '@/components/Atom/Title/Title'
 import { fetchBlogPosts } from '@/api/BlogPost/fetch-blog-post'
 import { blogPostAtom } from '@/states/blogPostAtom'
 import { useAtom } from 'jotai'
+import { Locale } from '@/config/i18n.config'
+import Link from 'next/link'
 
-function Blog() {
+interface BlogProps {
+  lang: Locale
+}
+
+function Blog({ lang }: BlogProps) {
   const [blogPosts, setBlogPosts] = useAtom(blogPostAtom)
   const handleBlogPostsFetch = async () => {
     const response = await fetchBlogPosts()
@@ -36,7 +42,12 @@ function Blog() {
                 largeScreen={8}
                 className="!flex !px-0 !py-4"
               >
-                <CardBlog data={item} />
+                <Link
+                  href={`/${lang}/post/${item.id}`}
+                  className="text-primary no-underline hover:text-primary"
+                >
+                  <CardBlog data={item} />
+                </Link>
               </GridColumn>
             )
           })}

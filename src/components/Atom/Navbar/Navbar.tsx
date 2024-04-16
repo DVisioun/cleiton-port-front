@@ -17,11 +17,11 @@ function Navbar({ lang }: NavBarProps) {
         simple
         className="!z-20 pb-2 text-3xl sm:!hidden sm-1:!flex"
       >
-        <DropdownMenu className="!w-28 sm-1:!-translate-x-4">
+        <DropdownMenu className="!w-28 sm-1:!-translate-x-20">
           <DropdownItem>
             <Link
               href={`/${lang}/home`}
-              className="text-lg text-primary duration-300 hover:text-hover hover:underline active:text-hover active:underline sm-0.1:text-sm"
+              className="text-lg text-primary duration-300 hover:text-hover hover:underline active:text-hover active:underline sm-0.1:text-sm sm-1:text-base"
             >
               Home
             </Link>
@@ -29,15 +29,23 @@ function Navbar({ lang }: NavBarProps) {
           <DropdownItem>
             <Link
               href={`/${lang}/about`}
-              className="text-lg text-primary duration-300 hover:text-hover hover:underline sm-0.1:text-sm"
+              className="text-lg text-primary duration-300 hover:text-hover hover:underline sm-0.1:text-sm sm-1:text-base"
             >
               About
             </Link>
           </DropdownItem>
           <DropdownItem>
             <Link
+              href={`/${lang}/portfolio`}
+              className="text-lg text-primary duration-300 hover:text-hover hover:underline sm-0.1:text-sm sm-1:text-base"
+            >
+              Portfolio
+            </Link>
+          </DropdownItem>
+          <DropdownItem>
+            <Link
               href={`/${lang}/blog`}
-              className="text-lg text-primary duration-300 hover:text-hover hover:underline sm-0.1:text-sm"
+              className="text-lg text-primary duration-300 hover:text-hover hover:underline sm-0.1:text-sm sm-1:text-base"
             >
               Blog
             </Link>
