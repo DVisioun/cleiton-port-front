@@ -40,7 +40,6 @@ function SoftwareEdit() {
 
   return (
     <div className="mb-5">
-      <h3>Softwares</h3>
       <SoftwareList />
       <div className="w- mt-10 gap-2 lg:flex">
         <form

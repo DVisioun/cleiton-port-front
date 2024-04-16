@@ -1,18 +1,21 @@
 export namespace About {
-  export interface CardEducationProps {
+  export interface CardExperienceEducationProps {
+    id: string
     title: string
-    institution: string
-    place: string
-    text: string
-    date: string
+    organization: string
+    location: string
+    description: string
+    initial_date: string
+    final_date?: string
   }
 
-  export interface CardExperienceProps {
+  export interface CreateExperienceEducationProps {
     title: string
-    company: string
-    place: string
-    text: string
-    date: string
+    organization: string
+    location: string
+    description: string
+    initial_date: string
+    final_date?: string
   }
 }
 
