@@ -26,7 +26,7 @@ function About({ params }: any) {
               <Title title="About" />
               <TextAbout params={params} />
               <Title title="Skills" />
-              <TextSkills params={params} />
+              <TextSkills />
               <Title title="Softwares" />
               <Softwares />
               <Title title="Experience" />
