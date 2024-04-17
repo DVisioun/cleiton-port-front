@@ -3,8 +3,8 @@ import React, { useEffect, useState } from 'react'
 import { fetchSkills } from '@/api/Skill/fetch-skill'
 import { API } from '@/@types/api'
 
-function TextSkills({ params }: any) {
-  const [skills, setSkills] = useState<API.SkillSchema[]>([])
+function TextSkills() {
+  const [skills, setSkills] = useState<API.SkillSchema[]>([]);
 
   const handleFetchSkills = async () => {
     try {
