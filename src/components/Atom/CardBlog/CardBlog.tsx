@@ -16,7 +16,7 @@ function CardBlog({ data }: Blog.CardBlogProps) {
     <div className="w-full px-4">
       <Segment
         raised
-        className="!sm-1:p-5 !flex h-[350px] w-[550px] sm-1:w-full !flex-col !justify-between overflow-hidden !rounded-2xl !bg-secondary !p-10"
+        className="!sm-1:p-5 !flex h-[350px] w-[550px] !flex-col !justify-between overflow-hidden !rounded-2xl !bg-secondary !p-10 sm-1:w-full"
       >
         <div className="flex flex-col gap-2">
           <h1 className="m-0">{data.name}</h1>

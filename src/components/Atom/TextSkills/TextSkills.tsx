@@ -4,7 +4,7 @@ import { fetchSkills } from '@/api/Skill/fetch-skill'
 import { API } from '@/@types/api'
 
 function TextSkills() {
-  const [skills, setSkills] = useState<API.SkillSchema[]>([]);
+  const [skills, setSkills] = useState<API.SkillSchema[]>([])
 
   const handleFetchSkills = async () => {
     try {

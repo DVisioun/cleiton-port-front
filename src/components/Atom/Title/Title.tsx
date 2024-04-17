@@ -9,7 +9,7 @@ function Title({ title }: TitleProps) {
   return (
     <div className="my-4 w-full lg:flex lg:justify-center">
       <Grid className="sm:flex sm:w-full">
-        <GridRow columns={3} className='sm-1:!flex-nowrap'>
+        <GridRow columns={3} className="sm-1:!flex-nowrap">
           <GridColumn mobile={1} computer={6} tablet={6}>
             <div className="flex h-full items-center">
               <div className="h-[2px] w-full bg-[var(--secondary)] sm-2:hidden"></div>

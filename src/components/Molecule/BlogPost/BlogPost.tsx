@@ -1,35 +1,35 @@
-"use client";
+'use client'
 
-import { API } from "@/@types/api";
-import { fetchBlogPosts } from "@/api/BlogPost/fetch-blog-post";
-import BlogHero from "@/components/Atom/BlogHero/BlogHero";
-import React, { useEffect, useState } from "react";
+import { API } from '@/@types/api'
+import { fetchBlogPosts } from '@/api/BlogPost/fetch-blog-post'
+import BlogHero from '@/components/Atom/BlogHero/BlogHero'
+import React, { useEffect, useState } from 'react'
 
 interface BlogPostProps {
-  id: string;
+  id: string
 }
 
 function BlogPost({ id }: BlogPostProps) {
-  const [blogPost, setBlogPost] = useState<API.BlogPostSchema[]>();
+  const [blogPost, setBlogPost] = useState<API.BlogPostSchema[]>()
 
   const handleBlogPostsFetch = async () => {
-    const response = await fetchBlogPosts();
+    const response = await fetchBlogPosts()
     if (response) {
-      setBlogPost(response.data);
+      setBlogPost(response.data)
     }
-  };
+  }
 
   useEffect(() => {
-    handleBlogPostsFetch();
-    handleFilteredPosts();
-  }, []);
+    handleBlogPostsFetch()
+    handleFilteredPosts()
+  }, [])
 
   const handleFilteredPosts = () => {
-    const filteredPosts = blogPost?.filter((post) => post.id === id);
-    setBlogPost(filteredPosts);
-  };
+    const filteredPosts = blogPost?.filter((post) => post.id === id)
+    setBlogPost(filteredPosts)
+  }
 
-  console.log(blogPost);
+  console.log(blogPost)
   return (
     <>
       {blogPost?.map((item) => {
@@ -48,10 +48,10 @@ function BlogPost({ id }: BlogPostProps) {
               />
             </div>
           </div>
-        );
+        )
       })}
     </>
-  );
+  )
 }
 
-export default BlogPost;
+export default BlogPost

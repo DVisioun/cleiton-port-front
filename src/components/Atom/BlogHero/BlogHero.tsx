@@ -1,22 +1,22 @@
-import { readBase64ToFile } from "@/utils/base64-converter";
-import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import { readBase64ToFile } from '@/utils/base64-converter'
+import Image from 'next/image'
+import React, { useEffect, useState } from 'react'
 
 interface BlogHeroProps {
-  imageHeader: string;
+  imageHeader: string
 }
 
 function BlogHero({ imageHeader }: BlogHeroProps) {
-  const [imageCover, setImageCover] = useState<string>();
+  const [imageCover, setImageCover] = useState<string>()
 
   useEffect(() => {
     const handleFetchImages = async () => {
-      const imageCoverAux = await readBase64ToFile(imageHeader);
-      const previewURL = URL.createObjectURL(imageCoverAux);
-      if (previewURL) setImageCover(previewURL);
-    };
-    handleFetchImages();
-  }, []);
+      const imageCoverAux = await readBase64ToFile(imageHeader)
+      const previewURL = URL.createObjectURL(imageCoverAux)
+      if (previewURL) setImageCover(previewURL)
+    }
+    handleFetchImages()
+  }, [])
 
   return (
     <div className="mx-20 mt-24 h-2/4 max-h-[350px] overflow-hidden bg-secondary sm-1:mx-0 sm-1:mt-0">
@@ -30,7 +30,7 @@ function BlogHero({ imageHeader }: BlogHeroProps) {
         />
       ) : null}
     </div>
-  );
+  )
 }
 
-export default BlogHero;
+export default BlogHero
