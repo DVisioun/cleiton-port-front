@@ -7,18 +7,20 @@ function Experience() {
     {
       id: 'experience-01',
       title: '3D Artist',
-      company: 'Aden · Tempo integral',
-      place: 'Portugal · Remota',
-      text: 'Desenvolvimento de personagens 3D ...',
-      date: 'Apr 2021 - Apr 2021',
+      organization: 'Aden · Tempo integral',
+      location: 'Portugal · Remota',
+      description: 'Desenvolvimento de personagens 3D ...',
+      initial_date: 'Apr 2021',
+      final_date: 'Apr 2021',
     },
     {
       id: 'experience-02',
       title: 'teste',
-      company: 'Teste',
-      text: 'Teste2',
-      place: '',
-      date: 'May 2022 - Jul 2023',
+      organization: 'Teste',
+      description: 'Teste2',
+      location: '',
+      initial_date: 'May 2022',
+      final_date: 'Jul 2023',
     },
   ]
 
@@ -35,10 +37,11 @@ function Experience() {
           >
             <CardExperience
               title={experience.title}
-              company={experience.company}
-              place={experience.place}
-              text={experience.text}
-              date={experience.date}
+              organization={experience.organization}
+              location={experience.location}
+              description={experience.description}
+              initial_date={experience.initial_date}
+              final_date={experience.final_date}
             />
           </GridColumn>
         ))}
