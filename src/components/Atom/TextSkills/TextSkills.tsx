@@ -1,25 +1,25 @@
-"use client";
-import React, { useEffect, useState } from "react";
-import { fetchSkills } from "@/api/Skill/fetch-skill";
-import { API } from "@/@types/api";
+'use client'
+import React, { useEffect, useState } from 'react'
+import { fetchSkills } from '@/api/Skill/fetch-skill'
+import { API } from '@/@types/api'
 
-function TextSkills({ params }: any) {
+function TextSkills() {
   const [skills, setSkills] = useState<API.SkillSchema[]>([]);
 
   const handleFetchSkills = async () => {
     try {
-      const response: API.FetchSkillResponseProps = await fetchSkills();
+      const response: API.FetchSkillResponseProps = await fetchSkills()
       if (response?.success) {
-        setSkills(response.data);
+        setSkills(response.data)
       }
     } catch (error) {
-      console.error("Erro ao buscar as habilidades:", error);
+      console.error('Erro ao buscar as habilidades:', error)
     }
-  };
+  }
 
   useEffect(() => {
-    handleFetchSkills();
-  }, []);
+    handleFetchSkills()
+  }, [])
 
   return (
     <div className="flex flex-wrap justify-center gap-3 py-14">
@@ -30,7 +30,7 @@ function TextSkills({ params }: any) {
         </React.Fragment>
       ))}
     </div>
-  );
+  )
 }
 
-export default TextSkills;
+export default TextSkills

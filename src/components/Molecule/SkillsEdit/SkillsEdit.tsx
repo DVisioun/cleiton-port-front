@@ -24,7 +24,6 @@ function SkillsEdit() {
 
   return (
     <div className="mb-5">
-      <h3>Skills</h3>
       <SkillsList />
       <div className="w- mt-10 gap-2 lg:flex">
         <form

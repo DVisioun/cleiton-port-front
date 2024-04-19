@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import Flag from 'react-flagkit'
 import {
+  Button,
   Grid,
   GridColumn,
   GridRow,

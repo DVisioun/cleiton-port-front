@@ -41,6 +41,7 @@ const config: Config = {
         'sm-0.2': { max: '350px' },
         'sm-0': { max: '480px' },
         'sm-1': { max: '640px' },
+        'sm-2': { max: '767px' },
         'md-1': { max: '991px' },
       },
     },

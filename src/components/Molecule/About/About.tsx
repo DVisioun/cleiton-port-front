@@ -14,12 +14,7 @@ function About({ params }: any) {
       <div className="mt-40 pb-20 sm-1:mt-20">
         <Grid>
           <GridRow columns={2}>
-            <GridColumn
-              mobile={16}
-              tablet={16}
-              largeScreen={4}
-              widescreen={3}
-            >
+            <GridColumn mobile={16} tablet={16} largeScreen={4} widescreen={3}>
               <AboutCard position="fixed" />
             </GridColumn>
             <GridColumn
@@ -31,7 +26,7 @@ function About({ params }: any) {
               <Title title="About" />
               <TextAbout params={params} />
               <Title title="Skills" />
-              <TextSkills params={params} />
+              <TextSkills />
               <Title title="Softwares" />
               <Softwares />
               <Title title="Experience" />

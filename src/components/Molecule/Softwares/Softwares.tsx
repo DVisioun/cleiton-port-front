@@ -1,28 +1,47 @@
-import SoftwareIcon from '@/components/Atom/SoftwareIcon/SoftwareIcon'
-import React from 'react'
+'use client'
+import SoftwareIcon from "@/components/Atom/SoftwareIcon/SoftwareIcon";
+import React, { useEffect, useState } from "react";
+import { API } from "@/@types/api";
+import { fetchSoftwares } from "@/api/Software/fetch-softwares";
+import { readBase64ToFile } from "@/utils/base64-converter";
 
 function Softwares() {
-  const softwares = [
-    { title: 'Blender', image: '/images/softwares/blender.png' },
-    { title: 'Maya', image: '/images/softwares/maya.png' },
-    { title: 'ZBrush', image: '/images/softwares/zbrush.png' },
-    { title: 'Substance 3D Painter', image: '/images/softwares/substance.png' },
-    { title: 'Marmoset Toolbag', image: '/images/softwares/marmoset.png' },
-    { title: 'Unreal Engine', image: '/images/softwares/unreal.png' },
-    { title: 'Photoshop', image: '/images/softwares/photoshop.png' },
-    { title: 'TopGun', image: '/images/softwares/topgun.png' },
-    { title: 'Unity', image: '/images/softwares/unity.svg' },
-  ]
+  const [softwares, setSoftwares] = useState<API.SoftwareSchema[]>([]);
+  const [softwareImages, setSoftwareImages] = useState<string[]>([]);
+
+  const handleFetchSkills = async () => {
+    try {
+      const response: API.FetchSoftwareResponseProps = await fetchSoftwares();
+      if (response?.success) {
+        setSoftwares(response.data);
+        const images = await Promise.all(
+          response.data.map((software) => toFile(software.image)),
+        );
+        setSoftwareImages(images);
+      }
+    } catch (error) {
+      console.error("Erro ao buscar as habilidades:", error);
+    }
+  };
+
+  const toFile = async (image: string): Promise<string> => {
+    const imageCoverAux = await readBase64ToFile(image);
+    return URL.createObjectURL(imageCoverAux);
+  };
+
+  useEffect(() => {
+    handleFetchSkills();
+  }, []);
 
   return (
     <div className="flex flex-wrap justify-start gap-7 py-14 lg:justify-center lg:px-4 lg:py-4 sm-1:justify-evenly">
       {softwares.map((software, index) => (
         <div key={index}>
-          <SoftwareIcon title={software.title} image={software.image} />
+          <SoftwareIcon title={software.name} image={softwareImages[index]} />
         </div>
       ))}
     </div>
-  )
+  );
 }
 
-export default Softwares
+export default Softwares;
