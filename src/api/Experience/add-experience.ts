@@ -1,17 +1,18 @@
 import { API } from '@/@types/api'
 import { connection } from '@/utils/axios'
 
-export const addExperience = async (experience: API.ExperienceFormProps) => {
+export const addExperience = async (
+  experience: API.ExperienceCreateRequestProps,
+) => {
   try {
     const response = await connection.post('/education-experience', {
       title: experience.title,
-      organization: experience.organization,
       location: experience.location,
-      description: experience?.description,
+      organization: experience.organization,
+      description: experience.description,
       initial_date: experience.initial_date,
-      final_date: experience.final_date,
-      order: experience.order,
       type: experience.type,
+      order: experience.order,
     })
 
     return response.data

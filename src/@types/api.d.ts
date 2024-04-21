@@ -144,4 +144,35 @@ export namespace API {
     data: AboutEditSchema[] | []
     success: boolean
   }
+
+  // EXPERIENCE
+
+  export interface ExperienceSchema extends FieldValues {
+    id: string
+    title: string
+    organization: string
+    location: string
+    order: number
+    description?: string
+    initial_date: string
+    final_date: string
+    type: 'EXPERIENCE'
+  }
+
+  export interface ExperienceCreateRequestProps extends FieldValues {
+    title: string
+    organization: string
+    location: string
+    order: number
+    description?: string
+    initial_date: string
+    final_date: string
+    type: 'EXPERIENCE'
+  }
+
+  export interface CreateAndUpdateExperienceResponseProps {
+    message: string
+    data: ExperienceSchema
+    success: boolean
+  }
 }

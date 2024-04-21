@@ -54,7 +54,7 @@ function SoftwareEdit() {
           </Input>
           <Button
             type="submit"
-            content="Gravar"
+            content="Save"
             primary
             className="sm-1:!mt-5 sm-1:!w-full md-1:!mt-5 md-1:!w-full"
           />
