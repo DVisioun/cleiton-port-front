@@ -5,7 +5,6 @@ import AboutEdit from '@/components/Molecule/AboutEdit/AboutEdit'
 import SkillsEdit from '@/components/Molecule/SkillsEdit/SkillsEdit'
 import SoftwareEdit from '@/components/Molecule/SoftwareEdit/SoftwareEdit'
 import ExperienceEdit from '@/components/Molecule/ExperienceEdit/ExperienceEdit'
-import EducationEdit from '@/components/Molecule/EducationEdit/EducationEdit'
 
 function page() {
   return (

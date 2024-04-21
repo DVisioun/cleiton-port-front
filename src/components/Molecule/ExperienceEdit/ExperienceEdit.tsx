@@ -1,9 +1,8 @@
-import ModalCreateNewExperience from '@/components/Atom/ModalCreateNewExperience/ModalCreateNewExperience'
+import { ModalExperience } from '@/components/Atom/ModalExperience/ModalExperience'
 import ModalEditEducation from '@/components/Atom/ModalEditEducation/ModalEditEducation'
-import ModalEditExperience from '@/components/Atom/ModalEditExperience/ModalEditExperience'
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React from 'react'
+import React, { useState } from 'react'
 import Flag from 'react-flagkit'
 import {
   Button,
@@ -19,6 +18,7 @@ import {
 } from 'semantic-ui-react'
 
 function ExperienceEdit() {
+  const [isEdit, setIsEdit] = useState(false)
   return (
     <Grid>
       <GridRow columns={2}>
@@ -38,17 +38,17 @@ function ExperienceEdit() {
               <TableRow>
                 <TableCell>Aden</TableCell>
                 <TableCell textAlign="center">
-                  <ModalEditExperience language={true} />
-                  <FontAwesomeIcon
-                    icon={faTrash}
-                    height={12}
-                    className="cursor-pointer"
-                  />
+                  <button onClick={() => setIsEdit(true)} className="mr-2">
+                    <FontAwesomeIcon icon={faEdit} height={12} />
+                  </button>
+                  <button className="mr-2">
+                    <FontAwesomeIcon icon={faTrash} height={12} />
+                  </button>
                 </TableCell>
               </TableRow>
             </TableBody>
-          </Table>
-          <ModalCreateNewExperience />
+          </Table>{' '}
+          <ModalExperience isEdit={isEdit} setIsEdit={setIsEdit} />
         </GridColumn>
         <GridColumn mobile={16} computer={8} tablet={16}>
           <div className="flex items-center justify-start gap-4">

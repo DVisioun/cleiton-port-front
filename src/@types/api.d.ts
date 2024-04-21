@@ -125,7 +125,7 @@ export namespace API {
   export interface LabelSchema extends FieldValues {
     id?: string
     label: string
-    description: string
+    description?: string
     pt_content: string
     en_content: string
   }
