@@ -93,7 +93,7 @@ function ModalEditEducation({ language }: ModalEditEducationProps) {
           {language ? 'Nope' : 'Não'}
         </Button>
         <Button
-          content={language ? "Yep, it's alright!" : 'Sim, está tudo certo!'}
+          content={language ? 'Save!' : 'Salvar!'}
           labelPosition="right"
           icon="checkmark"
           onClick={() => setOpen(false)}
