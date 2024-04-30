@@ -175,4 +175,33 @@ export namespace API {
     data: ExperienceSchema
     success: boolean
   }
+
+  export interface EducationSchema extends FieldValues {
+    id: string
+    title: string
+    organization: string
+    location: string
+    order: number
+    description?: string
+    initial_date: string
+    final_date: string
+    type: 'EDUCATION'
+  }
+
+  export interface EducationCreateRequestProps extends FieldValues {
+    title: string
+    organization: string
+    location: string
+    order: number
+    description?: string
+    initial_date: string
+    final_date: string
+    type: 'EDUCATION'
+  }
+
+  export interface CreateAndUpdateEducationResponseProps {
+    message: string
+    data: EducationSchema
+    success: boolean
+  }
 }

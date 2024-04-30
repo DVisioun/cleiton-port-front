@@ -1,5 +1,5 @@
 import { ModalExperience } from '@/components/Atom/ModalExperience/ModalExperience'
-import ModalEditEducation from '@/components/Atom/ModalEditEducation/ModalEditEducation'
+import { ModalEducation } from '@/components/Atom/ModalEducation/ModalEducation'
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useState } from 'react'
@@ -17,8 +17,9 @@ import {
   TableRow,
 } from 'semantic-ui-react'
 
-function ExperienceEdit() {
-  const [isEdit, setIsEdit] = useState(false)
+export function ExperienceEducationEdit() {
+  const [isEditEducation, setIsEditEducation] = useState(false)
+  const [isEditExperience, setIsEditExperience] = useState(false)
   return (
     <Grid>
       <GridRow columns={2}>
@@ -38,7 +39,10 @@ function ExperienceEdit() {
               <TableRow>
                 <TableCell>Aden</TableCell>
                 <TableCell textAlign="center">
-                  <button onClick={() => setIsEdit(true)} className="mr-2">
+                  <button
+                    onClick={() => setIsEditExperience(true)}
+                    className="mr-2"
+                  >
                     <FontAwesomeIcon icon={faEdit} height={12} />
                   </button>
                   <button className="mr-2">
@@ -47,8 +51,11 @@ function ExperienceEdit() {
                 </TableCell>
               </TableRow>
             </TableBody>
-          </Table>{' '}
-          <ModalExperience isEdit={isEdit} setIsEdit={setIsEdit} />
+          </Table>
+          <ModalExperience
+            isEdit={isEditExperience}
+            setIsEdit={setIsEditExperience}
+          />
         </GridColumn>
         <GridColumn mobile={16} computer={8} tablet={16}>
           <div className="flex items-center justify-start gap-4">
@@ -58,7 +65,7 @@ function ExperienceEdit() {
           <Table celled structured>
             <TableHeader>
               <TableRow>
-                <TableHeaderCell width={13}>Education</TableHeaderCell>
+                <TableHeaderCell width={13}>Experience</TableHeaderCell>
                 <TableHeaderCell width={3}>Operation</TableHeaderCell>
               </TableRow>
             </TableHeader>
@@ -66,26 +73,25 @@ function ExperienceEdit() {
               <TableRow>
                 <TableCell>Aden</TableCell>
                 <TableCell textAlign="center">
-                  <ModalEditEducation language={true} />
-                  <FontAwesomeIcon
-                    icon={faTrash}
-                    height={12}
-                    className="cursor-pointer"
-                  />
+                  <button
+                    onClick={() => setIsEditEducation(true)}
+                    className="mr-2"
+                  >
+                    <FontAwesomeIcon icon={faEdit} height={12} />
+                  </button>
+                  <button className="mr-2">
+                    <FontAwesomeIcon icon={faTrash} height={12} />
+                  </button>
                 </TableCell>
               </TableRow>
             </TableBody>
           </Table>
-          <Button
-            type="submit"
-            content="Create Education"
-            primary
-            className="sm-1:!mt-5 sm-1:!w-full md-1:!mt-5 md-1:!w-full"
+          <ModalEducation
+            isEdit={isEditEducation}
+            setIsEdit={setIsEditEducation}
           />
         </GridColumn>
       </GridRow>
     </Grid>
   )
 }
-
-export default ExperienceEdit

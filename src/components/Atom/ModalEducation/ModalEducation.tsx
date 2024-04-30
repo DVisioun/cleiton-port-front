@@ -1,6 +1,8 @@
 import { API } from '@/@types/api'
-import { addExperience } from '@/api/Experience/add-experience'
-import { experienceAtom } from '@/states/experienceAtom'
+import { addEducation } from '@/api/Education/add-education'
+import { editEducation } from '@/api/Education/edit-education'
+import { getEducationById } from '@/api/Education/get-education-by-id'
+import { educationAtom } from '@/states/educationAtom'
 import { notifyFailure, notifySuccess } from '@/utils/toastify'
 import { useAtom } from 'jotai'
 import React, { useState } from 'react'
@@ -20,52 +22,94 @@ import {
   TextArea,
 } from 'semantic-ui-react'
 
-interface ModalExperienceProps {
+interface ModalEducationProps {
   isEdit?: boolean
   setIsEdit?: (isEdit: boolean) => void
 }
 
-export function ModalExperience({ isEdit, setIsEdit }: ModalExperienceProps) {
+export function ModalEducation({ isEdit, setIsEdit }: ModalEducationProps) {
   const [open, setOpen] = useState(false)
-  const [experience, setExperience] = useAtom(experienceAtom)
+  const [education, setEducation] = useAtom(educationAtom)
   const { register, reset, handleSubmit } =
-    useForm<API.ExperienceCreateRequestProps>()
+    useForm<API.EducationCreateRequestProps>()
 
   const onSubmit = async (data) => {
-    const requestExperienceObject = {
-      title: {
-        en: data.title,
-        pt: data.titulo,
-      },
-      location: {
-        en: data.location,
-        pt: data.localizacao,
-      },
-      organization: {
-        en: data.organization,
-        pt: data.organizacao,
-      },
-      description: {
-        en: data.description,
-        pt: data.descricao,
-      },
-      initial_date: {
-        en: data.initial_date,
-        pt: data.data_inicial,
-      },
-      final_date: {
-        en: data.final_date,
-        pt: data.data_final,
-      },
-    }
+    if (isEdit) {
+      const education = await getEducationById(data.id)
+      const requestEducationObject = {
+        title: {
+          en: data.title || education.title,
+          pt: data.titulo || education.titulo,
+        },
+        location: {
+          en: data.location || education.location,
+          pt: data.localizacao || education.localizacao,
+        },
+        organization: {
+          en: data.organization || education.organization,
+          pt: data.organizacao || education.organizacao,
+        },
+        description: {
+          en: data.description || education.description,
+          pt: data.descricao || education.descricao,
+        },
+        initial_date: {
+          en: data.initial_date || education.initial_date,
+          pt: data.data_inicial || education.data_inicial,
+        },
+        final_date: {
+          en: data.final_date || education.final_date,
+          pt: data.data_final || education.data_final,
+        },
+      }
 
-    const response: any = await addExperience(requestExperienceObject)
-    if (response && response.success) {
-      setExperience([...experience, response.data])
-      notifySuccess(response.message)
-      reset()
+      const response: any = await editEducation(
+        education.id,
+        requestEducationObject,
+      )
+      if (response && response.success) {
+        setEducation([...education, response.data])
+        notifySuccess(response.message)
+        reset()
+      } else {
+        notifyFailure(response.message)
+      }
     } else {
-      notifyFailure(response.message)
+      const requestEducationObject = {
+        title: {
+          en: data.title,
+          pt: data.titulo,
+        },
+        location: {
+          en: data.location,
+          pt: data.localizacao,
+        },
+        organization: {
+          en: data.organization,
+          pt: data.organizacao,
+        },
+        description: {
+          en: data.description,
+          pt: data.descricao,
+        },
+        initial_date: {
+          en: data.initial_date,
+          pt: data.data_inicial,
+        },
+        final_date: {
+          en: data.final_date,
+          pt: data.data_final,
+        },
+      }
+
+      const response: any = await addEducation(requestEducationObject)
+      if (response && response.success) {
+        setEducation([...education, response.data])
+        notifySuccess(response.message)
+        reset()
+      } else {
+        notifyFailure(response.message)
+      }
     }
   }
 
@@ -76,14 +120,14 @@ export function ModalExperience({ isEdit, setIsEdit }: ModalExperienceProps) {
       open={open}
       trigger={
         <Button
-          content="Create Experience"
+          content="Create Education"
           primary
           className="!mt-4 sm-1:!mt-5 sm-1:!w-full md-1:!mt-5 md-1:!w-full"
         />
       }
     >
       <ModalHeader className="!flex !items-center !justify-between">
-        {'Create Experience'}
+        {'Create Education'}
       </ModalHeader>
       <form
         onSubmit={handleSubmit(onSubmit)}
