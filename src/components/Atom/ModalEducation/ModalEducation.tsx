@@ -1,11 +1,11 @@
 import { API } from '@/@types/api'
 import { addEducation } from '@/api/Education/add-education'
 import { editEducation } from '@/api/Education/edit-education'
-import { getEducationById } from '@/api/Education/get-education-by-id'
 import { educationAtom } from '@/states/educationAtom'
+import { labelAtom } from '@/states/labelsAtom'
 import { notifyFailure, notifySuccess } from '@/utils/toastify'
 import { useAtom } from 'jotai'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import {
   Button,
@@ -23,48 +23,64 @@ import {
 } from 'semantic-ui-react'
 
 interface ModalEducationProps {
-  isEdit?: boolean
-  setIsEdit?: (isEdit: boolean) => void
+  isEdit: boolean
+  setIsEdit: (isEdit: boolean) => void
+  selectedItem?: { id: string }
 }
 
-export function ModalEducation({ isEdit, setIsEdit }: ModalEducationProps) {
+export function ModalEducation({
+  isEdit,
+  setIsEdit,
+  selectedItem,
+}: ModalEducationProps) {
   const [open, setOpen] = useState(false)
   const [education, setEducation] = useAtom(educationAtom)
-  const { register, reset, handleSubmit } =
+  const [label, setLabel] = useAtom(labelAtom)
+  const { register, reset, handleSubmit, setValue } =
     useForm<API.EducationCreateRequestProps>()
+
+  const handleCloseModal = () => {
+    setOpen(false)
+    setIsEdit(false)
+    reset()
+  }
 
   const onSubmit = async (data) => {
     if (isEdit) {
-      const education = await getEducationById(data.id)
+      const educationEdit = education.find(
+        (item) => item.id === selectedItem?.id,
+      )
+
+      if (!educationEdit) return
       const requestEducationObject = {
         title: {
-          en: data.title || education.title,
-          pt: data.titulo || education.titulo,
+          en: data.title || educationEdit?.title,
+          pt: data.titulo || educationEdit?.titulo,
         },
         location: {
-          en: data.location || education.location,
-          pt: data.localizacao || education.localizacao,
+          en: data.location || educationEdit?.location,
+          pt: data.localizacao || educationEdit?.localizacao,
         },
         organization: {
-          en: data.organization || education.organization,
-          pt: data.organizacao || education.organizacao,
+          en: data.organization || educationEdit?.organization,
+          pt: data.organizacao || educationEdit?.organizacao,
         },
         description: {
-          en: data.description || education.description,
-          pt: data.descricao || education.descricao,
+          en: data.description || educationEdit?.description,
+          pt: data.descricao || educationEdit?.descricao,
         },
         initial_date: {
-          en: data.initial_date || education.initial_date,
-          pt: data.data_inicial || education.data_inicial,
+          en: data.initial_date || educationEdit?.initial_date,
+          pt: data.data_inicial || educationEdit?.data_inicial,
         },
         final_date: {
-          en: data.final_date || education.final_date,
-          pt: data.data_final || education.data_final,
+          en: data.final_date || educationEdit?.final_date,
+          pt: data.data_final || educationEdit?.data_final,
         },
       }
 
       const response: any = await editEducation(
-        education.id,
+        educationEdit.id,
         requestEducationObject,
       )
       if (response && response.success) {
@@ -113,9 +129,84 @@ export function ModalEducation({ isEdit, setIsEdit }: ModalEducationProps) {
     }
   }
 
+  useEffect(() => {
+    if (isEdit) setOpen(true)
+  }, [isEdit])
+
+  useEffect(() => {
+    if (isEdit && selectedItem) {
+      const educationEdit = education.find(
+        (item) => item.id === selectedItem?.id,
+      )
+      console.log(educationEdit)
+      console.log(label)
+
+      if (!educationEdit) return
+
+      setValue(
+        'title',
+        label.find((item) => item.label === educationEdit?.title)?.en_content,
+      )
+      setValue(
+        'titulo',
+        label.find((item) => item.label === educationEdit?.title)?.pt_content,
+      )
+      setValue(
+        'initial_date',
+        label.find((item) => item.label === educationEdit?.initial_date)
+          ?.en_content,
+      )
+      setValue(
+        'data_inicial',
+        label.find((item) => item.label === educationEdit?.initial_date)
+          ?.pt_content,
+      )
+      setValue(
+        'final_date',
+        label.find((item) => item.label === educationEdit?.final_date)
+          ?.en_content,
+      )
+      setValue(
+        'data_final',
+        label.find((item) => item.label === educationEdit?.final_date)
+          ?.pt_content,
+      )
+      setValue(
+        'organization',
+        label.find((item) => item.label === educationEdit?.organization)
+          ?.en_content,
+      )
+      setValue(
+        'organizacao',
+        label.find((item) => item.label === educationEdit?.organization)
+          ?.pt_content,
+      )
+      setValue(
+        'location',
+        label.find((item) => item.label === educationEdit?.location)
+          ?.en_content,
+      )
+      setValue(
+        'localizacao',
+        label.find((item) => item.label === educationEdit?.location)
+          ?.pt_content,
+      )
+      setValue(
+        'description',
+        label.find((item) => item.label === educationEdit?.description)
+          ?.en_content,
+      )
+      setValue(
+        'descricao',
+        label.find((item) => item.label === educationEdit?.description)
+          ?.pt_content,
+      )
+    }
+  }, [isEdit, selectedItem])
+
   return (
     <Modal
-      onClose={() => setOpen(false)}
+      onClose={() => handleCloseModal()}
       onOpen={() => setOpen(true)}
       open={open}
       trigger={
@@ -244,7 +335,7 @@ export function ModalEducation({ isEdit, setIsEdit }: ModalEducationProps) {
               <Button
                 type="button"
                 color="black"
-                onClick={() => setOpen(false)}
+                onClick={() => handleCloseModal()}
               >
                 Cancelar
               </Button>
