@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect, useState } from 'react'
 import Flag from 'react-flagkit'
 import {
-  Button,
   Grid,
   GridColumn,
   GridRow,
@@ -57,17 +56,21 @@ export function ExperienceEducationEdit() {
     if (item.type === 'EDUCATION') {
       const response = await removeEducation(item, label)
       if (response && response.success) {
+        setEducation(education.filter((e) => e.id !== item.id))
+        notifySuccess(response.message)
+      } else {
+        notifyFailure(response.message)
+      }
+    } else if (item.type === 'EXPERIENCE') {
+      const response = await removeExperience(item, label)
+      if (response && response.success) {
+        setExperience(experience.filter((e) => e.id !== item.id))
         notifySuccess(response.message)
       } else {
         notifyFailure(response.message)
       }
     } else {
-      const response = await removeExperience(item, label)
-      if (response && response.success) {
-        notifySuccess(response.message)
-      } else {
-        notifyFailure(response.message)
-      }
+      notifyFailure('Error deleting!')
     }
   }
 
@@ -75,6 +78,10 @@ export function ExperienceEducationEdit() {
     fetchAllExperienceEducation()
     fetchAllLabels()
   }, [])
+
+  useEffect(() => {
+    fetchAllLabels()
+  }, [experience])
 
   return (
     <Grid>
@@ -96,7 +103,7 @@ export function ExperienceEducationEdit() {
                 return (
                   <TableRow key={item.id}>
                     <TableCell>
-                      {label.map((l) => {
+                      {label?.map((l) => {
                         if (l.label === item.title) {
                           return l.pt_content
                         } else return ''

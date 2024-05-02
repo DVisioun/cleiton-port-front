@@ -52,44 +52,45 @@ export function ModalEducation({
       )
 
       if (!educationEdit) return
+
       const requestEducationObject = {
         title: {
-          en: data.title || educationEdit?.title,
-          pt: data.titulo || educationEdit?.titulo,
+          en: data.title,
+          pt: data.titulo,
         },
         location: {
-          en: data.location || educationEdit?.location,
-          pt: data.localizacao || educationEdit?.localizacao,
+          en: data.location,
+          pt: data.localizacao,
         },
         organization: {
-          en: data.organization || educationEdit?.organization,
-          pt: data.organizacao || educationEdit?.organizacao,
+          en: data.organization,
+          pt: data.organizacao,
         },
         description: {
-          en: data.description || educationEdit?.description,
-          pt: data.descricao || educationEdit?.descricao,
+          en: data.description,
+          pt: data.descricao,
         },
         initial_date: {
-          en: data.initial_date || educationEdit?.initial_date,
-          pt: data.data_inicial || educationEdit?.data_inicial,
+          en: data.initial_date,
+          pt: data.data_inicial,
         },
         final_date: {
-          en: data.final_date || educationEdit?.final_date,
-          pt: data.data_final || educationEdit?.data_final,
+          en: data.final_date,
+          pt: data.data_final,
         },
       }
 
       const response: any = await editEducation(
-        educationEdit.id,
         requestEducationObject,
+        educationEdit,
+        label,
       )
       if (response && response.success) {
-        setEducation([...education, response.data])
         notifySuccess(response.message)
-        reset()
       } else {
         notifyFailure(response.message)
       }
+      handleCloseModal()
     } else {
       const requestEducationObject = {
         title: {
@@ -122,10 +123,10 @@ export function ModalEducation({
       if (response && response.success) {
         setEducation([...education, response.data])
         notifySuccess(response.message)
-        reset()
       } else {
         notifyFailure(response.message)
       }
+      handleCloseModal()
     }
   }
 

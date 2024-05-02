@@ -1,5 +1,6 @@
 import { API } from '@/@types/api'
 import { addExperience } from '@/api/Experience/add-experience'
+import { editExperience } from '@/api/Experience/edit-experience'
 import { experienceAtom } from '@/states/experienceAtom'
 import { labelAtom } from '@/states/labelsAtom'
 import { notifyFailure, notifySuccess } from '@/utils/toastify'
@@ -45,40 +46,90 @@ export function ModalExperience({
   }
 
   const onSubmit = async (data) => {
-    const requestExperienceObject = {
-      title: {
-        en: data.title,
-        pt: data.titulo,
-      },
-      location: {
-        en: data.location,
-        pt: data.localizacao,
-      },
-      organization: {
-        en: data.organization,
-        pt: data.organizacao,
-      },
-      description: {
-        en: data.description,
-        pt: data.descricao,
-      },
-      initial_date: {
-        en: data.initial_date,
-        pt: data.data_inicial,
-      },
-      final_date: {
-        en: data.final_date,
-        pt: data.data_final,
-      },
-    }
+    if (isEdit) {
+      const experienceEdit = experience.find(
+        (item) => item.id === selectedItem?.id,
+      )
 
-    const response: any = await addExperience(requestExperienceObject)
-    if (response && response.success) {
-      setExperience([...experience, response.data])
-      notifySuccess(response.message)
-      reset()
+      if (!experienceEdit) return
+
+      const requestEducationObject = {
+        title: {
+          en: data.title,
+          pt: data.titulo,
+        },
+        location: {
+          en: data.location,
+          pt: data.localizacao,
+        },
+        organization: {
+          en: data.organization,
+          pt: data.organizacao,
+        },
+        description: {
+          en: data.description,
+          pt: data.descricao,
+        },
+        initial_date: {
+          en: data.initial_date,
+          pt: data.data_inicial,
+        },
+        final_date: {
+          en: data.final_date,
+          pt: data.data_final,
+        },
+      }
+
+      const response: any = await editExperience(
+        requestEducationObject,
+        experienceEdit,
+        label,
+      )
+
+      if (response && response.success) {
+        notifySuccess(response.message)
+        handleCloseModal()
+      } else {
+        notifyFailure(response.message)
+        handleCloseModal()
+      }
     } else {
-      notifyFailure(response.message)
+      const requestEducationObject = {
+        title: {
+          en: data.title,
+          pt: data.titulo,
+        },
+        location: {
+          en: data.location,
+          pt: data.localizacao,
+        },
+        organization: {
+          en: data.organization,
+          pt: data.organizacao,
+        },
+        description: {
+          en: data.description,
+          pt: data.descricao,
+        },
+        initial_date: {
+          en: data.initial_date,
+          pt: data.data_inicial,
+        },
+        final_date: {
+          en: data.final_date,
+          pt: data.data_final,
+        },
+      }
+
+      const response: any = await addExperience(requestEducationObject)
+      if (response && response.success) {
+        setExperience([...experience, response.data])
+        notifySuccess(response.message)
+        handleCloseModal()
+      } else {
+        notifyFailure(response.message)
+        handleCloseModal()
+      }
     }
   }
 

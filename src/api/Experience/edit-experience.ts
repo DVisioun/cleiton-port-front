@@ -1,12 +1,12 @@
 import { editLabel } from '../Labels/edit-label'
 
-export const editEducation = async (
+export const editExperience = async (
   requestObject: any,
-  education: any,
+  experience: any,
   labels: any[],
 ) => {
   try {
-    const fieldsArray = Object.entries(education)
+    const fieldsArray = Object.entries(experience)
 
     for (const field of fieldsArray) {
       const labelToBeUpdated = labels.find((label) => label.label === field[1])
