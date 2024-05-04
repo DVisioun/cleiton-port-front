@@ -32,6 +32,11 @@ export const SideBarCMS = () => {
             About Information
           </li>
         </Link>
+        <Link href="/cms/home-images">
+          <li className="cursor-pointer py-2 text-base text-white duration-300 hover:bg-gray-400">
+            Home Images
+          </li>
+        </Link>
       </ul>
     </Sidebar>
   )
