@@ -1,6 +1,6 @@
 import { atom } from 'jotai'
 
-interface HomeImage {
+export interface HomeImage {
   id?: string
   image: string
   order: number

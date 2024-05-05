@@ -15,12 +15,14 @@ import { Divider, Header, Segment, Input, Button } from 'semantic-ui-react'
 function HomeImagePage() {
   const [images, setImages] = useAtom(homeImageAtom)
   const [imagePreview, setImagePreview] = useState<string>('')
-  const { register, reset, handleSubmit, control, setValue, watch } = useForm()
+  const { register, handleSubmit, watch, reset } = useForm()
 
   const fetchAllImages = async () => {
     const response = await fetchHomeImages()
-    if (response && response.success) setImages(response.data)
-    else notifyFailure(response.message)
+    if (response && response.success) {
+      const orderedImages = response.data.toSorted((a, b) => a.order - b.order)
+      setImages(orderedImages)
+    } else notifyFailure(response.message)
   }
 
   const onSubmit = async (data) => {
@@ -29,6 +31,15 @@ function HomeImagePage() {
     const response = await addImage(imgConverted, order)
     if (response && response.success) {
       notifySuccess(response.message)
+      setImages([
+        ...images,
+        {
+          id: response.data.id,
+          order: response.data.order,
+          image: response.data.image,
+        },
+      ])
+      reset()
     } else {
       notifyFailure(response.message)
     }
@@ -95,7 +106,7 @@ function HomeImagePage() {
             />
           </form>
           <div className="pt-8">
-            <TableHomeImages />
+            <TableHomeImages images={images} />
           </div>
         </Segment>
       </Segment>
