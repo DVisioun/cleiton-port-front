@@ -4,7 +4,7 @@ import React from 'react'
 
 const BodyPortfolioPost = () => {
   return (
-    <div className="flex w-full items-start justify-between">
+    <div className="flex w-full items-start justify-around">
       <section className="flex w-2/3 flex-col items-start justify-start gap-4">
         <Image
           alt="Portfólio Image"
@@ -37,8 +37,8 @@ const BodyPortfolioPost = () => {
         />
       </section>
       <aside className="flex w-[30%] flex-col items-start justify-center gap-6">
-        <div className="flex w-full flex-col items-center justify-start bg-secondary px-12 py-4 shadow-card">
-          <AboutCard position="relative" />
+        <div className="flex w-full flex-col items-center justify-start bg-secondary px-8 py-4 shadow-card">
+          <AboutCard />
           <h2 className="w-full text-left text-primary">Geraldão</h2>
           <p className="w-full text-left text-primary">
             Lorem Ipsum is simply dummy text of the printing and typesetting

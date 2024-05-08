@@ -11,8 +11,8 @@ import {
 import NavbarSocialBlack from '../NavbarSocial/NavbarSocialBlack'
 import { AboutCardTypes } from '@/@types/about'
 
-const AboutCard = ({ position }: AboutCardTypes) => {
-  const styleCard = `!top-15 !mx-auto !mb-10 !rounded-lg !bg-primary !shadow-card sm:!mb-8 sm:flex sm:!max-w-[300px] xl:!${position} sm-0:!mb-12 sm-0:!max-w-[250px]`
+const AboutCard = () => {
+  const styleCard = `!top-15 !mx-auto !mb-10 !rounded-lg !bg-primary !shadow-card sm:!mb-8 sm:flex sm:!max-w-[300px] sm-0:!mb-12 sm-0:!max-w-[250px]`
   return (
     <Card className={styleCard}>
       <div className="flex justify-center px-4 py-8 sm-1:px-0">
