@@ -19,7 +19,7 @@ const Portfolio = () => {
     }
 
     handleFetchProjects()
-  }, [])
+  }, [setPortfolioProjects])
 
   return (
     <main className="min-h-[calc(100%-90px)] w-full px-[80px] pt-40 sm-0:px-6 sm-1:pt-5">
