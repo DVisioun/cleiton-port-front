@@ -56,7 +56,7 @@ export function ExperienceEducationEdit() {
     if (item.type === 'EDUCATION') {
       const response = await removeEducation(item, label)
       if (response && response.success) {
-        setEducation(education.filter((e) => e.id !== item.id))
+        fetchAllExperienceEducation()
         notifySuccess(response.message)
       } else {
         notifyFailure(response.message)
@@ -64,7 +64,7 @@ export function ExperienceEducationEdit() {
     } else if (item.type === 'EXPERIENCE') {
       const response = await removeExperience(item, label)
       if (response && response.success) {
-        setExperience(experience.filter((e) => e.id !== item.id))
+        fetchAllExperienceEducation()
         notifySuccess(response.message)
       } else {
         notifyFailure(response.message)
@@ -135,6 +135,7 @@ export function ExperienceEducationEdit() {
             selectedItem={selectedItem}
             isEdit={isEditExperience}
             setIsEdit={setIsEditExperience}
+            fetchAllExperienceEducation={fetchAllExperienceEducation}
           />
         </GridColumn>
         <GridColumn mobile={16} computer={8} tablet={16}>
@@ -185,6 +186,7 @@ export function ExperienceEducationEdit() {
             selectedItem={selectedItem}
             isEdit={isEditEducation}
             setIsEdit={setIsEditEducation}
+            fetchAllExperienceEducation={fetchAllExperienceEducation}
           />
         </GridColumn>
       </GridRow>

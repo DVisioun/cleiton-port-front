@@ -1,6 +1,7 @@
 import { API } from '@/@types/api'
 import { addEducation } from '@/api/Education/add-education'
 import { editEducation } from '@/api/Education/edit-education'
+import { fetchLabels } from '@/api/Labels/fetch-labels'
 import { educationAtom } from '@/states/educationAtom'
 import { labelAtom } from '@/states/labelsAtom'
 import { notifyFailure, notifySuccess } from '@/utils/toastify'
@@ -26,12 +27,14 @@ interface ModalEducationProps {
   isEdit: boolean
   setIsEdit: (isEdit: boolean) => void
   selectedItem?: { id: string }
+  fetchAllExperienceEducation: () => void
 }
 
 export function ModalEducation({
   isEdit,
   setIsEdit,
   selectedItem,
+  fetchAllExperienceEducation,
 }: ModalEducationProps) {
   const [open, setOpen] = useState(false)
   const [education, setEducation] = useAtom(educationAtom)
@@ -43,6 +46,13 @@ export function ModalEducation({
     setOpen(false)
     setIsEdit(false)
     reset()
+  }
+
+  const fetchAllLabels = async () => {
+    const response: any = await fetchLabels()
+    if (response && response.success) {
+      setLabel(response.data)
+    }
   }
 
   const onSubmit = async (data) => {
@@ -86,6 +96,8 @@ export function ModalEducation({
         label,
       )
       if (response && response.success) {
+        fetchAllLabels()
+        fetchAllExperienceEducation()
         notifySuccess(response.message)
       } else {
         notifyFailure(response.message)
@@ -121,6 +133,7 @@ export function ModalEducation({
 
       const response: any = await addEducation(requestEducationObject)
       if (response && response.success) {
+        fetchAllLabels()
         setEducation([...education, response.data])
         notifySuccess(response.message)
       } else {
@@ -139,8 +152,6 @@ export function ModalEducation({
       const educationEdit = education.find(
         (item) => item.id === selectedItem?.id,
       )
-      console.log(educationEdit)
-      console.log(label)
 
       if (!educationEdit) return
 
