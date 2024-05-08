@@ -8,7 +8,7 @@ interface FooterProps {
 export const Footer = ({ position }: FooterProps) => {
   return (
     <footer
-      className={`flex w-full justify-center p-8 sm-0:py-2 ${position}  bottom-0 `}
+      className={`flex w-full justify-center p-8 sm-0:py-2 ${position} bottom-0 `}
     >
       {position === '' && <TeamLogo />}
       {position === 'absolute' && (
