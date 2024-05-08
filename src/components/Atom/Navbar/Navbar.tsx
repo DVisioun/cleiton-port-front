@@ -2,6 +2,7 @@
 
 import { Locale } from '@/config/i18n.config'
 import Link from 'next/link'
+import { useState } from 'react'
 import { Dropdown, DropdownItem, DropdownMenu } from 'semantic-ui-react'
 
 interface NavBarProps {
@@ -12,7 +13,6 @@ function Navbar({ lang }: NavBarProps) {
   return (
     <nav className="ml-10 flex gap-5">
       <Dropdown
-        item
         icon="list"
         simple
         className="!z-20 pb-2 text-3xl sm:!hidden sm-1:!flex"
