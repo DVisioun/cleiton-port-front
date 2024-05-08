@@ -28,6 +28,8 @@
     "react-dom": "^18",
     "react-flagkit": "^2.0.4",
     "react-hook-form": "^7.50.1",
+    "react-loader-spinner": "^6.1.6",
+    "react-spinners": "^0.13.8",
     "react-toastify": "^10.0.4",
     "semantic-ui-css": "^2.5.0",
     "semantic-ui-react": "^3.0.0-beta.2",

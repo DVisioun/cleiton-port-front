@@ -1,11 +1,12 @@
 import { API } from '@/@types/api'
 import { addExperience } from '@/api/Experience/add-experience'
 import { editExperience } from '@/api/Experience/edit-experience'
+import { fetchLabels } from '@/api/Labels/fetch-labels'
 import { experienceAtom } from '@/states/experienceAtom'
 import { labelAtom } from '@/states/labelsAtom'
 import { notifyFailure, notifySuccess } from '@/utils/toastify'
 import { useAtom } from 'jotai'
-import React, { useEffect, useState } from 'react'
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import {
   Button,
@@ -26,18 +27,29 @@ interface ModalExperienceProps {
   isEdit: boolean
   setIsEdit: (isEdit: boolean) => void
   selectedItem?: { id: string }
+  fetchAllExperienceEducation: () => void
+  setLoading: Dispatch<SetStateAction<boolean>>
 }
 
 export function ModalExperience({
   isEdit,
   setIsEdit,
   selectedItem,
+  fetchAllExperienceEducation,
+  setLoading,
 }: ModalExperienceProps) {
   const [open, setOpen] = useState(false)
   const [experience, setExperience] = useAtom(experienceAtom)
   const [label, setLabel] = useAtom(labelAtom)
   const { register, reset, handleSubmit, setValue } =
     useForm<API.ExperienceCreateRequestProps>()
+
+  const fetchAllLabels = async () => {
+    const response: any = await fetchLabels()
+    if (response && response.success) {
+      setLabel(response.data)
+    }
+  }
 
   const handleCloseModal = () => {
     setOpen(false)
@@ -88,6 +100,7 @@ export function ModalExperience({
 
       if (response && response.success) {
         notifySuccess(response.message)
+        fetchAllLabels()
         handleCloseModal()
       } else {
         notifyFailure(response.message)
@@ -123,7 +136,8 @@ export function ModalExperience({
 
       const response: any = await addExperience(requestEducationObject)
       if (response && response.success) {
-        setExperience([...experience, response.data])
+        fetchAllLabels()
+        fetchAllExperienceEducation()
         notifySuccess(response.message)
         handleCloseModal()
       } else {

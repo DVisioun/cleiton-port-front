@@ -24,10 +24,12 @@ import { fetchLabels } from '@/api/Labels/fetch-labels'
 import { labelAtom } from '@/states/labelsAtom'
 import { removeExperience } from '@/api/Experience/remove-experience'
 import { removeEducation } from '@/api/Education/remove-education'
+import { LoadingScreen } from '@/components/Atom/Loading/Loading'
 
 export function ExperienceEducationEdit() {
   const [isEditEducation, setIsEditEducation] = useState(false)
   const [isEditExperience, setIsEditExperience] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   const [education, setEducation] = useAtom(educationAtom)
   const [experience, setExperience] = useAtom(experienceAtom)
@@ -53,10 +55,11 @@ export function ExperienceEducationEdit() {
   }
 
   const handleDeleteExperienceEducation = async (item: any) => {
+    setLoading(true)
     if (item.type === 'EDUCATION') {
       const response = await removeEducation(item, label)
       if (response && response.success) {
-        setEducation(education.filter((e) => e.id !== item.id))
+        fetchAllExperienceEducation()
         notifySuccess(response.message)
       } else {
         notifyFailure(response.message)
@@ -64,7 +67,7 @@ export function ExperienceEducationEdit() {
     } else if (item.type === 'EXPERIENCE') {
       const response = await removeExperience(item, label)
       if (response && response.success) {
-        setExperience(experience.filter((e) => e.id !== item.id))
+        fetchAllExperienceEducation()
         notifySuccess(response.message)
       } else {
         notifyFailure(response.message)
@@ -72,6 +75,7 @@ export function ExperienceEducationEdit() {
     } else {
       notifyFailure('Error deleting!')
     }
+    setLoading(false)
   }
 
   useEffect(() => {
@@ -84,110 +88,117 @@ export function ExperienceEducationEdit() {
   }, [experience])
 
   return (
-    <Grid>
-      <GridRow columns={2}>
-        <GridColumn mobile={16} computer={8} tablet={16}>
-          <div className="flex items-center justify-start gap-4">
-            <Flag country="US" size={25} className="mb-2" />
-            <Flag country="BR" size={25} className="mb-2" />
-          </div>
-          <Table celled structured>
-            <TableHeader>
-              <TableRow>
-                <TableHeaderCell width={13}>Experience</TableHeaderCell>
-                <TableHeaderCell width={3}>Operation</TableHeaderCell>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {experience?.map((item) => {
-                return (
-                  <TableRow key={item.id}>
-                    <TableCell>
-                      {label?.map((l) => {
-                        if (l.label === item.title) {
-                          return l.pt_content
-                        } else return ''
-                      })}
-                    </TableCell>
-                    <TableCell textAlign="center">
-                      <button
-                        onClick={() => {
-                          setIsEditExperience(true)
-                          setSelectedItem({ id: item.id })
-                        }}
-                        className="mr-2"
-                      >
-                        <FontAwesomeIcon icon={faEdit} height={12} />
-                      </button>
-                      <button
-                        onClick={() => handleDeleteExperienceEducation(item)}
-                        className="mr-2"
-                      >
-                        <FontAwesomeIcon icon={faTrash} height={12} />
-                      </button>
-                    </TableCell>
-                  </TableRow>
-                )
-              })}
-            </TableBody>
-          </Table>
-          <ModalExperience
-            selectedItem={selectedItem}
-            isEdit={isEditExperience}
-            setIsEdit={setIsEditExperience}
-          />
-        </GridColumn>
-        <GridColumn mobile={16} computer={8} tablet={16}>
-          <div className="flex items-center justify-start gap-4">
-            <Flag country="US" size={25} className="mb-2" />
-            <Flag country="BR" size={25} className="mb-2" />
-          </div>
-          <Table celled structured>
-            <TableHeader>
-              <TableRow>
-                <TableHeaderCell width={13}>Education</TableHeaderCell>
-                <TableHeaderCell width={3}>Operation</TableHeaderCell>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {education?.map((item) => {
-                return (
-                  <TableRow key={item.id}>
-                    <TableCell>
-                      {label.map((l) => {
-                        if (l.label === item.title) return l.pt_content
-                        else return ''
-                      })}
-                    </TableCell>
-                    <TableCell textAlign="center">
-                      <button
-                        onClick={() => {
-                          setIsEditEducation(true)
-                          setSelectedItem({ id: item.id })
-                        }}
-                        className="mr-2"
-                      >
-                        <FontAwesomeIcon icon={faEdit} height={12} />
-                      </button>
-                      <button
-                        onClick={() => handleDeleteExperienceEducation(item)}
-                        className="mr-2"
-                      >
-                        <FontAwesomeIcon icon={faTrash} height={12} />
-                      </button>
-                    </TableCell>
-                  </TableRow>
-                )
-              })}
-            </TableBody>
-          </Table>
-          <ModalEducation
-            selectedItem={selectedItem}
-            isEdit={isEditEducation}
-            setIsEdit={setIsEditEducation}
-          />
-        </GridColumn>
-      </GridRow>
-    </Grid>
+    <>
+      <LoadingScreen loading={loading} />
+      <Grid>
+        <GridRow columns={2}>
+          <GridColumn mobile={16} computer={8} tablet={16}>
+            <div className="flex items-center justify-start gap-4">
+              <Flag country="US" size={25} className="mb-2" />
+              <Flag country="BR" size={25} className="mb-2" />
+            </div>
+            <Table celled structured>
+              <TableHeader>
+                <TableRow>
+                  <TableHeaderCell width={13}>Experience</TableHeaderCell>
+                  <TableHeaderCell width={3}>Operation</TableHeaderCell>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {experience?.map((item) => {
+                  return (
+                    <TableRow key={item.id}>
+                      <TableCell>
+                        {label?.map((l) => {
+                          if (l.label === item.title) {
+                            return l.pt_content
+                          } else return ''
+                        })}
+                      </TableCell>
+                      <TableCell textAlign="center">
+                        <button
+                          onClick={() => {
+                            setIsEditExperience(true)
+                            setSelectedItem({ id: item.id })
+                          }}
+                          className="mr-2"
+                        >
+                          <FontAwesomeIcon icon={faEdit} height={12} />
+                        </button>
+                        <button
+                          onClick={() => handleDeleteExperienceEducation(item)}
+                          className="mr-2"
+                        >
+                          <FontAwesomeIcon icon={faTrash} height={12} />
+                        </button>
+                      </TableCell>
+                    </TableRow>
+                  )
+                })}
+              </TableBody>
+            </Table>
+            <ModalExperience
+              selectedItem={selectedItem}
+              isEdit={isEditExperience}
+              setIsEdit={setIsEditExperience}
+              fetchAllExperienceEducation={fetchAllExperienceEducation}
+              setLoading={setLoading}
+            />
+          </GridColumn>
+          <GridColumn mobile={16} computer={8} tablet={16}>
+            <div className="flex items-center justify-start gap-4">
+              <Flag country="US" size={25} className="mb-2" />
+              <Flag country="BR" size={25} className="mb-2" />
+            </div>
+            <Table celled structured>
+              <TableHeader>
+                <TableRow>
+                  <TableHeaderCell width={13}>Education</TableHeaderCell>
+                  <TableHeaderCell width={3}>Operation</TableHeaderCell>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {education?.map((item) => {
+                  return (
+                    <TableRow key={item.id}>
+                      <TableCell>
+                        {label.map((l) => {
+                          if (l.label === item.title) return l.pt_content
+                          else return ''
+                        })}
+                      </TableCell>
+                      <TableCell textAlign="center">
+                        <button
+                          onClick={() => {
+                            setIsEditEducation(true)
+                            setSelectedItem({ id: item.id })
+                          }}
+                          className="mr-2"
+                        >
+                          <FontAwesomeIcon icon={faEdit} height={12} />
+                        </button>
+                        <button
+                          onClick={() => handleDeleteExperienceEducation(item)}
+                          className="mr-2"
+                        >
+                          <FontAwesomeIcon icon={faTrash} height={12} />
+                        </button>
+                      </TableCell>
+                    </TableRow>
+                  )
+                })}
+              </TableBody>
+            </Table>
+            <ModalEducation
+              selectedItem={selectedItem}
+              isEdit={isEditEducation}
+              setIsEdit={setIsEditEducation}
+              fetchAllExperienceEducation={fetchAllExperienceEducation}
+              setLoading={setLoading}
+            />
+          </GridColumn>
+        </GridRow>
+      </Grid>
+    </>
   )
 }
