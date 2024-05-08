@@ -10,5 +10,6 @@ export const addSkill = async (skill: API.SkillCreateProps) => {
     return response.data
   } catch (error) {
     console.log(error)
+    return error.response
   }
 }

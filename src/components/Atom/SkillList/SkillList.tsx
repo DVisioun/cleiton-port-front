@@ -8,7 +8,11 @@ import { skillAtom } from '@/states/skillAtom'
 import { notifyFailure, notifySuccess } from '@/utils/toastify'
 import { API } from '@/@types/api'
 
-export const SkillsList = () => {
+interface SkillsListProps {
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+export const SkillsList = ({ setLoading }: SkillsListProps) => {
   const [skills, setSkills] = useAtom(skillAtom)
 
   const handleFetchSkills = async () => {
@@ -19,6 +23,7 @@ export const SkillsList = () => {
   }
 
   const handleDeleteSkill = async (id: string) => {
+    setLoading(true)
     const response: API.DeleteSkillResponseProps = await deleteSkill(id)
     if (response?.success) {
       setSkills(skills.filter((item) => item.id !== id))
@@ -26,6 +31,7 @@ export const SkillsList = () => {
     } else {
       notifyFailure(response.message)
     }
+    setLoading(false)
   }
 
   useEffect(() => {

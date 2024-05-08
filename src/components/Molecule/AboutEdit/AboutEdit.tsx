@@ -2,6 +2,7 @@
 import { API } from '@/@types/api'
 import { fetchLabels } from '@/api/Labels/fetch-labels'
 import { fetchAbout } from '@/api/User/fetch-about'
+import { LoadingScreen } from '@/components/Atom/Loading/Loading'
 import React, { useEffect } from 'react'
 import Flag from 'react-flagkit'
 import {
@@ -44,37 +45,40 @@ function AboutEdit() {
   })
 
   return (
-    <Grid>
-      <GridRow columns={2}>
-        <GridColumn mobile={16} computer={8} tablet={16}>
-          <div className="mb-5">
-            <Flag country="US" size={25} className="mb-2" />
-            <Form>
-              <TextArea placeholder="About" id="about-en" />
-            </Form>
-          </div>
-          <Button
-            type="submit"
-            content="Gravar"
-            primary
-            className="sm-1:!mt-5 sm-1:!w-full md-1:!mt-5 md-1:!w-full"
-          />
-        </GridColumn>
-        <GridColumn
-          mobile={16}
-          computer={8}
-          tablet={16}
-          className="sm-1:!mt-10 md-1:!mt-10"
-        >
-          <div>
-            <Flag country="BR" size={25} className="mb-2" />
-            <Form>
-              <TextArea placeholder="About" id="about-pt" />
-            </Form>
-          </div>
-        </GridColumn>
-      </GridRow>
-    </Grid>
+    <>
+      <LoadingScreen loading={false} />
+      <Grid>
+        <GridRow columns={2}>
+          <GridColumn mobile={16} computer={8} tablet={16}>
+            <div className="mb-5">
+              <Flag country="US" size={25} className="mb-2" />
+              <Form>
+                <TextArea placeholder="About" id="about-en" />
+              </Form>
+            </div>
+            <Button
+              type="submit"
+              content="Gravar"
+              primary
+              className="sm-1:!mt-5 sm-1:!w-full md-1:!mt-5 md-1:!w-full"
+            />
+          </GridColumn>
+          <GridColumn
+            mobile={16}
+            computer={8}
+            tablet={16}
+            className="sm-1:!mt-10 md-1:!mt-10"
+          >
+            <div>
+              <Flag country="BR" size={25} className="mb-2" />
+              <Form>
+                <TextArea placeholder="About" id="about-pt" />
+              </Form>
+            </div>
+          </GridColumn>
+        </GridRow>
+      </Grid>
+    </>
   )
 }
 

@@ -6,7 +6,7 @@ import { experienceAtom } from '@/states/experienceAtom'
 import { labelAtom } from '@/states/labelsAtom'
 import { notifyFailure, notifySuccess } from '@/utils/toastify'
 import { useAtom } from 'jotai'
-import React, { useEffect, useState } from 'react'
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import {
   Button,
@@ -28,6 +28,7 @@ interface ModalExperienceProps {
   setIsEdit: (isEdit: boolean) => void
   selectedItem?: { id: string }
   fetchAllExperienceEducation: () => void
+  setLoading: Dispatch<SetStateAction<boolean>>
 }
 
 export function ModalExperience({
@@ -35,6 +36,7 @@ export function ModalExperience({
   setIsEdit,
   selectedItem,
   fetchAllExperienceEducation,
+  setLoading,
 }: ModalExperienceProps) {
   const [open, setOpen] = useState(false)
   const [experience, setExperience] = useAtom(experienceAtom)
