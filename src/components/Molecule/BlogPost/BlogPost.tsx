@@ -28,8 +28,7 @@ function BlogPost({ id }: BlogPostProps) {
     const filteredPosts = blogPost?.filter((post) => post.id === id);
     setBlogPost(filteredPosts);
   };
-
-  console.log(blogPost);
+  
   return (
     <>
       {blogPost?.map((item) => {

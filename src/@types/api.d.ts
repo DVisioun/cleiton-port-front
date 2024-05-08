@@ -144,4 +144,16 @@ export namespace API {
     data: AboutEditSchema[] | []
     success: boolean
   }
+
+  // Home Post
+  export interface HomePostProps extends FieldValues {
+    id: string,
+    image: string,
+    order: Number
+  }
+
+  export interface FetchHomePostProps {
+    data: HomePostProps[] | []
+    success: boolean
+  }
 }
