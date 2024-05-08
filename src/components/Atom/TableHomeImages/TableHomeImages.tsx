@@ -6,6 +6,7 @@ import { notifySuccess } from '@/utils/toastify'
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useAtom } from 'jotai'
+import { Dispatch, SetStateAction } from 'react'
 import {
   Table,
   TableBody,
@@ -15,10 +16,15 @@ import {
   TableRow,
 } from 'semantic-ui-react'
 
-export const TableHomeImages = () => {
+interface TableHomeImagesProps {
+  setLoading: Dispatch<SetStateAction<boolean>>
+}
+
+export const TableHomeImages = ({ setLoading }: TableHomeImagesProps) => {
   const [images, setImages] = useAtom(homeImageAtom)
 
   const handleRemoveImage = async (id: string) => {
+    setLoading(true)
     const response = await removeImage(id)
     if (response && response.success) {
       notifySuccess(response.message)
@@ -26,6 +32,7 @@ export const TableHomeImages = () => {
     } else {
       notifySuccess(response.message)
     }
+    setLoading(false)
   }
   return (
     <Table celled textAlign="center">

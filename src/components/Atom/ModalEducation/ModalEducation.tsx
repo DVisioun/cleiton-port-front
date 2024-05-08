@@ -1,11 +1,12 @@
 import { API } from '@/@types/api'
 import { addEducation } from '@/api/Education/add-education'
 import { editEducation } from '@/api/Education/edit-education'
+import { fetchLabels } from '@/api/Labels/fetch-labels'
 import { educationAtom } from '@/states/educationAtom'
 import { labelAtom } from '@/states/labelsAtom'
 import { notifyFailure, notifySuccess } from '@/utils/toastify'
 import { useAtom } from 'jotai'
-import React, { useEffect, useState } from 'react'
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import {
   Button,
@@ -26,12 +27,16 @@ interface ModalEducationProps {
   isEdit: boolean
   setIsEdit: (isEdit: boolean) => void
   selectedItem?: { id: string }
+  fetchAllExperienceEducation: () => void
+  setLoading: Dispatch<SetStateAction<boolean>>
 }
 
 export function ModalEducation({
   isEdit,
   setIsEdit,
   selectedItem,
+  fetchAllExperienceEducation,
+  setLoading,
 }: ModalEducationProps) {
   const [open, setOpen] = useState(false)
   const [education, setEducation] = useAtom(educationAtom)
@@ -45,7 +50,17 @@ export function ModalEducation({
     reset()
   }
 
+  const fetchAllLabels = async () => {
+    setLoading(true)
+    const response: any = await fetchLabels()
+    if (response && response.success) {
+      setLabel(response.data)
+    }
+    setLoading(false)
+  }
+
   const onSubmit = async (data) => {
+    setLoading(true)
     if (isEdit) {
       const educationEdit = education.find(
         (item) => item.id === selectedItem?.id,
@@ -86,6 +101,8 @@ export function ModalEducation({
         label,
       )
       if (response && response.success) {
+        fetchAllLabels()
+        fetchAllExperienceEducation()
         notifySuccess(response.message)
       } else {
         notifyFailure(response.message)
@@ -121,6 +138,7 @@ export function ModalEducation({
 
       const response: any = await addEducation(requestEducationObject)
       if (response && response.success) {
+        fetchAllLabels()
         setEducation([...education, response.data])
         notifySuccess(response.message)
       } else {
@@ -128,6 +146,8 @@ export function ModalEducation({
       }
       handleCloseModal()
     }
+
+    setLoading(false)
   }
 
   useEffect(() => {
@@ -139,8 +159,6 @@ export function ModalEducation({
       const educationEdit = education.find(
         (item) => item.id === selectedItem?.id,
       )
-      console.log(educationEdit)
-      console.log(label)
 
       if (!educationEdit) return
 

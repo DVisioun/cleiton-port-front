@@ -7,7 +7,7 @@ import { blogPostAtom } from '@/states/blogPostAtom'
 import { useAtom } from 'jotai'
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Dispatch, SetStateAction, useEffect } from 'react'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import {
   Icon,
   Menu,
@@ -21,6 +21,7 @@ import {
   TableRow,
 } from 'semantic-ui-react'
 import { deleteBlogPost } from '@/api/BlogPost/delete-blog-post'
+import { LoadingScreen } from '../Loading/Loading'
 
 dayjs.locale(ptBr)
 
@@ -36,7 +37,7 @@ export const TableBlogPost = ({
   setAddPost,
 }: TableBlogPostProps) => {
   const [blogPosts, setBlogPosts] = useAtom(blogPostAtom)
-
+  const [loading, setLoading] = useState(false)
   const handleBlogPostEdit = (id: string) => {
     setPostId(id)
     setEditPost(true)
@@ -54,10 +55,12 @@ export const TableBlogPost = ({
   }
 
   const handleDelete = async (id: string) => {
+    setLoading(true)
     await deleteBlogPost(id)
     setBlogPosts((prevItems) => {
       return prevItems.filter((item) => item.id !== id)
     })
+    setLoading(false)
   }
 
   useEffect(() => {
@@ -65,65 +68,68 @@ export const TableBlogPost = ({
   }, [])
 
   return (
-    <Table celled textAlign="center">
-      <TableHeader>
-        <TableRow>
-          <TableHeaderCell>Name</TableHeaderCell>
-          <TableHeaderCell>Date Created</TableHeaderCell>
-          <TableHeaderCell>Edit</TableHeaderCell>
-          <TableHeaderCell>Remove</TableHeaderCell>
-        </TableRow>
-      </TableHeader>
+    <>
+      <LoadingScreen loading={loading} />
+      <Table celled textAlign="center">
+        <TableHeader>
+          <TableRow>
+            <TableHeaderCell>Name</TableHeaderCell>
+            <TableHeaderCell>Date Created</TableHeaderCell>
+            <TableHeaderCell>Edit</TableHeaderCell>
+            <TableHeaderCell>Remove</TableHeaderCell>
+          </TableRow>
+        </TableHeader>
 
-      <TableBody>
-        {blogPosts.map((item) => {
-          return (
-            <TableRow key={item.id}>
-              <TableCell>{item.name}</TableCell>
-              <TableCell>
-                {dayjs(item.created_at).format('D[ de ]MMMM[, ]YYYY')}
-              </TableCell>
-              <TableCell textAlign="center">
-                <FontAwesomeIcon
-                  className="cursor-pointer duration-300 hover:scale-125"
-                  icon={faEdit}
-                  height={30}
-                  fontSize={18}
-                  onClick={() => handleBlogPostEdit(item.id)}
-                />
-              </TableCell>
-              <TableCell textAlign="center">
-                <FontAwesomeIcon
-                  className="cursor-pointer duration-300 hover:scale-125"
-                  icon={faTrash}
-                  height={30}
-                  fontSize={18}
-                  onClick={() => handleDelete(item.id)}
-                />
-              </TableCell>
-            </TableRow>
-          )
-        })}
-      </TableBody>
+        <TableBody>
+          {blogPosts.map((item) => {
+            return (
+              <TableRow key={item.id}>
+                <TableCell>{item.name}</TableCell>
+                <TableCell>
+                  {dayjs(item.created_at).format('D[ de ]MMMM[, ]YYYY')}
+                </TableCell>
+                <TableCell textAlign="center">
+                  <FontAwesomeIcon
+                    className="cursor-pointer duration-300 hover:scale-125"
+                    icon={faEdit}
+                    height={30}
+                    fontSize={18}
+                    onClick={() => handleBlogPostEdit(item.id)}
+                  />
+                </TableCell>
+                <TableCell textAlign="center">
+                  <FontAwesomeIcon
+                    className="cursor-pointer duration-300 hover:scale-125"
+                    icon={faTrash}
+                    height={30}
+                    fontSize={18}
+                    onClick={() => handleDelete(item.id)}
+                  />
+                </TableCell>
+              </TableRow>
+            )
+          })}
+        </TableBody>
 
-      <TableFooter>
-        <TableRow>
-          <TableHeaderCell colSpan="6">
-            <Menu floated="right" pagination>
-              <MenuItem as="a" icon>
-                <Icon name="chevron left" />
-              </MenuItem>
-              <MenuItem as="a">1</MenuItem>
-              <MenuItem as="a">2</MenuItem>
-              <MenuItem as="a">3</MenuItem>
-              <MenuItem as="a">4</MenuItem>
-              <MenuItem as="a" icon>
-                <Icon name="chevron right" />
-              </MenuItem>
-            </Menu>
-          </TableHeaderCell>
-        </TableRow>
-      </TableFooter>
-    </Table>
+        <TableFooter>
+          <TableRow>
+            <TableHeaderCell colSpan="6">
+              <Menu floated="right" pagination>
+                <MenuItem as="a" icon>
+                  <Icon name="chevron left" />
+                </MenuItem>
+                <MenuItem as="a">1</MenuItem>
+                <MenuItem as="a">2</MenuItem>
+                <MenuItem as="a">3</MenuItem>
+                <MenuItem as="a">4</MenuItem>
+                <MenuItem as="a" icon>
+                  <Icon name="chevron right" />
+                </MenuItem>
+              </Menu>
+            </TableHeaderCell>
+          </TableRow>
+        </TableFooter>
+      </Table>
+    </>
   )
 }
