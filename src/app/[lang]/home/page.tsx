@@ -9,14 +9,14 @@ import { Footer } from '@/components/Molecule/Footer/Footer'
 
 export default function Home({ params }: { params: { lang: Locale } }) {
   return (
-    <div className=" text-primary">
+    <div className="text-primary">
       <ThemeProvider initialTheme="light">
         <Header lang={params.lang} bgColor="bg-opacity" />
         <main>
           <Carousel />
-          <div className="flex min-h-screen flex-col items-center justify-center">
-            <ConfigContent />
-          </div>
+          {/* <div className="flex min-h-screen flex-col items-center justify-center"> */}
+          <ConfigContent />
+          {/* </div> */}
         </main>
         <Footer position="absolute" />
       </ThemeProvider>

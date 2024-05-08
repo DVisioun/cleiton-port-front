@@ -23,10 +23,14 @@ function CardExperience({
           {final_date ? ' - ' + final_date : ''}
         </Label>
         <div className="min-h-40">
-          <h2 className="!mt-2 text-3xl text-primary">{title}</h2>
-          <h5 className="!my-1 font-normal text-secondary">{organization}</h5>
-          <h5 className="!my-1 font-normal text-primary">{location}</h5>
-          <p className="!mt-1">{description}</p>
+          <h2 className="!mt-2 text-3xl text-primary sm-0:text-2xl">{title}</h2>
+          <h5 className="!my-1 font-normal text-secondary sm-0:text-sm">
+            {organization}
+          </h5>
+          <h5 className="!my-1 font-normal text-primary sm-0:text-sm">
+            {location}
+          </h5>
+          <p className="!mt-1 sm-0:text-sm">{description}</p>
         </div>
       </Segment>
     </div>

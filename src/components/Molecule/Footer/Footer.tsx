@@ -7,11 +7,13 @@ interface FooterProps {
 
 export const Footer = ({ position }: FooterProps) => {
   return (
-    <footer className={`flex w-full justify-center p-8 ${position}  bottom-0 `}>
+    <footer
+      className={`flex w-full justify-center p-8 sm-0:py-2 ${position} bottom-0 `}
+    >
       {position === '' && <TeamLogo />}
       {position === 'absolute' && (
-        <div className="flex gap-3 sm-0.2:flex-col sm-0.2:items-center sm-1:justify-center">
-          <span className="text-lg text-[var(--white)]">
+        <div className="flex items-center justify-center gap-3">
+          <span className="text-lg text-[var(--white)] sm-0:text-xs">
             © 2024 - Developed by{' '}
           </span>
           <Image
@@ -19,7 +21,7 @@ export const Footer = ({ position }: FooterProps) => {
             alt=""
             width={120}
             height={120}
-            className="max-w-28"
+            className="max-w-28 sm-0:w-20"
           />
         </div>
       )}
