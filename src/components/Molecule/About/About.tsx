@@ -15,7 +15,7 @@ function About({ params }: any) {
         <Grid>
           <GridRow columns={2}>
             <GridColumn mobile={16} tablet={16} largeScreen={4} widescreen={3}>
-              <AboutCard position="fixed" />
+              <AboutCard />
             </GridColumn>
             <GridColumn
               mobile={16}
