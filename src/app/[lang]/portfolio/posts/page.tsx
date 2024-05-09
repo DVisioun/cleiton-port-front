@@ -8,7 +8,7 @@ import BodyPortfolioPost from '@/components/Molecule/BodyPortfolioPost/BodyPortf
 
 const page = ({ params }: { params: { lang: Locale } }) => {
   return (
-    <div className="flex w-full flex-col items-center justify-center bg-primary px-12 pt-24">
+    <div className="flex w-full flex-col items-center justify-center bg-primary px-12 pt-24 sm-0:px-2">
       <ThemeProvider initialTheme="light">
         <Header lang={params.lang} bgColor="bg-primary" />
         <ConfigContent />
