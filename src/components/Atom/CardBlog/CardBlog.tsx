@@ -16,10 +16,10 @@ function CardBlog({ data }: Blog.CardBlogProps) {
     <div className="w-full px-4">
       <Segment
         raised
-        className="!sm-1:p-5 !flex h-[350px] w-[550px] !flex-col !justify-between overflow-hidden !rounded-2xl !bg-secondary !p-10 sm-1:w-full"
+        className="!flex w-[550px] !flex-col !justify-between gap-4 overflow-hidden !rounded-2xl !bg-secondary !p-10 sm-1:w-full sm-1:!p-5"
       >
-        <div className="flex flex-col gap-2">
-          <h1 className="m-0">{data.name}</h1>
+        <div className="flex flex-col gap-2 sm-0:text-sm">
+          <h1 className="m-0 sm-0:text-lg">{data.name}</h1>
           <span
             className="line-clamp-6"
             dangerouslySetInnerHTML={{ __html: data.content }}
@@ -28,7 +28,7 @@ function CardBlog({ data }: Blog.CardBlogProps) {
         <div className="mb-4 flex flex-col gap-2">
           <div className="mt-14 h-[2px] w-full bg-[var(--gold)] sm-1:mt-4"></div>
           <div>
-            <p className="m-0">
+            <p className="m-0 sm-0:text-sm">
               Cleiton Moreira
               <FontAwesomeIcon
                 icon={faCircle}

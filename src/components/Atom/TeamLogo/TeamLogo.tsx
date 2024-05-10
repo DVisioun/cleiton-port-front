@@ -16,15 +16,17 @@ export const TeamLogo = () => {
   }, [theme])
 
   return (
-    <div className="flex gap-3 sm-0.2:flex-col sm-0.2:items-center sm-1:justify-center">
-      <span className="text-lg sm-1:text-base">© 2024 - Developed by </span>
+    <div className="flex items-center justify-center gap-3 pb-6 sm-0.2:flex-col sm-0.2:items-center sm-1:justify-center">
+      <span className="text-lg sm-0:!text-xs sm-1:text-base">
+        © 2024 - Developed by{' '}
+      </span>
       {darkMode ? (
         <Image
           src="/images/dvision-logo-white.svg"
           alt=""
           width={120}
           height={120}
-          className="max-w-28"
+          className="max-w-28 sm-0:w-20"
         />
       ) : (
         <Image
@@ -32,7 +34,7 @@ export const TeamLogo = () => {
           alt=""
           width={120}
           height={120}
-          className="max-w-28"
+          className="max-w-28 sm-0:w-20"
         />
       )}
     </div>

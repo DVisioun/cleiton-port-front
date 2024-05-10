@@ -19,10 +19,11 @@ const Portfolio = () => {
     }
 
     handleFetchProjects()
-  }, [])
+  }, [setPortfolioProjects])
+
 
   return (
-    <main className="min-h-[calc(100%-90px)] w-full px-[80px] pt-40 sm-1:pt-5">
+    <main className="min-h-[calc(100%-90px)] w-full px-[80px] pt-40 sm-0:px-6 sm-1:pt-5">
       <Title title="Portfólio" />
       <section className="flex w-full flex-col items-center gap-6 p-4 sm-cardPortfolio-0:flex-row sm-cardPortfolio-0:flex-wrap">
         {portfolioProjects

@@ -34,7 +34,7 @@ function Softwares() {
   }, [])
 
   return (
-    <div className="flex flex-wrap justify-start gap-7 py-14 lg:justify-center lg:px-4 lg:py-4 sm-1:justify-evenly">
+    <div className="flex flex-wrap justify-start gap-7 py-14 lg:justify-center lg:px-4 lg:py-4 sm-0:gap-3 sm-0:py-6 sm-1:justify-evenly">
       {softwares.map((software, index) => (
         <div key={index}>
           <SoftwareIcon title={software.name} image={softwareImages[index]} />

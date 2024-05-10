@@ -19,22 +19,21 @@ function BlogPost({ id }: BlogPostProps) {
     }
   }
 
+    const handleFilteredPosts = () => {
+    const filteredPosts = blogPost?.filter((post) => post.id === id)
+    setBlogPost(filteredPosts)
+  }
+  
   useEffect(() => {
     handleBlogPostsFetch()
     handleFilteredPosts()
   }, [])
 
-  const handleFilteredPosts = () => {
-    const filteredPosts = blogPost?.filter((post) => post.id === id)
-    setBlogPost(filteredPosts)
-  }
-
-  console.log(blogPost)
   return (
     <>
       {blogPost?.map((item) => {
         return (
-          <div key={item.content}>
+          <div key={item.content} className="sm-1:mt-16">
             <BlogHero imageHeader={item.image} />
             <div className="mt-10 px-40 pb-10 sm-0:px-7">
               <h2 className="text-5xl sm-1:text-3xl">{item.name}</h2>

@@ -22,11 +22,15 @@ function TextSkills() {
   }, [])
 
   return (
-    <div className="flex flex-wrap justify-center gap-3 py-14">
+    <div className="mb-10 flex flex-wrap items-center justify-center gap-3">
       {skills.map((skill, index) => (
         <React.Fragment key={skill.id}>
-          <p className="text-xl sm:text-lg">{skill.name}</p>
-          {index !== skills.length - 1 && <span className="text-2xl">-</span>}
+          <p className="m-0 text-center text-xl sm:text-lg sm-0:text-sm">
+            {skill.name}
+          </p>
+          {index !== skills.length - 1 && (
+            <span className="text-center text-2xl ">-</span>
+          )}
         </React.Fragment>
       ))}
     </div>

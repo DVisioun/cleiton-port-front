@@ -15,6 +15,7 @@ import { Portfolio } from '@/@types/project'
 import { softwareAtom } from '@/states/softwareAtom'
 import Image from 'next/image'
 import { API } from '@/@types/api'
+import { LoadingScreen } from '@/components/Atom/Loading/Loading'
 
 interface ProjectEditProps {
   editProject: boolean
@@ -34,10 +35,15 @@ const ProjectEdit = ({
   const [portfolioIndex, setPortfolioIndex] = useState<number>(0)
   const [imagePreview, setImagePreview] = useState<string>('')
 
-  const imagePreviewElement = document.getElementById('file')
-
-  const { register, reset, handleSubmit, control, setValue, watch } =
-    useForm<Portfolio.CreatePortfolioProjectFormProps>()
+  const {
+    register,
+    reset,
+    handleSubmit,
+    control,
+    setValue,
+    watch,
+    formState: { isSubmitting },
+  } = useForm<Portfolio.CreatePortfolioProjectFormProps>()
 
   const watchImage = watch('image')
 
@@ -72,9 +78,23 @@ const ProjectEdit = ({
     }
   }
 
+  function validateFile() {
+    const input = document.getElementById('file') as HTMLInputElement
+    const maxFileSizeInBytes = 3 * 1024 * 1024 // 3 MB
+    if (input.files && input.files[0]) {
+      const fileSize = input.files[0].size
+      if (fileSize > maxFileSizeInBytes) {
+        notifyFailure('Maximum size exceeded (3 MB)')
+        setImagePreview('')
+        setValue('image', null)
+        return null
+      }
+    }
+  }
+
   const onSubmit = async (data: Portfolio.CreatePortfolioProjectFormProps) => {
     const currentDate = new Date()
-
+    validateFile()
     if (editProject) {
       const imageConverter = await readFileToBase64(data.image[0])
 
@@ -131,6 +151,7 @@ const ProjectEdit = ({
         notifySuccess('Project created successfully')
         reset()
         setAddProject(false)
+        setImagePreview('')
       } else {
         notifyFailure('Failed to create project, please try again..')
       }
@@ -153,98 +174,102 @@ const ProjectEdit = ({
   }, [watchImage])
 
   return (
-    <div className="pb-4">
-      <form
-        className="flex flex-col items-start justify-center gap-4"
-        onSubmit={handleSubmit(onSubmit)}
-      >
-        <label
-          htmlFor="title"
-          className="mt-4 flex w-full flex-col items-start justify-center gap-2 font-semibold"
+    <>
+      <LoadingScreen loading={isSubmitting} />
+      <div className="pb-4">
+        <form
+          className="flex flex-col items-start justify-center gap-4"
+          onSubmit={handleSubmit(onSubmit)}
         >
-          Title
-          <Input placeholder="Enter title of your project...">
-            <input
-              type="text"
-              {...register('name', { required: 'Required field!' })}
+          <label
+            htmlFor="title"
+            className="mt-4 flex w-full flex-col items-start justify-center gap-2 font-semibold"
+          >
+            Title
+            <Input placeholder="Enter title of your project...">
+              <input
+                type="text"
+                {...register('name', { required: 'Required field!' })}
+              />
+            </Input>
+          </label>
+          <label
+            htmlFor="description"
+            className="flex w-full flex-col items-start justify-center gap-2 font-semibold"
+          >
+            Description
+          </label>
+          <Form className="w-full">
+            <TextArea
+              placeholder="Write a short summary about your portfolio"
+              style={{ minHeight: 100, maxHeight: 100 }}
+              {...register('description', { required: 'Required field!' })}
             />
-          </Input>
-        </label>
-        <label
-          htmlFor="description"
-          className="flex w-full flex-col items-start justify-center gap-2 font-semibold"
-        >
-          Description
-        </label>
-        <Form className="w-full">
-          <TextArea
-            placeholder="Write a short summary about your portfolio"
-            style={{ minHeight: 100, maxHeight: 100 }}
-            {...register('description', { required: 'Required field!' })}
+          </Form>
+          <label
+            htmlFor="content"
+            className="flex w-full flex-col items-start justify-center gap-2 font-semibold"
+          >
+            Content
+          </label>
+          <PortfolioTextEditor
+            defaultValue={`${!editProject ? '<p>Enter content your project...</p>' : portfolioProject[portfolioIndex].content}`}
+            control={control}
           />
-        </Form>
-        <label
-          htmlFor="content"
-          className="flex w-full flex-col items-start justify-center gap-2 font-semibold"
-        >
-          Content
-        </label>
-        <PortfolioTextEditor
-          defaultValue={`${!editProject ? '<p>Enter content your project...</p>' : portfolioProject[portfolioIndex].content}`}
-          control={control}
-        />
-        <label
-          htmlFor="softwares"
-          className="flex w-full flex-col items-start justify-center gap-2 font-semibold"
-        >
-          Softwares
-        </label>
-        <select
-          multiple
-          {...register('softwares')}
-          className="block w-full appearance-none rounded-md border border-gray-300 p-2.5 text-gray-700 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500"
-        >
-          {softwares.map((item) => {
-            return (
-              <option key={item.id} value={item.id}>
-                {item.name}
-              </option>
-            )
-          })}
-        </select>
-        <label
-          htmlFor="image"
-          className="flex w-full flex-col items-start justify-center gap-2 font-semibold"
-        >
-          Cover Image
-        </label>
-        <div className="flex items-center gap-16">
-          <Input placeholder="">
-            <input
-              id="file"
-              type="file"
-              placeholder="Enter image of your project..."
-              {...register('image', { required: 'Required field!' })}
-            />
-          </Input>
-          {imagePreview ? (
-            <Image
-              width={320}
-              height={200}
-              className="h-60 w-60 rounded-full"
-              alt=""
-              src={imagePreview}
-            />
-          ) : null}
-        </div>
-        <Button
-          type="submit"
-          content="Gravar"
-          primary
-          className="sm-1:!mt-5 sm-1:!w-full md-1:!mt-5 md-1:!w-full"
-        />
-      </form>
-    </div>
+          <label
+            htmlFor="softwares"
+            className="flex w-full flex-col items-start justify-center gap-2 font-semibold"
+          >
+            Softwares
+          </label>
+          <select
+            multiple
+            {...register('softwares')}
+            className="block w-full appearance-none rounded-md border border-gray-300 p-2.5 text-gray-700 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500"
+          >
+            {softwares.map((item) => {
+              return (
+                <option key={item.id} value={item.id}>
+                  {item.name}
+                </option>
+              )
+            })}
+          </select>
+          <label
+            htmlFor="image"
+            className="flex w-full flex-col items-start justify-center gap-2 font-semibold"
+          >
+            Cover Image
+          </label>
+          <div className="flex items-center gap-16">
+            <Input placeholder="">
+              <input
+                id="file"
+                type="file"
+                accept=".jpg, .jpeg, .png"
+                placeholder="Enter image of your project..."
+                {...register('image', { required: 'Required field!' })}
+              />
+            </Input>
+            {imagePreview ? (
+              <Image
+                width={320}
+                height={200}
+                className="h-60 w-60 rounded-full"
+                alt=""
+                src={imagePreview}
+              />
+            ) : null}
+          </div>
+          <Button
+            type="submit"
+            content="Gravar"
+            primary
+            className="sm-1:!mt-5 sm-1:!w-full md-1:!mt-5 md-1:!w-full"
+          />
+        </form>
+      </div>
+    </>
   )
 }
 
