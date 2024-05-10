@@ -145,6 +145,17 @@ export namespace API {
     success: boolean
   }
 
+
+  // Home Post
+  export interface HomePostProps extends FieldValues {
+    id: string,
+    image: string,
+    order: Number
+  }
+
+  export interface FetchHomePostProps {
+    data: HomePostProps[] | []
+  }
   // EXPERIENCE
 
   export interface ExperienceSchema extends FieldValues {
