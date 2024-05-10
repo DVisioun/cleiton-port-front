@@ -1,6 +1,10 @@
 import { connection } from '@/utils/axios'
 
 export const fetchAbout = async () => {
-  const response = await connection.get('/user/about')
-  return response.data
+  try {
+    const response = await connection.get('/user/about')
+    return response.data
+  } catch (error) {
+    console.log(error)
+  }
 }

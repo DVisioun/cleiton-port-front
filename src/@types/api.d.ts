@@ -124,8 +124,8 @@ export namespace API {
   // LABELS
   export interface LabelSchema extends FieldValues {
     id?: string
-    label: string
-    description: string
+    label?: string
+    description?: string
     pt_content: string
     en_content: string
   }
@@ -145,6 +145,7 @@ export namespace API {
     success: boolean
   }
 
+
   // Home Post
   export interface HomePostProps extends FieldValues {
     id: string,
@@ -154,6 +155,64 @@ export namespace API {
 
   export interface FetchHomePostProps {
     data: HomePostProps[] | []
+  }
+  // EXPERIENCE
+
+  export interface ExperienceSchema extends FieldValues {
+    id: string
+    title: string
+    organization: string
+    location: string
+    order: number
+    description?: string
+    initial_date: string
+    final_date: string
+    type: 'EXPERIENCE'
+  }
+
+  export interface ExperienceCreateRequestProps extends FieldValues {
+    title: string
+    organization: string
+    location: string
+    order: number
+    description?: string
+    initial_date: string
+    final_date: string
+    type: 'EXPERIENCE'
+  }
+
+  export interface CreateAndUpdateExperienceResponseProps {
+    message: string
+    data: ExperienceSchema
+    success: boolean
+  }
+
+  export interface EducationSchema extends FieldValues {
+    id: string
+    title: string
+    organization: string
+    location: string
+    order: number
+    description?: string
+    initial_date: string
+    final_date: string
+    type: 'EDUCATION'
+  }
+
+  export interface EducationCreateRequestProps extends FieldValues {
+    title: string
+    organization: string
+    location: string
+    order: number
+    description?: string
+    initial_date: string
+    final_date: string
+    type: 'EDUCATION'
+  }
+
+  export interface CreateAndUpdateEducationResponseProps {
+    message: string
+    data: EducationSchema
     success: boolean
   }
 }

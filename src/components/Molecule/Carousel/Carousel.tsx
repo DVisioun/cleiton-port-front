@@ -56,7 +56,7 @@ export default function Carousel() {
         }}
         modules={[Autoplay]}
         onAutoplayTimeLeft={onAutoplayTimeLeft}
-        className="home"
+        className="realtive"
       >
         {homePost &&
           homePost.map((item) => (
@@ -69,7 +69,7 @@ export default function Carousel() {
               />
             </SwiperSlide>
           ))}
-        <div className="autoplay-progress" slot="container-end">
+        <div className="autoplay-progress absolute sm-0:!bottom-10">
           <svg viewBox="0 0 48 48" ref={progressCircle}>
             <circle cx="24" cy="24" r="20"></circle>
           </svg>

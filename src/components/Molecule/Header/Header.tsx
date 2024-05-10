@@ -26,7 +26,7 @@ export default function Header({ lang, bgColor }: HeaderProps) {
 
   return (
     <div
-      className={`top-0 z-10 flex h-24 w-full items-center justify-between sm:fixed sm-1:h-16 ${bgColor} px-20 text-primary shadow-header duration-300 hover:bg-primary`}
+      className={`absolute top-0 z-10 flex h-24 w-full items-center justify-between sm-1:h-16 ${bgColor} px-20 text-primary shadow-header duration-300 hover:bg-primary sm-0:px-8`}
     >
       <div className="flex items-center sm-1:w-full sm-1:justify-between">
         {!darkMode && (

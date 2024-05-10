@@ -24,7 +24,7 @@ function ConfigContent() {
   }, [pathname])
 
   return (
-    <div className="fixed right-0 top-52 z-50 flex flex-col items-center justify-center gap-4 rounded-l-lg bg-content px-3 py-3 shadow sm-1:absolute sm-1:top-72">
+    <div className="fixed right-0 top-52 z-50 flex flex-col items-center justify-center gap-4 rounded-l-lg bg-content px-3 py-3 shadow sm-0:absolute sm-0:left-0 sm-0:right-auto sm-0:top-20 sm-0:rounded-l-none sm-0:rounded-r-lg">
       <button onClick={getHrefLink}>
         <LanguageButton country={language} />
       </button>

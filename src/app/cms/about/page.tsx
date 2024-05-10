@@ -4,8 +4,7 @@ import { Divider, Header, Segment } from 'semantic-ui-react'
 import AboutEdit from '@/components/Molecule/AboutEdit/AboutEdit'
 import SkillsEdit from '@/components/Molecule/SkillsEdit/SkillsEdit'
 import SoftwareEdit from '@/components/Molecule/SoftwareEdit/SoftwareEdit'
-import ExperienceEdit from '@/components/Molecule/ExperienceEdit/ExperienceEdit'
-import EducationEdit from '@/components/Molecule/EducationEdit/EducationEdit'
+import { ExperienceEducationEdit } from '@/components/Molecule/ExperienceEducationEdit/ExperienceEducationEdit'
 
 function page() {
   return (
@@ -50,21 +49,10 @@ function page() {
               as="h4"
               className="!sm-1:text-5xl !m-0 !font-alt !text-6xl !font-medium !text-secondary"
             >
-              Experience
+              Experience and Education
             </Header>
           </Divider>
-          <ExperienceEdit />
-        </Segment>
-        <Segment>
-          <Divider horizontal>
-            <Header
-              as="h4"
-              className="!sm-1:text-5xl !m-0 !font-alt !text-6xl !font-medium !text-secondary"
-            >
-              Education
-            </Header>
-          </Divider>
-          <EducationEdit />
+          <ExperienceEducationEdit />
         </Segment>
       </Segment>
     </div>

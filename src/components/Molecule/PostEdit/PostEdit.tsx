@@ -13,6 +13,7 @@ import { editBlogPost } from '@/api/BlogPost/edit-blog-post'
 import { fetchBlogPosts } from '@/api/BlogPost/fetch-blog-post'
 import { readBase64ToFile, readFileToBase64 } from '@/utils/base64-converter'
 import Image from 'next/image'
+import { LoadingScreen } from '@/components/Atom/Loading/Loading'
 
 interface PostEditProps {
   editPost: boolean
@@ -31,8 +32,15 @@ const PostEdit = ({
   const [blogIndex, setBlogIndex] = useState<number>(0)
   const [imagePreview, setImagePreview] = useState<string>('')
 
-  const { register, reset, handleSubmit, control, setValue, watch } =
-    useForm<API.BlogPostCreateFormProps>()
+  const {
+    register,
+    reset,
+    handleSubmit,
+    control,
+    setValue,
+    watch,
+    formState: { isSubmitting },
+  } = useForm<API.BlogPostCreateFormProps>()
 
   const watchImage = watch('image')
 
@@ -118,66 +126,69 @@ const PostEdit = ({
   }, [watchImage])
 
   return (
-    <div>
-      <form
-        className="flex flex-col items-start justify-center gap-4"
-        onSubmit={handleSubmit(onSubmit)}
-      >
-        <label
-          htmlFor="title"
-          className="mt-4 flex w-full flex-col items-start justify-center gap-2 font-semibold"
+    <>
+      <LoadingScreen loading={isSubmitting} />
+      <div>
+        <form
+          className="flex flex-col items-start justify-center gap-4"
+          onSubmit={handleSubmit(onSubmit)}
         >
-          Title
-          <Input placeholder="Enter title your post...">
-            <input
-              type="text"
-              {...register('name', { required: 'Required field!' })}
-            />
-          </Input>
-        </label>
-        <label
-          htmlFor="title"
-          className="flex w-full flex-col items-start justify-center gap-2 font-semibold"
-        >
-          Content
-        </label>
-        <BlogTextEditor
-          name="content"
-          defaultValue={`${!editPost ? '<p>Enter content your post...</p>' : blogPost[blogIndex].content}`}
-          control={control}
-        />
-        <label
-          htmlFor="title"
-          className="flex w-full flex-col items-start justify-center gap-2 font-semibold"
-        >
-          Cover Image
-        </label>
-        <div className="flex items-center gap-16">
-          <Input placeholder="">
-            <input
-              id="file"
-              type="file"
-              {...register('image', { required: 'Required field!' })}
-            />
-          </Input>
-          {imagePreview ? (
-            <Image
-              width={320}
-              height={200}
-              className="h-60 w-60 rounded-full"
-              alt=""
-              src={imagePreview}
-            />
-          ) : null}
-        </div>
-        <Button
-          type="submit"
-          content="Gravar"
-          primary
-          className="sm-1:!mt-5 sm-1:!w-full md-1:!mt-5 md-1:!w-full"
-        />
-      </form>
-    </div>
+          <label
+            htmlFor="title"
+            className="mt-4 flex w-full flex-col items-start justify-center gap-2 font-semibold"
+          >
+            Title
+            <Input placeholder="Enter title your post...">
+              <input
+                type="text"
+                {...register('name', { required: 'Required field!' })}
+              />
+            </Input>
+          </label>
+          <label
+            htmlFor="title"
+            className="flex w-full flex-col items-start justify-center gap-2 font-semibold"
+          >
+            Content
+          </label>
+          <BlogTextEditor
+            name="content"
+            defaultValue={`${!editPost ? '<p>Enter content your post...</p>' : blogPost[blogIndex].content}`}
+            control={control}
+          />
+          <label
+            htmlFor="title"
+            className="flex w-full flex-col items-start justify-center gap-2 font-semibold"
+          >
+            Cover Image
+          </label>
+          <div className="flex items-center gap-16">
+            <Input placeholder="">
+              <input
+                id="file"
+                type="file"
+                {...register('image', { required: 'Required field!' })}
+              />
+            </Input>
+            {imagePreview ? (
+              <Image
+                width={320}
+                height={200}
+                className="h-60 w-60 rounded-full"
+                alt=""
+                src={imagePreview}
+              />
+            ) : null}
+          </div>
+          <Button
+            type="submit"
+            content="Gravar"
+            primary
+            className="sm-1:!mt-5 sm-1:!w-full md-1:!mt-5 md-1:!w-full"
+          />
+        </form>
+      </div>
+    </>
   )
 }
 
