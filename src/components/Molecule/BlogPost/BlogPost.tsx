@@ -19,7 +19,7 @@ function BlogPost({ id }: BlogPostProps) {
     }
   }
 
-    const handleFilteredPosts = () => {
+  const handleFilteredPosts = () => {
     const filteredPosts = blogPost?.filter((post) => post.id === id)
     setBlogPost(filteredPosts)
   }

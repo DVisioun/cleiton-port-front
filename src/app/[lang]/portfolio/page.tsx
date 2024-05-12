@@ -12,7 +12,7 @@ function page({ params }: { params: { lang: Locale } }) {
       <ThemeProvider initialTheme="light">
         <Header lang={params.lang} bgColor="bg-primary" />
         <ConfigContent />
-        <Portfolio />
+        <Portfolio lang={params.lang} />
         <Footer position="" />
       </ThemeProvider>
     </div>

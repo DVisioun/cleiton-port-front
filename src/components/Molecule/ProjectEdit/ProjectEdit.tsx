@@ -93,10 +93,16 @@ const ProjectEdit = ({
   }
 
   const onSubmit = async (data: Portfolio.CreatePortfolioProjectFormProps) => {
-    const currentDate = new Date()
-    validateFile()
+    const currentDate = new Date();
+    if(data.image[0]){
+      validateFile();
+    }
     if (editProject) {
-      const imageConverter = await readFileToBase64(data.image[0])
+      let imageConverter = "";
+
+      if(data.image[0]){
+        const imageConverter = await readFileToBase64(data.image[0])
+      }
 
       const softwaresUsedInProject: API.SoftwareSchema[] = softwares.filter(
         (item) => data.softwares.some((software) => software === item.id),
