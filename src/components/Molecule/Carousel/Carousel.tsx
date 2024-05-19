@@ -1,45 +1,49 @@
-import React, { useEffect, useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
-import "./index.css";
-import { Autoplay } from "swiper/modules";
-import { fetchHomePost } from "@/api/HomePost/fetch-home-post";
-import Image from "next/image";
-import { API } from "@/@types/api";
-import { readBase64ToFile } from "@/utils/base64-converter";
+import React, { useEffect, useState } from 'react'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import 'swiper/css'
+import 'swiper/css/pagination'
+import 'swiper/css/navigation'
+import './index.css'
+import { Autoplay } from 'swiper/modules'
+import { fetchHomePost } from '@/api/HomePost/fetch-home-post'
+import Image from 'next/image'
+import { API } from '@/@types/api'
+import { readBase64ToFile } from '@/utils/base64-converter'
 
 export default function Carousel() {
-  const progressCircle: React.RefObject<any> = React.createRef();
-  const progressContent: React.RefObject<any> = React.createRef();
+  const progressCircle: React.RefObject<any> = React.createRef()
+  const progressContent: React.RefObject<any> = React.createRef()
   const onAutoplayTimeLeft = (s: any, time: number, progress: number) => {
-    progressCircle.current.style.setProperty("--progress", 1 - progress);
-    progressContent.current.textContent = `${Math.ceil(time / 1000)}s`;
-  };
-  const [homePost, setHomePost] = useState<API.HomePostProps[]>();
+    progressCircle.current.style.setProperty('--progress', 1 - progress)
+    progressContent.current.textContent = `${Math.ceil(time / 1000)}s`
+  }
+  const [homePost, setHomePost] = useState<API.HomePostProps[]>()
 
   const handleHomePostsFetch = async () => {
-    const response = await fetchHomePost();
+    const response: API.HomePostProps = await fetchHomePost()
     if (response) {
       const data = response.data
-      const homePostAux:any = [];
+      const homePostAux: API.HomePostProps[] = []
 
-      data.map(async(item:any) => {
-        const imageCoverAux = await readBase64ToFile(item.image);
-        const previewURL = URL.createObjectURL(imageCoverAux);
-        if (previewURL){
-          homePostAux.push({id:item.id, image:previewURL, order:item.order});
+      data.map(async (item: any) => {
+        const imageCoverAux = await readBase64ToFile(item.image)
+        const previewURL = URL.createObjectURL(imageCoverAux)
+        if (previewURL) {
+          homePostAux.push({
+            id: item.id,
+            image: previewURL,
+            order: item.order,
+          })
         }
-      });
+      })
 
-      setHomePost(homePostAux);
+      setHomePost(homePostAux)
     }
-  };
+  }
 
   useEffect(() => {
-    handleHomePostsFetch();
-  }, []);
+    handleHomePostsFetch()
+  }, [])
 
   return (
     <>
@@ -48,7 +52,7 @@ export default function Carousel() {
         slidesPerView={1}
         centeredSlides={true}
         loop={true}
-        style={{ height: "100vh" }}
+        style={{ height: '100vh' }}
         autoplay={{
           delay: 5000,
           disableOnInteraction: false,
@@ -77,5 +81,5 @@ export default function Carousel() {
         </div>
       </Swiper>
     </>
-  );
+  )
 }
