@@ -9,7 +9,6 @@ import {
   Image,
 } from 'semantic-ui-react'
 import NavbarSocialBlack from '../NavbarSocial/NavbarSocialBlack'
-import { AboutCardTypes } from '@/@types/about'
 
 const AboutCard = () => {
   const styleCard = `!top-15 !mx-auto !mb-10 !rounded-lg !bg-primary !shadow-card sm:!mb-8 sm:flex sm:!max-w-[300px] sm-0:!mb-12 sm-0:!max-w-[250px]`

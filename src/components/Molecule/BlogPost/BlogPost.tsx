@@ -3,6 +3,10 @@
 import { API } from '@/@types/api'
 import { fetchBlogPosts } from '@/api/BlogPost/fetch-blog-post'
 import BlogHero from '@/components/Atom/BlogHero/BlogHero'
+import { LoadingScreen } from '@/components/Atom/Loading/Loading'
+import { blogPostAtom } from '@/states/blogPostAtom'
+import { notifyFailure } from '@/utils/toastify'
+import { useAtom } from 'jotai'
 import React, { useEffect, useState } from 'react'
 
 interface BlogPostProps {
@@ -10,12 +14,20 @@ interface BlogPostProps {
 }
 
 function BlogPost({ id }: BlogPostProps) {
-  const [blogPost, setBlogPost] = useState<API.BlogPostSchema[]>()
+  const [blogPost, setBlogPost] = useAtom(blogPostAtom)
+  const [loading, setLoading] = useState(true)
 
   const handleBlogPostsFetch = async () => {
-    const response = await fetchBlogPosts()
-    if (response) {
-      setBlogPost(response.data)
+    try {
+      if (blogPost.length > 0) return
+      const response = await fetchBlogPosts()
+      if (response) {
+        setBlogPost(response.data)
+      }
+    } catch (error) {
+      notifyFailure(error.message)
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -23,7 +35,7 @@ function BlogPost({ id }: BlogPostProps) {
     const filteredPosts = blogPost?.filter((post) => post.id === id)
     setBlogPost(filteredPosts)
   }
-  
+
   useEffect(() => {
     handleBlogPostsFetch()
     handleFilteredPosts()
@@ -31,6 +43,7 @@ function BlogPost({ id }: BlogPostProps) {
 
   return (
     <>
+      <LoadingScreen loading={loading} />
       {blogPost?.map((item) => {
         return (
           <div key={item.content} className="sm-1:mt-16">

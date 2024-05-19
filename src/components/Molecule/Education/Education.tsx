@@ -1,51 +1,36 @@
+'use client'
+
+import { fetchExperience } from '@/api/Experience/fetch-experiences'
 import CardEducation from '@/components/Atom/CardEducation/CardEducation'
-import React from 'react'
+import { Locale } from '@/config/i18n.config'
+import { getDictionaryUseClient } from '@/dictionaries/default-dictionaries-client'
+import { educationAtom } from '@/states/educationAtom'
+import { notifyFailure } from '@/utils/toastify'
+import { useAtom } from 'jotai'
+import React, { useEffect } from 'react'
 import { Grid, GridColumn, GridRow } from 'semantic-ui-react'
 
-function Education() {
-  const experiences = [
-    {
-      title: 'Licentiate degree, Digital Games Design',
-      organization: 'Instituto Politécnico de Bragança',
-      location: 'Mirandela - Portugal',
-      description: 'Desenvolvimento de personagens 3D ...',
-      initial_date: 'Sep 2018',
-      final_date: 'Sep 2021',
-      type: 'EDUCATION',
-    },
-    {
-      title: 'Licentiate degree, Digital Games Design',
-      organization: 'Instituto Politécnico de Bragança',
-      location: 'Mirandela - Portugal',
-      description: 'Desenvolvimento de personagens 3D ...',
-      initial_date: 'Sep 2018',
-      final_date: 'Sep 2021',
-      type: 'EDUCATION',
-    },
-    {
-      title: 'Licentiate degree, Digital Games Design',
-      organization: 'Instituto Politécnico de Bragança',
-      location: 'Mirandela - Portugal',
-      description: 'Desenvolvimento de personagens 3D ...',
-      initial_date: 'Sep 2018',
-      final_date: 'Sep 2021',
-      type: 'EDUCATION',
-    },
-    {
-      title: 'Licentiate degree, Digital Games Design',
-      organization: 'Instituto Politécnico de Bragança',
-      location: 'Mirandela - Portugal',
-      description: 'Desenvolvimento de personagens 3D ...',
-      initial_date: 'Sep 2018',
-      final_date: 'Sep 2021',
-      type: 'EDUCATION',
-    },
-  ]
+function Education({ params }: { params: { lang: Locale } }) {
+  const [education, setEducation] = useAtom(educationAtom)
+  const t = getDictionaryUseClient(params.lang)
+
+  const fetchEducation = async () => {
+    const response = await fetchExperience()
+    if (response?.success) {
+      setEducation(response.data.filter((item) => item.type === 'EDUCATION'))
+    } else {
+      notifyFailure(response.message)
+    }
+  }
+
+  useEffect(() => {
+    fetchEducation()
+  }, [])
 
   return (
     <Grid className="lg:!mx-auto lg:!py-4">
       <GridRow columns={2}>
-        {experiences.map((experience, index) => (
+        {education.map((item, index) => (
           <GridColumn
             key={index}
             columns={8}
@@ -55,12 +40,12 @@ function Education() {
             className="pb-8"
           >
             <CardEducation
-              title={experience.title}
-              organization={experience.organization}
-              location={experience.location}
-              description={experience.description}
-              initial_date={experience.initial_date}
-              final_date={experience.final_date}
+              title={t[item.title]}
+              organization={t[item.organization]}
+              location={t[item.location]}
+              description={t[item.description]}
+              initial_date={t[item.initial_date]}
+              final_date={t[item.final_date]}
             />
           </GridColumn>
         ))}

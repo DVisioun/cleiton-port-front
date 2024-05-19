@@ -9,6 +9,8 @@ import { fetchHomePost } from '@/api/HomePost/fetch-home-post'
 import Image from 'next/image'
 import { API } from '@/@types/api'
 import { readBase64ToFile } from '@/utils/base64-converter'
+import { LoadingScreen } from '@/components/Atom/Loading/Loading'
+import { notifyFailure } from '@/utils/toastify'
 
 export default function Carousel() {
   const progressCircle: React.RefObject<any> = React.createRef()
@@ -18,26 +20,33 @@ export default function Carousel() {
     progressContent.current.textContent = `${Math.ceil(time / 1000)}s`
   }
   const [homePost, setHomePost] = useState<API.HomePostProps[]>()
+  const [loading, setLoading] = useState<boolean>(true)
 
   const handleHomePostsFetch = async () => {
-    const response: API.HomePostProps = await fetchHomePost()
-    if (response) {
-      const data = response.data
-      const homePostAux: API.HomePostProps[] = []
+    try {
+      const response: API.HomePostProps = await fetchHomePost()
+      if (response) {
+        const data = response.data
+        const homePostAux: API.HomePostProps[] = []
 
-      data.map(async (item: any) => {
-        const imageCoverAux = await readBase64ToFile(item.image)
-        const previewURL = URL.createObjectURL(imageCoverAux)
-        if (previewURL) {
-          homePostAux.push({
-            id: item.id,
-            image: previewURL,
-            order: item.order,
-          })
-        }
-      })
+        data.map(async (item: any) => {
+          const imageCoverAux = await readBase64ToFile(item.image)
+          const previewURL = URL.createObjectURL(imageCoverAux)
+          if (previewURL) {
+            homePostAux.push({
+              id: item.id,
+              image: previewURL,
+              order: item.order,
+            })
+          }
+        })
 
-      setHomePost(homePostAux)
+        setHomePost(homePostAux)
+      }
+    } catch (error) {
+      notifyFailure(error.message)
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -47,6 +56,7 @@ export default function Carousel() {
 
   return (
     <>
+      <LoadingScreen loading={loading} />
       <Swiper
         spaceBetween={30}
         slidesPerView={1}
