@@ -93,14 +93,14 @@ const ProjectEdit = ({
   }
 
   const onSubmit = async (data: Portfolio.CreatePortfolioProjectFormProps) => {
-    const currentDate = new Date();
-    if(data.image[0]){
-      validateFile();
+    const currentDate = new Date()
+    if (data.image[0]) {
+      validateFile()
     }
     if (editProject) {
-      let imageConverter = "";
+      const imageConverter = ''
 
-      if(data.image[0]){
+      if (data.image[0]) {
         const imageConverter = await readFileToBase64(data.image[0])
       }
 

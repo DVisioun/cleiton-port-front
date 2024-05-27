@@ -153,12 +153,11 @@ export namespace API {
     success: boolean
   }
 
-
   // Home Post
   export interface HomePostProps extends FieldValues {
-    id: string,
-    image: string,
-    order: Number
+    id: string
+    image: string
+    order: number
   }
 
   export interface FetchHomePostProps {
