@@ -11,7 +11,9 @@ const fetchAndSaveLabels = async () => {
   if (response?.success) {
     const data = response.data
 
-    data?.forEach((el) => {
+    if (!data) return null
+
+    data.forEach((el) => {
       en[el.label] = el.en_content
       pt[el.label] = el.pt_content
     })
