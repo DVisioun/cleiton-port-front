@@ -98,9 +98,16 @@ export namespace API {
   export interface PortfolioPostSchema extends FieldValues {
     id: string
     name: string
+    description: string
+    flag_home?: boolean
+    order?: number
     content: string
     image: string
     created_at: Date
+    softwares: {
+      portfolio_id: string
+      software_id: string
+    }[]
   }
 
   export interface BlogPostCreateProps extends FieldValues {
