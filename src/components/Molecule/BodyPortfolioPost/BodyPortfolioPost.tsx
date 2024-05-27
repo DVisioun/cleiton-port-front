@@ -4,8 +4,8 @@ import React from 'react'
 
 const BodyPortfolioPost = () => {
   return (
-    <div className="md-1.5:flex-col md-1.5:items-center md-1.5:justify-center md-1.5:gap-12 flex w-full items-start justify-around">
-      <section className="md-2:w-1/2 md-1.5:!w-full md-1.5:items-center flex w-2/3 flex-col items-start justify-start gap-4">
+    <div className="flex w-full items-start justify-around md-1.5:flex-col md-1.5:items-center md-1.5:justify-center md-1.5:gap-12">
+      <section className="flex w-2/3 flex-col items-start justify-start gap-4 md-1.5:!w-full md-1.5:items-center md-2:w-1/2 md-3:items-center">
         <Image
           alt="Portfólio Image"
           className="mt-4"
@@ -36,8 +36,8 @@ const BodyPortfolioPost = () => {
           aria-label="Portfólio Image"
         />
       </section>
-      <div className="md-2:w-[35%] md-1.5:flex-row sm-2.1:items-center sm-2.1:!flex-col md-1.5:!w-[82%] flex w-[30%] flex-col items-start justify-center gap-6">
-        <div className="flex w-full flex-col items-center justify-start bg-secondary px-8 py-4 shadow-card sm-0:px-2">
+      <div className="flex w-[30%] flex-col items-start justify-center gap-6 sm-2.1:!flex-col sm-2.1:items-center md-1.5:!w-[82%] md-1.5:flex-row md-2:w-[35%] md-3:items-center">
+        <div className="flex w-full flex-col items-center justify-start bg-secondary px-8 py-4 shadow-card sm-0:px-2 md-3:!w-[385px]">
           <AboutCard />
           <h2 className="w-full text-left text-primary">Geraldão</h2>
           <p className="w-full text-left text-primary">
@@ -100,7 +100,7 @@ const BodyPortfolioPost = () => {
             </div>
           </section>
         </div>
-        <div className="sm-2.1:w-1/2 flex w-full flex-col items-center justify-start gap-8 bg-secondary px-12 py-10 shadow-card sm-0:px-4 sm-2:!w-full">
+        <div className="flex w-full flex-col items-center justify-start gap-8 bg-secondary px-12 py-10 shadow-card sm-0:px-4 sm-2:!w-full sm-2.1:w-1/2 md-3:!w-[385px]">
           <h3 className="m-0 w-full text-left text-3xl text-primary">
             Outras postagens
           </h3>

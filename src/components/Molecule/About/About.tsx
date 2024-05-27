@@ -7,8 +7,9 @@ import Softwares from '@/components/Molecule/Softwares/Softwares'
 import Experience from '@/components/Molecule/Experience/Experience'
 import Education from '@/components/Molecule/Education/Education'
 import AboutCard from '@/components/Atom/AboutCard/AboutCard'
+import { Locale } from '@/config/i18n.config'
 
-function About({ params }: any) {
+function About({ params }: { params: { lang: Locale } }) {
   return (
     <div className="px-20 sm-1:px-4">
       <div className="mt-40 pb-20 sm-1:mt-20">
@@ -30,9 +31,9 @@ function About({ params }: any) {
               <Title title="Softwares" />
               <Softwares />
               <Title title="Experience" />
-              <Experience />
+              <Experience params={params} />
               <Title title="Education" />
-              <Education />
+              <Education params={params} />
             </GridColumn>
           </GridRow>
         </Grid>

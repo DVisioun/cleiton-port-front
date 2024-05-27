@@ -13,7 +13,7 @@ export function LoadingScreen({ loading }: { loading: boolean }) {
   return (
     <>
       {isLoading && (
-        <div className="fixed inset-0 z-50 flex min-h-screen w-full items-center justify-center bg-gray-500 bg-opacity-70">
+        <div className="fixed inset-0 z-50 flex min-h-screen w-full items-center justify-center bg-gray-300">
           <ThreeCircles
             height={300}
             width={300}

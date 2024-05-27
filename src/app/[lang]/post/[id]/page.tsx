@@ -13,7 +13,7 @@ function Page({ params }: { params: { lang: Locale; id: string } }) {
   const { id } = useParams()
 
   return (
-    <div className="h-full bg-primary text-primary">
+    <div className="bg-primary text-primary">
       <ThemeProvider initialTheme="light">
         <Header lang={params.lang} bgColor="bg-primary" />
         <ConfigContent />

@@ -95,6 +95,14 @@ export namespace API {
     created_at: Date
   }
 
+  export interface PortfolioPostSchema extends FieldValues {
+    id: string
+    name: string
+    content: string
+    image: string
+    created_at: Date
+  }
+
   export interface BlogPostCreateProps extends FieldValues {
     name: string
     content: string
@@ -145,12 +153,11 @@ export namespace API {
     success: boolean
   }
 
-
   // Home Post
   export interface HomePostProps extends FieldValues {
-    id: string,
-    image: string,
-    order: Number
+    id: string
+    image: string
+    order: number
   }
 
   export interface FetchHomePostProps {
