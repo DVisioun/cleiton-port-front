@@ -18,14 +18,11 @@ function AboutEdit() {
     formState: { isSubmitting },
   } = useForm()
 
-  const handleFetchAbout = async () => {
+  const handleFetchLabels = async () => {
     const response: API.FetchLabelsResponseProps = await fetchAbout()
     if (response?.success) {
       const { data } = await fetchLabels()
-      const filteredLabels = data?.filter((item) =>
-        item.label.includes('about'),
-      )
-      localStorage.setItem('labels', JSON.stringify(filteredLabels))
+      localStorage.setItem('labels', JSON.stringify(data))
     }
   }
 
@@ -37,7 +34,7 @@ function AboutEdit() {
     })
 
     if (response && response.success) {
-      handleFetchAbout().then(() => handleFillLabels())
+      handleFetchLabels().then(() => handleFillLabels())
       notifySuccess(response.message)
     } else {
       notifyFailure('Failed editing description. Try again, please!')
@@ -54,7 +51,7 @@ function AboutEdit() {
   }
 
   useEffect(() => {
-    handleFetchAbout().then(() => handleFillLabels())
+    handleFetchLabels().then(() => handleFillLabels())
   }, [])
 
   return (
