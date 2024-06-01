@@ -8,6 +8,7 @@ import Image from 'next/image'
 import React, { use, useEffect, useState } from 'react'
 import { readBase64ToFile } from '@/utils/base64-converter'
 import Link from 'next/link'
+import { useLanguage } from '@/hooks/LanguageContext'
 
 interface PortfolioPostProps {
   id: string
@@ -19,6 +20,8 @@ const BodyPortfolioPost = ({ id }: PortfolioPostProps) => {
   const [portfolioOtherPosts, setPortfolioOtherPosts] =
     useState<API.PortfolioPostSchema[]>()
   const [softwares, setSoftwares] = useAtom(softwareAtom)
+
+  const { language, setLanguage, refreshLanguage } = useLanguage()
 
   const handlePortfolioPostsFetch = async () => {
     const response = await fetchPortfolioProjects()
