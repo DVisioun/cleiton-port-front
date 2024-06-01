@@ -17,12 +17,13 @@ const qwigley = Qwigley({
   variable: '--font-qwigley',
 })
 
+fetchAndSaveLabels()
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  fetchAndSaveLabels()
   return (
     <html lang="pt">
       <body className={`${poppins.variable} ${qwigley.variable} font-sans`}>
