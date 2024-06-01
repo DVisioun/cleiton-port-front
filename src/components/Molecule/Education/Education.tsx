@@ -27,6 +27,8 @@ function Education({ params }: { params: { lang: Locale } }) {
     fetchEducation()
   }, [])
 
+  console.log(education)
+
   return (
     <Grid className="lg:!mx-auto lg:!py-4">
       <GridRow columns={2}>
