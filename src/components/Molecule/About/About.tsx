@@ -7,8 +7,11 @@ import Softwares from '@/components/Molecule/Softwares/Softwares'
 import Experience from '@/components/Molecule/Experience/Experience'
 import Education from '@/components/Molecule/Education/Education'
 import AboutCard from '@/components/Atom/AboutCard/AboutCard'
+import { useLanguage } from '@/hooks/LanguageContext'
 
-function About({ language }: { language: string }) {
+function About() {
+  const { language, setLanguage, refreshLanguage } = useLanguage()
+
   return (
     <div className="px-20 sm-1:px-4">
       <div className="mt-40 pb-20 sm-1:mt-20">

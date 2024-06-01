@@ -1,3 +1,5 @@
+'use client'
+
 import Blog from '@/components/Molecule/Blog/Blog'
 import React from 'react'
 import Header from '@/components/Molecule/Header/Header'

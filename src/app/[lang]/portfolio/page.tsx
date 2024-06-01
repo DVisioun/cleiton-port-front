@@ -1,3 +1,5 @@
+'use client'
+
 import ConfigContent from '@/components/Molecule/ConfigContent/ConfigContent'
 import { Footer } from '@/components/Molecule/Footer/Footer'
 import Header from '@/components/Molecule/Header/Header'

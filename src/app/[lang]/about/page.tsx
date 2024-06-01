@@ -13,7 +13,7 @@ function Page() {
     <div className="h-full overflow-y-auto bg-primary text-primary">
       <Header lang={language} bgColor="bg-primary" />
       <ConfigContent />
-      <About language={language} />
+      <About />
       <Footer position="" />
     </div>
   )
