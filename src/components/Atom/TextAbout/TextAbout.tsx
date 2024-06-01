@@ -1,8 +1,13 @@
 import { getLabel } from '@/utils/getLabel'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
-function TextAbout({ params }: any) {
-  const label = getLabel('about-me', params.lang)
+function TextAbout({ language }: { language: string }) {
+  const [label, setLabel] = useState('')
+
+  useEffect(() => {
+    setLabel(getLabel('about-me', language))
+    console.log(getLabel('about-me', language))
+  }, [language])
 
   return (
     <div className="px-3 py-14 sm-1:py-8">

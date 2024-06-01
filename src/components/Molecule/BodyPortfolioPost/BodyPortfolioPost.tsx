@@ -8,14 +8,12 @@ import Image from 'next/image'
 import React, { use, useEffect, useState } from 'react'
 import { readBase64ToFile } from '@/utils/base64-converter'
 import Link from 'next/link'
-import { Locale } from '@/config/i18n.config'
 
 interface PortfolioPostProps {
   id: string
-  lang: Locale
 }
 
-const BodyPortfolioPost = ({ id, lang }: PortfolioPostProps) => {
+const BodyPortfolioPost = ({ id }: PortfolioPostProps) => {
   const [portfolioPost, setPortfolioPost] =
     useState<API.PortfolioPostSchema[]>()
   const [portfolioOtherPosts, setPortfolioOtherPosts] =
@@ -109,7 +107,7 @@ const BodyPortfolioPost = ({ id, lang }: PortfolioPostProps) => {
         {portfolioOtherPosts && (
           <div className="flex w-full flex-col items-center justify-start gap-8 bg-secondary px-12 py-10 shadow-card sm-0:px-4 sm-2:!w-full sm-2.1:w-1/2">
             <h3 className="m-0 w-full text-left text-3xl text-primary">
-              {lang === 'pt' ? 'Outros Projetos' : 'Other Projects'}
+              {language === 'pt' ? 'Outros Projetos' : 'Other Projects'}
             </h3>
             {portfolioOtherPosts.map(async (post) => {
               const imageCoverAux = await readBase64ToFile(post.image)
@@ -118,7 +116,7 @@ const BodyPortfolioPost = ({ id, lang }: PortfolioPostProps) => {
               return (
                 <Link
                   key={post.id}
-                  href={`/${lang}/portfolio/posts/${post.id}`}
+                  href={`/portfolio/posts/${post.id}`}
                   className="w-full text-primary no-underline"
                 >
                   <div className="relative w-full px-4">

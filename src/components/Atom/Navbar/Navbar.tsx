@@ -1,12 +1,11 @@
 'use client'
 
-import { Locale } from '@/config/i18n.config'
 import Link from 'next/link'
 import { useState } from 'react'
 import { Dropdown, DropdownItem, DropdownMenu } from 'semantic-ui-react'
 
 interface NavBarProps {
-  lang: Locale
+  lang: string
 }
 
 function Navbar({ lang }: NavBarProps) {
