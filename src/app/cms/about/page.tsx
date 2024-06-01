@@ -5,7 +5,6 @@ import AboutEdit from '@/components/Molecule/AboutEdit/AboutEdit'
 import SkillsEdit from '@/components/Molecule/SkillsEdit/SkillsEdit'
 import SoftwareEdit from '@/components/Molecule/SoftwareEdit/SoftwareEdit'
 import { ExperienceEducationEdit } from '@/components/Molecule/ExperienceEducationEdit/ExperienceEducationEdit'
-import LinksEdit from '@/components/Molecule/LinksEdit/LinksEdit'
 
 function page() {
   return (
@@ -55,17 +54,6 @@ function page() {
           </Divider>
           <ExperienceEducationEdit />
         </Segment>
-      </Segment>
-      <Segment>
-        <Divider horizontal>
-          <Header
-            as="h4"
-            className="!sm-1:text-5xl !m-0 !text-center !font-alt !text-6xl !font-medium !text-secondary"
-          >
-            Links
-          </Header>
-        </Divider>
-        <LinksEdit />
       </Segment>
     </div>
   )
