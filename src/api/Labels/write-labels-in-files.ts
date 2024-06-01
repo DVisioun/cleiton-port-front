@@ -1,6 +1,6 @@
 import { API } from '../../@types/api'
 import { fetchLabels } from './fetch-labels'
-import fs from 'fs'
+import fs from 'node:fs'
 
 const en: { [label: string]: string } = {}
 const pt: { [label: string]: string } = {}
@@ -24,11 +24,12 @@ const fetchAndSaveLabels = async () => {
 }
 
 const writeFile = async (filename: string, language: string, content: any) => {
-  const json = `export const ${language} = ${JSON.stringify(content)};`
-  await fs.promises.writeFile(
-    `./src/dictionaries/defaultLanguageCollections/${filename}.ts`,
-    json,
-  )
+  try {
+    const json = `export const ${language} = ${JSON.stringify(content)};`
+    await fs.promises.writeFile(`${process.env.ENV_PATH}${filename}.ts`, json)
+  } catch (error) {
+    console.error('Erro ao escrever arquivo:', error)
+  }
 }
 
 export default fetchAndSaveLabels

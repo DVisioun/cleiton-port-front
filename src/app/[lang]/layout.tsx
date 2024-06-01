@@ -4,6 +4,7 @@ import '@/app/globals.css'
 import 'semantic-ui-css/semantic.min.css'
 import { i18n } from '@/config/i18n.config'
 import fetchAndSaveLabels from '@/api/Labels/write-labels-in-files'
+import ThemeProvider from '@/hooks/ThemeContext'
 
 const poppins = Poppins({
   weight: ['400', '500', '600', '700', '800'],
@@ -40,7 +41,7 @@ export default function RootLayout({
         lang={params.lang}
         className={`${poppins.variable} ${qwigley.variable} font-sans`}
       >
-        {children}
+        <ThemeProvider initialTheme="light">{children}</ThemeProvider>
       </body>
     </html>
   )
