@@ -1,6 +1,7 @@
 import { API } from '../../@types/api'
 import { fetchLabels } from './fetch-labels'
 import fs from 'node:fs'
+import path from 'node:path'
 
 const en: { [label: string]: string } = {}
 const pt: { [label: string]: string } = {}
@@ -25,8 +26,17 @@ const fetchAndSaveLabels = async () => {
 
 const writeFile = async (filename: string, language: string, content: any) => {
   try {
-    const json = `export const ${language} = ${JSON.stringify(content)};`
-    await fs.promises.writeFile(`${process.env.ENV_PATH}${filename}.ts`, json)
+    const dictionariesPath = path.join(
+      process.cwd(),
+      'src',
+      'dictionaries',
+      'defaultLanguageCollections',
+    )
+
+    const filePath = path.join(dictionariesPath, `${filename}.ts`)
+
+    const json = `export const ${language} = ${JSON.stringify(content)}`
+    await fs.promises.writeFile(filePath, json)
   } catch (error) {
     console.error('Erro ao escrever arquivo:', error)
   }

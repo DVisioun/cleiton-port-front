@@ -1,6 +1,5 @@
 'use client'
 
-import { API } from '@/@types/api'
 import { fetchExperience } from '@/api/Experience/fetch-experiences'
 import CardExperience from '@/components/Atom/CardExperience/CardExperience'
 import { Locale } from '@/config/i18n.config'
