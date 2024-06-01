@@ -229,16 +229,4 @@ export namespace API {
     data: EducationSchema
     success: boolean
   }
-
-  export interface LinksUpdateRequestProps extends FieldValues {
-    artstation: string
-    instagram: string
-    linkedin: string
-  }
-  
-  export interface UpdateLinksResponseProps {
-    message: string
-    data: LinksUpdateRequestProps
-    success: boolean
-  }
 }
