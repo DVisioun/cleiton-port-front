@@ -2,8 +2,8 @@ import type { Metadata } from 'next'
 import { Poppins, Qwigley } from 'next/font/google'
 import '@/app/globals.css'
 import 'semantic-ui-css/semantic.min.css'
-import { i18n } from '@/config/i18n.config'
 import ThemeProvider from '@/hooks/ThemeContext'
+import { LanguageProvider } from '@/hooks/LanguageContext'
 
 const poppins = Poppins({
   weight: ['400', '500', '600', '700', '800'],
@@ -16,11 +16,6 @@ const qwigley = Qwigley({
   variable: '--font-qwigley',
 })
 
-export async function generateStaticParams() {
-  const languages: any = i18n.locales.map((lang) => ({ lang }))
-  return languages
-}
-
 export const metadata: Metadata = {
   title: 'Kleytow Moreira | Portfolio',
   description: 'Artista 3D',
@@ -28,18 +23,15 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-  params,
 }: {
   children: React.ReactNode
-  params: { lang: string }
 }) {
   return (
-    <html lang={params.lang}>
-      <body
-        lang={params.lang}
-        className={`${poppins.variable} ${qwigley.variable} font-sans`}
-      >
-        <ThemeProvider initialTheme="light">{children}</ThemeProvider>
+    <html>
+      <body className={`${poppins.variable} ${qwigley.variable} font-sans`}>
+        <ThemeProvider initialTheme="light">
+          <LanguageProvider>{children}</LanguageProvider>
+        </ThemeProvider>
       </body>
     </html>
   )

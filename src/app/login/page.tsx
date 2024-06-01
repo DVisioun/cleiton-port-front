@@ -24,7 +24,6 @@ function LoginPage() {
     const response = await UserAuthentication(data)
     if (response) {
       setTimeout(() => {
-        console.log('oi')
         router.push('/cms/portfolio-projects')
       }, 1500)
       reset()

@@ -7,15 +7,10 @@ import Title from '@/components/Atom/Title/Title'
 import { fetchBlogPosts } from '@/api/BlogPost/fetch-blog-post'
 import { blogPostAtom } from '@/states/blogPostAtom'
 import { useAtom } from 'jotai'
-import { Locale } from '@/config/i18n.config'
 import Link from 'next/link'
 import { LoadingScreen } from '@/components/Atom/Loading/Loading'
 
-interface BlogProps {
-  lang: Locale
-}
-
-function Blog({ lang }: BlogProps) {
+function Blog() {
   const [loading, setLoading] = useState(true)
   const [blogPosts, setBlogPosts] = useAtom(blogPostAtom)
   const handleBlogPostsFetch = async () => {
@@ -48,7 +43,7 @@ function Blog({ lang }: BlogProps) {
                   className="!flex !px-0 !py-4"
                 >
                   <Link
-                    href={`/${lang}/post/${item.id}`}
+                    href={`/post/${item.id}`}
                     className="text-primary no-underline hover:text-primary"
                   >
                     <CardBlog data={item} />

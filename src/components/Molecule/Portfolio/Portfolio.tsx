@@ -7,15 +7,10 @@ import { fetchPortfolioProjects } from '@/api/PortfolioProject/fetch-portfolio-p
 import { useAtom } from 'jotai'
 import { portfolioProjectAtom } from '@/states/portfolioProjectAtom'
 import Link from 'next/link'
-import { Locale } from '@/config/i18n.config'
 import { LoadingScreen } from '@/components/Atom/Loading/Loading'
 import { notifyFailure } from '@/utils/toastify'
 
-interface PortfolioProps {
-  lang: Locale
-}
-
-const Portfolio = ({ lang }: PortfolioProps) => {
+const Portfolio = () => {
   const [portfolioProjects, setPortfolioProjects] =
     useAtom(portfolioProjectAtom)
   const [loading, setLoading] = useState(true)
@@ -47,7 +42,7 @@ const Portfolio = ({ lang }: PortfolioProps) => {
                 return (
                   <Link
                     key={project.id}
-                    href={`/${lang}/portfolio/posts/${project.id}`}
+                    href={`/portfolio/posts/${project.id}`}
                     className="text-primary no-underline hover:text-primary"
                   >
                     <CardPortfolioSession key={project.id} project={project} />

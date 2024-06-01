@@ -6,11 +6,10 @@ import WhiteLogo from '../../../../public/images/white_logo.svg'
 import { ThemeContext } from '@/hooks/ThemeContext'
 import Navbar from '@/components/Atom/Navbar/Navbar'
 import NavbarSocial from '@/components/Atom/NavbarSocial/NavbarSocial'
-import { Locale } from '@/config/i18n.config'
 
 interface HeaderProps {
   bgColor: string
-  lang: Locale
+  lang: string
 }
 
 export default function Header({ lang, bgColor }: HeaderProps) {

@@ -2,17 +2,15 @@
 
 import { fetchExperience } from '@/api/Experience/fetch-experiences'
 import CardExperience from '@/components/Atom/CardExperience/CardExperience'
-import { Locale } from '@/config/i18n.config'
-import { getDictionaryUseClient } from '@/dictionaries/default-dictionaries-client'
 import { experienceAtom } from '@/states/experienceAtom'
+import { getLabel } from '@/utils/getLabel'
 import { notifyFailure } from '@/utils/toastify'
 import { useAtom } from 'jotai'
 import React, { useEffect } from 'react'
 import { Grid, GridColumn, GridRow } from 'semantic-ui-react'
 
-function Experience({ params }: { params: { lang: Locale } }) {
+function Experience({ language }: { language: string }) {
   const [experiences, setExperiences] = useAtom(experienceAtom)
-  const t = getDictionaryUseClient(params.lang)
 
   const fetchExperiences = async () => {
     const response = await fetchExperience()
@@ -39,12 +37,12 @@ function Experience({ params }: { params: { lang: Locale } }) {
             className="pb-8"
           >
             <CardExperience
-              title={t[experience.title]}
-              organization={t[experience.organization]}
-              location={t[experience.location]}
-              description={t[experience.description]}
-              initial_date={t[experience.initial_date]}
-              final_date={t[experience.final_date]}
+              title={getLabel(experience.title, language)}
+              organization={getLabel(experience.organization, language)}
+              location={getLabel(experience.location, language)}
+              description={getLabel(experience.description, language)}
+              initial_date={getLabel(experience.initial_date, language)}
+              final_date={getLabel(experience.final_date, language)}
             />
           </GridColumn>
         ))}
