@@ -33,7 +33,15 @@ const writeFile = async (filename: string, language: string, content: any) => {
       'defaultLanguageCollections',
     )
 
+    if (!fs.existsSync(dictionariesPath)) {
+      fs.mkdirSync(dictionariesPath)
+    }
+
+    console.log('Saving files to', dictionariesPath)
+
     const filePath = path.join(dictionariesPath, `${filename}.ts`)
+
+    console.log('File path = ', filePath)
 
     const json = `export const ${language} = ${JSON.stringify(content)}`
     await fs.promises.writeFile(filePath, json)
