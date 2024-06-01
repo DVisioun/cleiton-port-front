@@ -26,10 +26,7 @@ const fetchAndSaveLabels = async () => {
 const writeFile = async (filename: string, language: string, content: any) => {
   try {
     const json = `export const ${language} = ${JSON.stringify(content)};`
-    await fs.promises.writeFile(
-      `/root/cleiton-port-front/src/dictionaries/defaultLanguageCollections/${filename}.ts`,
-      json,
-    )
+    await fs.promises.writeFile(`${process.env.ENV_PATH}${filename}.ts`, json)
   } catch (error) {
     console.error('Erro ao escrever arquivo:', error)
   }
