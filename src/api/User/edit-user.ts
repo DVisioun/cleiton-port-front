@@ -7,7 +7,7 @@ export const editLinksUser = async (
 ) => {
   try {
     const response = await connection.put(`/user/${id}`, {
-      artistation: userUpdate.artstation,
+      artstation: userUpdate.artstation,
       instagram: userUpdate.instagram,
       linkedin: userUpdate.linkedin,
     })
