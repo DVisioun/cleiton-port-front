@@ -1,31 +1,25 @@
 'use client'
 import LanguageButton from '@/components/Atom/LanguageButton/LanguageButton'
 import ThemeButton from '@/components/Atom/ThemeButton/ThemeButton'
-import { usePathname } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useLanguage } from '@/hooks/LanguageContext'
 
 function ConfigContent() {
-  const [language, setLanguage] = useState('')
-  const pathname = usePathname()
+  const { language, setLanguage, refreshLanguage } = useLanguage()
 
-  const getHrefLink = () => {
-    const pathSplit = pathname.split('/')
-    const currentLanguage = pathSplit[1]
-    const page = pathSplit[2] ? pathSplit[2] : ''
-    const param = pathSplit[3] ? pathSplit[3] : ''
-    const newLanguage = currentLanguage === 'en' ? 'pt' : 'en'
-    window.location.href = `/${newLanguage}/${page}/${param}`
+  const changeLanguage = () => {
+    const currentLanguage = localStorage.getItem('lang')
+    if (currentLanguage === 'en') {
+      localStorage.setItem('lang', 'pt')
+      setLanguage('pt')
+    } else {
+      setLanguage('en')
+      localStorage.setItem('lang', 'en')
+    }
   }
-
-  useEffect(() => {
-    const pathSplit = pathname.split('/')
-    const currentLanguage = pathSplit[1]
-    setLanguage(currentLanguage)
-  }, [pathname])
 
   return (
     <div className="fixed right-0 top-52 z-50 flex flex-col items-center justify-center gap-4 rounded-l-lg bg-content px-3 py-3 shadow sm-0:absolute sm-0:left-0 sm-0:right-auto sm-0:top-20 sm-0:rounded-l-none sm-0:rounded-r-lg">
-      <button onClick={getHrefLink}>
+      <button onClick={changeLanguage}>
         <LanguageButton country={language} />
       </button>
       <ThemeButton />

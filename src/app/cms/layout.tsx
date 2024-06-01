@@ -2,7 +2,6 @@ import { Poppins, Qwigley } from 'next/font/google'
 import '@/app/globals.css'
 import 'semantic-ui-css/semantic.min.css'
 import { SideBarCMS } from '@/components/Molecule/SideBarCMS/SideBarCMS'
-import fetchAndSaveLabels from '@/api/Labels/write-labels-in-files'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
@@ -22,7 +21,6 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  fetchAndSaveLabels()
   return (
     <html lang="pt">
       <body className={`${poppins.variable} ${qwigley.variable} font-sans`}>

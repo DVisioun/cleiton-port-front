@@ -1,18 +1,22 @@
+'use client'
+
 import Header from '@/components/Molecule/Header/Header'
 import ConfigContent from '@/components/Molecule/ConfigContent/ConfigContent'
 import About from '@/components/Molecule/About/About'
-import { Locale } from '@/config/i18n.config'
 import { Footer } from '@/components/Molecule/Footer/Footer'
+import { useLanguage } from '@/hooks/LanguageContext'
 
-function page({ params }: { params: { lang: Locale } }) {
+function Page() {
+  const { language, setLanguage, refreshLanguage } = useLanguage()
+
   return (
     <div className="h-full overflow-y-auto bg-primary text-primary">
-      <Header lang={params.lang} bgColor="bg-primary" />
+      <Header lang={language} bgColor="bg-primary" />
       <ConfigContent />
-      <About params={params} />
+      <About />
       <Footer position="" />
     </div>
   )
 }
 
-export default page
+export default Page

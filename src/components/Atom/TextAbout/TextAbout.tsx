@@ -1,13 +1,10 @@
-import React from 'react'
-import { getDictionaryServerOnly } from '@/dictionaries/default-dictionaries-server'
+import { getLabel } from '@/utils/getLabel'
 
-function TextAbout({ params }: any) {
-  const t = getDictionaryServerOnly(params.lang)
-
+function TextAbout({ language }: { language: string }) {
   return (
     <div className="px-3 py-14 sm-1:py-8">
       <p className="text-justify text-lg leading-relaxed 2xl:text-xl sm-1:px-2 sm-1:text-base">
-        {t['about-me']}
+        {getLabel('about-me', language)}
       </p>
     </div>
   )

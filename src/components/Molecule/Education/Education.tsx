@@ -2,17 +2,15 @@
 
 import { fetchExperience } from '@/api/Experience/fetch-experiences'
 import CardEducation from '@/components/Atom/CardEducation/CardEducation'
-import { Locale } from '@/config/i18n.config'
-import { getDictionaryUseClient } from '@/dictionaries/default-dictionaries-client'
 import { educationAtom } from '@/states/educationAtom'
+import { getLabel } from '@/utils/getLabel'
 import { notifyFailure } from '@/utils/toastify'
 import { useAtom } from 'jotai'
 import React, { useEffect } from 'react'
 import { Grid, GridColumn, GridRow } from 'semantic-ui-react'
 
-function Education({ params }: { params: { lang: Locale } }) {
+function Education({ language }: { language: string }) {
   const [education, setEducation] = useAtom(educationAtom)
-  const t = getDictionaryUseClient(params.lang)
 
   const fetchEducation = async () => {
     const response = await fetchExperience()
@@ -27,8 +25,6 @@ function Education({ params }: { params: { lang: Locale } }) {
     fetchEducation()
   }, [])
 
-  console.log(education)
-
   return (
     <Grid className="lg:!mx-auto lg:!py-4">
       <GridRow columns={2}>
@@ -42,12 +38,12 @@ function Education({ params }: { params: { lang: Locale } }) {
             className="pb-8"
           >
             <CardEducation
-              title={t[item.title]}
-              organization={t[item.organization]}
-              location={t[item.location]}
-              description={t[item.description]}
-              initial_date={t[item.initial_date]}
-              final_date={t[item.final_date]}
+              title={getLabel(item.title, language)}
+              organization={getLabel(item.organization, language)}
+              location={getLabel(item.location, language)}
+              description={getLabel(item.description, language)}
+              initial_date={getLabel(item.initial_date, language)}
+              final_date={getLabel(item.final_date, language)}
             />
           </GridColumn>
         ))}

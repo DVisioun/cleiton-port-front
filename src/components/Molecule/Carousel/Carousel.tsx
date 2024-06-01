@@ -13,12 +13,6 @@ import { LoadingScreen } from '@/components/Atom/Loading/Loading'
 import { notifyFailure } from '@/utils/toastify'
 
 export default function Carousel() {
-  const progressCircle: React.RefObject<any> = React.createRef()
-  const progressContent: React.RefObject<any> = React.createRef()
-  const onAutoplayTimeLeft = (s: any, time: number, progress: number) => {
-    progressCircle.current.style.setProperty('--progress', 1 - progress)
-    progressContent.current.textContent = `${Math.ceil(time / 1000)}s`
-  }
   const [homePost, setHomePost] = useState<API.HomePostProps[]>()
   const [loading, setLoading] = useState<boolean>(true)
 
@@ -69,8 +63,7 @@ export default function Carousel() {
           pauseOnMouseEnter: false,
         }}
         modules={[Autoplay]}
-        onAutoplayTimeLeft={onAutoplayTimeLeft}
-        className="realtive"
+        className="relative"
       >
         {homePost &&
           homePost.map((item) => (
@@ -83,12 +76,6 @@ export default function Carousel() {
               />
             </SwiperSlide>
           ))}
-        <div className="autoplay-progress absolute sm-0:!bottom-10">
-          <svg viewBox="0 0 48 48" ref={progressCircle}>
-            <circle cx="24" cy="24" r="20"></circle>
-          </svg>
-          <span ref={progressContent}></span>
-        </div>
       </Swiper>
     </>
   )

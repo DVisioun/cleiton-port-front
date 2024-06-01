@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "prebuild": "node scripts/generate-language-files.js && npm run lint",
+    "prebuild": "npm run lint",
     "build": "next build",
     "start": "next start",
     "lint": "eslint src --ext .ts,.tsx --fix"

@@ -7,9 +7,11 @@ import Softwares from '@/components/Molecule/Softwares/Softwares'
 import Experience from '@/components/Molecule/Experience/Experience'
 import Education from '@/components/Molecule/Education/Education'
 import AboutCard from '@/components/Atom/AboutCard/AboutCard'
-import { Locale } from '@/config/i18n.config'
+import { useLanguage } from '@/hooks/LanguageContext'
 
-function About({ params }: { params: { lang: Locale } }) {
+function About() {
+  const { language, setLanguage, refreshLanguage } = useLanguage()
+
   return (
     <div className="px-20 sm-1:px-4">
       <div className="mt-40 pb-20 sm-1:mt-20">
@@ -25,15 +27,15 @@ function About({ params }: { params: { lang: Locale } }) {
               widescreen={13}
             >
               <Title title="About" />
-              <TextAbout params={params} />
+              <TextAbout language={language} />
               <Title title="Skills" />
               <TextSkills />
               <Title title="Softwares" />
               <Softwares />
               <Title title="Experience" />
-              <Experience params={params} />
+              <Experience language={language} />
               <Title title="Education" />
-              <Education params={params} />
+              <Education language={language} />
             </GridColumn>
           </GridRow>
         </Grid>

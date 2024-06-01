@@ -1,19 +1,23 @@
+'use client'
+
 import ConfigContent from '@/components/Molecule/ConfigContent/ConfigContent'
-import { Locale } from '@/config/i18n.config'
 import { Footer } from '@/components/Molecule/Footer/Footer'
 import Header from '@/components/Molecule/Header/Header'
 import Portfolio from '@/components/Molecule/Portfolio/Portfolio'
+import { useLanguage } from '@/hooks/LanguageContext'
 import React from 'react'
 
-function page({ params }: { params: { lang: Locale } }) {
+function Page() {
+  const { language, setLanguage, refreshLanguage } = useLanguage()
+
   return (
     <div className="h-full bg-primary text-primary">
-      <Header lang={params.lang} bgColor="bg-primary" />
+      <Header lang={language} bgColor="bg-primary" />
       <ConfigContent />
-      <Portfolio lang={params.lang} />
+      <Portfolio />
       <Footer position="" />
     </div>
   )
 }
 
-export default page
+export default Page

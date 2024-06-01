@@ -44,6 +44,7 @@ const ThemeProvider = ({ initialTheme, children }: ThemeProviderProps) => {
     root.classList.add(rawTheme)
 
     localStorage.setItem('color-theme', rawTheme)
+    localStorage.setItem('lang', 'en')
   }
 
   if (initialTheme) {
