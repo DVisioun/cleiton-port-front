@@ -3,7 +3,6 @@ import { Poppins, Qwigley } from 'next/font/google'
 import '@/app/globals.css'
 import 'semantic-ui-css/semantic.min.css'
 import { i18n } from '@/config/i18n.config'
-import fetchAndSaveLabels from '@/api/Labels/write-labels-in-files'
 import ThemeProvider from '@/hooks/ThemeContext'
 
 const poppins = Poppins({
@@ -34,7 +33,6 @@ export default function RootLayout({
   children: React.ReactNode
   params: { lang: string }
 }) {
-  fetchAndSaveLabels()
   return (
     <html lang={params.lang}>
       <body
