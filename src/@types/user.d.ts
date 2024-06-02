@@ -16,4 +16,8 @@ export namespace User {
     instagram: string
     linkedin: string
   }
+
+  export interface UserImageProps extends FieldValues {
+    image: FieldList
+  }
 }
