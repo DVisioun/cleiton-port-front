@@ -1,27 +1,27 @@
-'use client'
+"use client";
 
-import { useForm } from 'react-hook-form'
-import { useAtom } from 'jotai'
-import { Button, Form, Input, TextArea } from 'semantic-ui-react'
-import { portfolioProjectAtom } from '@/states/portfolioProjectAtom'
-import { addPortfolioProject } from '@/api/PortfolioProject/add-portfolio-project'
-import { PortfolioTextEditor } from '@/components/Atom/PortfolioTextEditor/PortfolioTextEditor'
-import { notifySuccess, notifyFailure } from '@/utils/toastify'
-import { readBase64ToFile, readFileToBase64 } from '@/utils/base64-converter'
-import { Dispatch, SetStateAction, useEffect, useState } from 'react'
-import { editPortfolioProject } from '@/api/PortfolioProject/edit-portfolio-project'
-import { fetchPortfolioProjects } from '@/api/PortfolioProject/fetch-portfolio-project'
-import { Portfolio } from '@/@types/project'
-import { softwareAtom } from '@/states/softwareAtom'
-import Image from 'next/image'
-import { API } from '@/@types/api'
-import { LoadingScreen } from '@/components/Atom/Loading/Loading'
+import { useForm } from "react-hook-form";
+import { useAtom } from "jotai";
+import { Button, Form, Input, TextArea } from "semantic-ui-react";
+import { portfolioProjectAtom } from "@/states/portfolioProjectAtom";
+import { addPortfolioProject } from "@/api/PortfolioProject/add-portfolio-project";
+import { PortfolioTextEditor } from "@/components/Atom/PortfolioTextEditor/PortfolioTextEditor";
+import { notifySuccess, notifyFailure } from "@/utils/toastify";
+import { readBase64ToFile, readFileToBase64 } from "@/utils/base64-converter";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { editPortfolioProject } from "@/api/PortfolioProject/edit-portfolio-project";
+import { fetchPortfolioProjects } from "@/api/PortfolioProject/fetch-portfolio-project";
+import { Portfolio } from "@/@types/project";
+import { softwareAtom } from "@/states/softwareAtom";
+import Image from "next/image";
+import { API } from "@/@types/api";
+import { LoadingScreen } from "@/components/Atom/Loading/Loading";
 
 interface ProjectEditProps {
-  editProject: boolean
-  setEditProject: Dispatch<SetStateAction<boolean>>
-  setAddProject: Dispatch<SetStateAction<boolean>>
-  projectId: string
+  editProject: boolean;
+  setEditProject: Dispatch<SetStateAction<boolean>>;
+  setAddProject: Dispatch<SetStateAction<boolean>>;
+  projectId: string;
 }
 
 const ProjectEdit = ({
@@ -30,10 +30,10 @@ const ProjectEdit = ({
   setAddProject,
   projectId,
 }: ProjectEditProps) => {
-  const [softwares, setSoftwares] = useAtom(softwareAtom)
-  const [portfolioProject, setPortfolioProject] = useAtom(portfolioProjectAtom)
-  const [portfolioIndex, setPortfolioIndex] = useState<number>(0)
-  const [imagePreview, setImagePreview] = useState<string>('')
+  const [softwares, setSoftwares] = useAtom(softwareAtom);
+  const [portfolioProject, setPortfolioProject] = useAtom(portfolioProjectAtom);
+  const [portfolioIndex, setPortfolioIndex] = useState<number>(0);
+  const [imagePreview, setImagePreview] = useState<string>("");
 
   const {
     register,
@@ -43,74 +43,75 @@ const ProjectEdit = ({
     setValue,
     watch,
     formState: { isSubmitting },
-  } = useForm<Portfolio.CreatePortfolioProjectFormProps>()
+  } = useForm<Portfolio.CreatePortfolioProjectFormProps>();
 
-  const watchImage = watch('image')
+  const watchImage = watch("image");
 
-  // completa os dados do formulário caso o usuário queira editar o project
+  // Preenche os dados do formulário caso o usuário queira editar o projeto
   const fillPortfolioProjectData = async () => {
     const portfolioProjectData = portfolioProject.find(
       (item) => item.id === projectId,
-    )
+    );
     if (portfolioProjectData) {
-      const index = portfolioProject.findIndex((item) => item.id === projectId)
-      setPortfolioIndex(index)
+      const index = portfolioProject.findIndex((item) => item.id === projectId);
+      setPortfolioIndex(index);
 
-      const imageConverted = await readBase64ToFile(portfolioProjectData.image)
-      const previewURL = URL.createObjectURL(imageConverted)
-      if (previewURL) setImagePreview(previewURL)
+      const imageConverted = await readBase64ToFile(portfolioProjectData.image);
+      const previewURL = URL.createObjectURL(imageConverted);
+      if (previewURL) setImagePreview(previewURL);
 
       const softwaresUsedInProject: API.SoftwareSchema[] = softwares.filter(
         (item) =>
           portfolioProjectData.softwares.some(
             (software) => software.software_id === item.id,
           ),
-      )
+      );
 
       const selectedSoftwares = softwaresUsedInProject.map((item) => {
-        return item.id
-      })
+        return item.id;
+      });
 
-      setValue('name', portfolioProjectData.name)
-      setValue('description', portfolioProjectData.description)
-      setValue('name', portfolioProjectData.name)
-      setValue('softwares', selectedSoftwares)
+      setValue("name", portfolioProjectData.name);
+      setValue("description", portfolioProjectData.description);
+      setValue("softwares", selectedSoftwares);
+      setValue("image", imageConverted);
     }
-  }
+  };
 
-  function validateFile() {
-    const input = document.getElementById('file') as HTMLInputElement
-    const maxFileSizeInBytes = 3 * 1024 * 1024 // 3 MB
-    if (input.files && input.files[0]) {
-      const fileSize = input.files[0].size
-      if (fileSize > maxFileSizeInBytes) {
-        notifyFailure('Maximum size exceeded (3 MB)')
-        setImagePreview('')
-        setValue('image', null)
-        return null
-      }
+  const validateFile = (file: File) => {
+    const maxFileSizeInBytes = 3 * 1024 * 1024; // 3 MB
+    if (file.size > maxFileSizeInBytes) {
+      notifyFailure("Maximum size exceeded (3 MB)");
+      setImagePreview("");
+      setValue("image", null);
+      return false;
     }
-  }
+    return true;
+  };
 
   const onSubmit = async (data: Portfolio.CreatePortfolioProjectFormProps) => {
-    const currentDate = new Date()
-    if (data.image[0]) {
-      validateFile()
-    }
-    if (editProject) {
-      const imageConverter = ''
+    const currentDate = new Date();
+    let imageConverter = "";
 
-      if (data.image[0]) {
-        const imageConverter = await readFileToBase64(data.image[0])
+    if (data.image && data.image[0] instanceof File) {
+      const file = data.image[0];
+      if (validateFile(file)) {
+        imageConverter = await readFileToBase64(file);
+      } else {
+        return;
       }
+    } else if (editProject && portfolioProject[portfolioIndex].image) {
+      imageConverter = portfolioProject[portfolioIndex].image;
+    }
 
+    if (editProject) {
       const softwaresUsedInProject: API.SoftwareSchema[] = softwares.filter(
         (item) => data.softwares.some((software) => software === item.id),
-      )
+      );
 
       const selectedSoftwares = softwaresUsedInProject.map((item) => {
-        return { id: item.id }
-      })
+        return { id: item.id };
+      });
 
       const requestPortfolioProjectEditObject = {
         name: data.name,
@@ -118,66 +119,64 @@ const ProjectEdit = ({
         content: data.content,
         softwares: selectedSoftwares,
         image: imageConverter,
-      }
+      };
 
       const response = await editPortfolioProject(
         requestPortfolioProjectEditObject,
         projectId,
-      )
+      );
       if (response?.success) {
-        await fetchPortfolioProjects()
-        notifySuccess('Project edited successfully')
-        reset()
-        setEditProject(false)
-        setAddProject(false)
+        await fetchPortfolioProjects();
+        notifySuccess("Project edited successfully");
+        reset();
+        setEditProject(false);
+        setAddProject(false);
       } else {
-        notifyFailure('Failed to edit project, please try again..')
+        notifyFailure("Failed to edit project, please try again..");
       }
     } else {
-      const imageConverted = await readFileToBase64(data.image[0])
-
       const softwaresArray = data.softwares.map((item) => {
-        return { id: item }
-      })
+        return { id: item };
+      });
 
       const requestPortfolioProjectCreateObject = {
         name: data.name,
         description: data.description,
         content: data.content,
         softwares: softwaresArray,
-        image: imageConverted,
+        image: imageConverter,
         created_at: currentDate,
-      }
+      };
 
       const response = await addPortfolioProject(
         requestPortfolioProjectCreateObject,
-      )
+      );
       if (response?.success) {
-        setPortfolioProject([...portfolioProject, response.data])
-        notifySuccess('Project created successfully')
-        reset()
-        setAddProject(false)
-        setImagePreview('')
+        setPortfolioProject([...portfolioProject, response.data]);
+        notifySuccess("Project created successfully");
+        reset();
+        setAddProject(false);
+        setImagePreview("");
       } else {
-        notifyFailure('Failed to create project, please try again..')
+        notifyFailure("Failed to create project, please try again..");
       }
     }
-  }
+  };
 
   useEffect(() => {
     if (editProject) {
-      fillPortfolioProjectData()
+      fillPortfolioProjectData();
     } else {
-      reset()
+      reset();
     }
-  }, [editProject])
+  }, [editProject]);
 
   useEffect(() => {
-    if (watchImage && watchImage[0]) {
-      const previewURL = URL.createObjectURL(watchImage[0])
-      if (previewURL) setImagePreview(previewURL)
+    if (watchImage && watchImage[0] instanceof File) {
+      const previewURL = URL.createObjectURL(watchImage[0]);
+      if (previewURL) setImagePreview(previewURL);
     }
-  }, [watchImage])
+  }, [watchImage]);
 
   return (
     <>
@@ -195,7 +194,7 @@ const ProjectEdit = ({
             <Input placeholder="Enter title of your project...">
               <input
                 type="text"
-                {...register('name', { required: 'Required field!' })}
+                {...register("name", { required: "Required field!" })}
               />
             </Input>
           </label>
@@ -209,7 +208,7 @@ const ProjectEdit = ({
             <TextArea
               placeholder="Write a short summary about your portfolio"
               style={{ minHeight: 100, maxHeight: 100 }}
-              {...register('description', { required: 'Required field!' })}
+              {...register("description", { required: "Required field!" })}
             />
           </Form>
           <label
@@ -219,7 +218,7 @@ const ProjectEdit = ({
             Content
           </label>
           <PortfolioTextEditor
-            defaultValue={`${!editProject ? '<p>Enter content your project...</p>' : portfolioProject[portfolioIndex].content}`}
+            defaultValue={`${!editProject ? "<p>Enter content your project...</p>" : portfolioProject[portfolioIndex].content}`}
             control={control}
           />
           <label
@@ -230,7 +229,7 @@ const ProjectEdit = ({
           </label>
           <select
             multiple
-            {...register('softwares')}
+            {...register("softwares")}
             className="block w-full appearance-none rounded-md border border-gray-300 p-2.5 text-gray-700 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500"
           >
             {softwares.map((item) => {
@@ -238,7 +237,7 @@ const ProjectEdit = ({
                 <option key={item.id} value={item.id}>
                   {item.name}
                 </option>
-              )
+              );
             })}
           </select>
           <label
@@ -254,7 +253,7 @@ const ProjectEdit = ({
                 type="file"
                 accept=".jpg, .jpeg, .png"
                 placeholder="Enter image of your project..."
-                {...register('image', { required: 'Required field!' })}
+                {...register("image")}
               />
             </Input>
             {imagePreview ? (
@@ -276,7 +275,7 @@ const ProjectEdit = ({
         </form>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default ProjectEdit
+export default ProjectEdit;

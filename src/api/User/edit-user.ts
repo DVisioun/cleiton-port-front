@@ -17,3 +17,18 @@ export const editLinksUser = async (
     console.log(error)
   }
 }
+
+export const editUserImage = async (
+  userUpdate:  User.UserImageProps,
+  id: string,
+) => {
+  try {
+    const response = await connection.put(`/user/${id}`, {
+      image: userUpdate.image,
+    })
+
+    return response.data
+  } catch (error) {
+    console.log(error)
+  }
+}

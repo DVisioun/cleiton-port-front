@@ -5,7 +5,7 @@ import { Button, Grid, GridColumn, GridRow, Input } from "semantic-ui-react";
 import { fetchUser } from "@/api/User/fetch-user";
 import { User } from "@/@types/user";
 import { editLinksUser } from "@/api/User/edit-user";
-import { notifyFailure } from "@/utils/toastify";
+import { notifyFailure, notifySuccess } from "@/utils/toastify";
 
 function LinksEdit() {
   const [user, setUser] = useState<User.UserProps | null>(null);
@@ -23,10 +23,10 @@ function LinksEdit() {
         requestLinksEditObject,
         data.id
     );
-    if (response?.success) {
-      console.log(response);
+    if (response && response.success) {
+      notifySuccess(response.message)
     } else {
-      notifyFailure("Failed to edit project, please try again..");
+      notifyFailure('Failed editing description. Try again, please!')
     }
   };
 

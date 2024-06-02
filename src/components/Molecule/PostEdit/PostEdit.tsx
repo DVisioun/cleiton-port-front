@@ -1,25 +1,25 @@
-'use client'
+"use client";
 
-import { useForm } from 'react-hook-form'
-import { useAtom } from 'jotai'
-import { Button, Input } from 'semantic-ui-react'
-import { API } from '@/@types/api'
-import { blogPostAtom } from '@/states/blogPostAtom'
-import { addBlogPost } from '@/api/BlogPost/add-blog-post'
-import { BlogTextEditor } from '@/components/Atom/BlogTextEditor/BlogTextEditor'
-import { notifySuccess, notifyFailure } from '@/utils/toastify'
-import { Dispatch, SetStateAction, useEffect, useState } from 'react'
-import { editBlogPost } from '@/api/BlogPost/edit-blog-post'
-import { fetchBlogPosts } from '@/api/BlogPost/fetch-blog-post'
-import { readBase64ToFile, readFileToBase64 } from '@/utils/base64-converter'
-import Image from 'next/image'
-import { LoadingScreen } from '@/components/Atom/Loading/Loading'
+import { useForm } from "react-hook-form";
+import { useAtom } from "jotai";
+import { Button, Input } from "semantic-ui-react";
+import { API } from "@/@types/api";
+import { blogPostAtom } from "@/states/blogPostAtom";
+import { addBlogPost } from "@/api/BlogPost/add-blog-post";
+import { BlogTextEditor } from "@/components/Atom/BlogTextEditor/BlogTextEditor";
+import { notifySuccess, notifyFailure } from "@/utils/toastify";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { editBlogPost } from "@/api/BlogPost/edit-blog-post";
+import { fetchBlogPosts } from "@/api/BlogPost/fetch-blog-post";
+import { readBase64ToFile, readFileToBase64 } from "@/utils/base64-converter";
+import Image from "next/image";
+import { LoadingScreen } from "@/components/Atom/Loading/Loading";
 
 interface PostEditProps {
-  editPost: boolean
-  setEditPost: Dispatch<SetStateAction<boolean>>
-  setAddPost: Dispatch<SetStateAction<boolean>>
-  postId: string
+  editPost: boolean;
+  setEditPost: Dispatch<SetStateAction<boolean>>;
+  setAddPost: Dispatch<SetStateAction<boolean>>;
+  postId: string;
 }
 
 const PostEdit = ({
@@ -28,9 +28,9 @@ const PostEdit = ({
   setAddPost,
   postId,
 }: PostEditProps) => {
-  const [blogPost, setBlogPost] = useAtom(blogPostAtom)
-  const [blogIndex, setBlogIndex] = useState<number>(0)
-  const [imagePreview, setImagePreview] = useState<string>('')
+  const [blogPost, setBlogPost] = useAtom(blogPostAtom);
+  const [blogIndex, setBlogIndex] = useState<number>(0);
+  const [imagePreview, setImagePreview] = useState<string>("");
 
   const {
     register,
@@ -40,90 +40,109 @@ const PostEdit = ({
     setValue,
     watch,
     formState: { isSubmitting },
-  } = useForm<API.BlogPostCreateFormProps>()
+  } = useForm<API.BlogPostCreateFormProps>();
 
-  const watchImage = watch('image')
+  const watchImage = watch("image");
 
-  // completa os dados do formulário caso o usuário queira editar o post
+  // Completa os dados do formulário caso o usuário queira editar o post
   const fillBlogPostData = async () => {
-    const blogPostData = blogPost.find((item) => item.id === postId)
+    const blogPostData = blogPost.find((item) => item.id === postId);
     if (blogPostData) {
-      const index = blogPost.findIndex((item) => item.id === postId)
-      setBlogIndex(index)
+      const index = blogPost.findIndex((item) => item.id === postId);
+      setBlogIndex(index);
 
-      const imageConverted = await readBase64ToFile(blogPostData.image)
-      const previewURL = URL.createObjectURL(imageConverted)
-      if (previewURL) setImagePreview(previewURL)
+      const imageConverted = await readBase64ToFile(blogPostData.image);
+      const previewURL = URL.createObjectURL(imageConverted);
+      if (previewURL) setImagePreview(previewURL);
 
-      setValue('title', blogPostData.title)
-      setValue('description', blogPostData.description)
-      setValue('order', blogPostData.order)
-      setValue('name', blogPostData.name)
+      setValue("title", blogPostData.title);
+      setValue("description", blogPostData.description);
+      setValue("order", blogPostData.order);
+      setValue("name", blogPostData.name);
     }
-  }
+  };
+
+  const validateFile = (file: File) => {
+    const maxFileSizeInBytes = 3 * 1024 * 1024; // 3 MB
+    if (file.size > maxFileSizeInBytes) {
+      notifyFailure("Maximum size exceeded (3 MB)");
+      setImagePreview("");
+      setValue("image", null);
+      return false;
+    }
+    return true;
+  };
 
   const onSubmit = async (data: API.BlogPostCreateFormProps) => {
-    const currentDate = new Date()
+    const currentDate = new Date();
+    let imageConverter = "";
+
+    if (data.image && data.image[0] instanceof File) {
+      const file = data.image[0];
+      if (validateFile(file)) {
+        imageConverter = await readFileToBase64(file);
+      } else {
+        return;
+      }
+    } else if (editPost && blogPost[blogIndex].image) {
+      imageConverter = blogPost[blogIndex].image;
+    }
 
     if (editPost) {
-      const imgConverted = await readFileToBase64(data.image[0])
-
       const requestBlogPostEditObject = {
         id: data.id,
         name: data.name,
-        image: imgConverted,
+        image: imageConverter,
         content: data.content,
         created_at: currentDate,
-      }
+      };
 
       const response: API.CreateAndUpdateBlogPostResponseProps =
-        await editBlogPost(requestBlogPostEditObject, postId)
+        await editBlogPost(requestBlogPostEditObject, postId);
       if (response && response.success) {
-        await fetchBlogPosts()
-        notifySuccess('Post edited successfully')
-        reset()
-        setEditPost(false)
-        setAddPost(false)
+        await fetchBlogPosts();
+        notifySuccess("Post edited successfully");
+        reset();
+        setEditPost(false);
+        setAddPost(false);
       } else {
-        notifyFailure('Failed to edit post, please try again..')
+        notifyFailure("Failed to edit post, please try again..");
       }
     } else {
-      const imgConverted = await readFileToBase64(data.image[0])
-
       const requestBlogPostCreateObject = {
         name: data.name,
         content: data.content,
-        image: imgConverted,
+        image: imageConverter,
         created_at: currentDate,
-      }
+      };
 
       const response: API.CreateAndUpdateBlogPostResponseProps =
-        await addBlogPost(requestBlogPostCreateObject)
+        await addBlogPost(requestBlogPostCreateObject);
       if (response && response.success) {
-        setBlogPost([...blogPost, response.data])
-        notifySuccess('Post created successfully')
-        reset()
-        setAddPost(false)
+        setBlogPost([...blogPost, response.data]);
+        notifySuccess("Post created successfully");
+        reset();
+        setAddPost(false);
       } else {
-        notifyFailure('Failed to create post, please try again..')
+        notifyFailure("Failed to create post, please try again..");
       }
     }
-  }
+  };
 
   useEffect(() => {
     if (editPost) {
-      fillBlogPostData()
+      fillBlogPostData();
     } else {
-      reset()
+      reset();
     }
-  }, [editPost])
+  }, [editPost]);
 
   useEffect(() => {
     if (watchImage && watchImage[0]) {
-      const previewURL = URL.createObjectURL(watchImage[0])
-      if (previewURL) setImagePreview(previewURL)
+      const previewURL = URL.createObjectURL(watchImage[0]);
+      if (previewURL) setImagePreview(previewURL);
     }
-  }, [watchImage])
+  }, [watchImage]);
 
   return (
     <>
@@ -141,7 +160,7 @@ const PostEdit = ({
             <Input placeholder="Enter title your post...">
               <input
                 type="text"
-                {...register('name', { required: 'Required field!' })}
+                {...register("name", { required: "Required field!" })}
               />
             </Input>
           </label>
@@ -153,7 +172,7 @@ const PostEdit = ({
           </label>
           <BlogTextEditor
             name="content"
-            defaultValue={`${!editPost ? '<p>Enter content your post...</p>' : blogPost[blogIndex].content}`}
+            defaultValue={`${!editPost ? "<p>Enter content your post...</p>" : blogPost[blogIndex].content}`}
             control={control}
           />
           <label
@@ -167,7 +186,8 @@ const PostEdit = ({
               <input
                 id="file"
                 type="file"
-                {...register('image', { required: 'Required field!' })}
+                accept=".jpg, .jpeg, .png"
+                {...register("image")}
               />
             </Input>
             {imagePreview ? (
@@ -189,7 +209,7 @@ const PostEdit = ({
         </form>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default PostEdit
+export default PostEdit;

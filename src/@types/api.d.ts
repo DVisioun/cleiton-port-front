@@ -241,4 +241,19 @@ export namespace API {
     data: LinksUpdateRequestProps
     success: boolean
   }
+
+  export interface UserImageCreateFormProps extends FieldValues {
+    id: string
+    image: FileList
+  }
+
+  export interface UserImageSchema extends FieldValues {
+    image: string
+  }
+
+  export interface CreateAndUpdateUserImageResponseProps {
+    message: string
+    data: UserImageSchema
+    success: boolean
+  }
 }
