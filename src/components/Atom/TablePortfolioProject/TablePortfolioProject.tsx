@@ -83,7 +83,6 @@ export const TablePortfolioProject = ({
         <TableHeader>
           <TableRow>
             <TableHeaderCell>Name</TableHeaderCell>
-            <TableHeaderCell>Order</TableHeaderCell>
             <TableHeaderCell>Date Created</TableHeaderCell>
             <TableHeaderCell>Edit</TableHeaderCell>
             <TableHeaderCell>Remove</TableHeaderCell>
@@ -95,7 +94,6 @@ export const TablePortfolioProject = ({
             return (
               <TableRow key={item.id}>
                 <TableCell>{item.name}</TableCell>
-                <TableCell>{item.order}</TableCell>
                 <TableCell>
                   {dayjs(item.created_at).format('D[ de ]MMMM[, ]YYYY')}
                 </TableCell>
@@ -121,25 +119,6 @@ export const TablePortfolioProject = ({
             )
           })}
         </TableBody>
-
-        <TableFooter>
-          <TableRow>
-            <TableHeaderCell colSpan="6">
-              <Menu floated="right" pagination>
-                <MenuItem as="a" icon>
-                  <Icon name="chevron left" />
-                </MenuItem>
-                <MenuItem as="a">1</MenuItem>
-                <MenuItem as="a">2</MenuItem>
-                <MenuItem as="a">3</MenuItem>
-                <MenuItem as="a">4</MenuItem>
-                <MenuItem as="a" icon>
-                  <Icon name="chevron right" />
-                </MenuItem>
-              </Menu>
-            </TableHeaderCell>
-          </TableRow>
-        </TableFooter>
       </Table>
     </>
   )

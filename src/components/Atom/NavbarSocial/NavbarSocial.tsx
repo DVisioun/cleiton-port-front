@@ -32,7 +32,7 @@ function NavbarSocial() {
       {user.artstation && (
         <Link href={user.artstation} target="_blank">
           <FontAwesomeIcon
-            className="text-3xl text-primary duration-300 hover:text-hover  hover:underline active:text-hover active:underline"
+            className="text-3xl text-primary duration-300 hover:text-hover hover:underline active:text-hover active:underline"
             icon={faArtstation}
           />
         </Link>
@@ -40,7 +40,7 @@ function NavbarSocial() {
       {user.linkedin && (
         <Link href={user.linkedin} target="_blank">
           <FontAwesomeIcon
-            className="text-3xl text-primary duration-300 hover:text-hover   hover:underline active:text-hover active:underline"
+            className="text-3xl text-primary duration-300 hover:text-hover hover:underline active:text-hover active:underline"
             icon={faLinkedin}
           />
         </Link>
@@ -48,7 +48,7 @@ function NavbarSocial() {
       {user.instagram && (
         <Link href={user.instagram} target="_blank">
           <FontAwesomeIcon
-            className="text-3xl text-primary duration-300 hover:text-hover   hover:underline active:text-hover active:underline"
+            className="text-3xl text-primary duration-300 hover:text-hover hover:underline active:text-hover active:underline"
             icon={faInstagram}
           />
         </Link>
