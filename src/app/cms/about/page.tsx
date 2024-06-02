@@ -1,13 +1,13 @@
-"use client";
-import React, { useState } from "react";
-import { Divider, Header, Input, Segment } from "semantic-ui-react";
-import AboutEdit from "@/components/Molecule/AboutEdit/AboutEdit";
-import SkillsEdit from "@/components/Molecule/SkillsEdit/SkillsEdit";
-import SoftwareEdit from "@/components/Molecule/SoftwareEdit/SoftwareEdit";
-import { ExperienceEducationEdit } from "@/components/Molecule/ExperienceEducationEdit/ExperienceEducationEdit";
-import LinksEdit from "@/components/Molecule/LinksEdit/LinksEdit";
-import Image from "next/image";
-import UserImageEdit from "@/components/Molecule/UserImageEdit/UserImageEdit";
+'use client'
+import React, { useState } from 'react'
+import { Divider, Header, Input, Segment } from 'semantic-ui-react'
+import AboutEdit from '@/components/Molecule/AboutEdit/AboutEdit'
+import SkillsEdit from '@/components/Molecule/SkillsEdit/SkillsEdit'
+import SoftwareEdit from '@/components/Molecule/SoftwareEdit/SoftwareEdit'
+import { ExperienceEducationEdit } from '@/components/Molecule/ExperienceEducationEdit/ExperienceEducationEdit'
+import LinksEdit from '@/components/Molecule/LinksEdit/LinksEdit'
+import Image from 'next/image'
+import UserImageEdit from '@/components/Molecule/UserImageEdit/UserImageEdit'
 
 function page() {
   return (
@@ -81,7 +81,7 @@ function page() {
         <LinksEdit />
       </Segment>
     </div>
-  );
+  )
 }
 
-export default page;
+export default page

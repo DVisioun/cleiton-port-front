@@ -235,7 +235,7 @@ export namespace API {
     instagram: string
     linkedin: string
   }
-  
+
   export interface UpdateLinksResponseProps {
     message: string
     data: LinksUpdateRequestProps
