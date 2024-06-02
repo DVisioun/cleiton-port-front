@@ -1,19 +1,21 @@
-"use client";
-import { API } from "@/@types/api";
-import Image from "next/image";
-import React, { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import { Button, Input } from "semantic-ui-react";
-import { notifySuccess, notifyFailure } from "@/utils/toastify";
-import { readFileToBase64 } from "@/utils/base64-converter";
-import { editUserImage } from "@/api/User/edit-user";
-import { fetchUser } from "@/api/User/fetch-user";
-import { User } from "@/@types/user";
+'use client'
+import { API } from '@/@types/api'
+import Image from 'next/image'
+import React, { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { Button, Input } from 'semantic-ui-react'
+import { notifySuccess, notifyFailure } from '@/utils/toastify'
+import { readBase64ToFile, readFileToBase64 } from '@/utils/base64-converter'
+import { editUserImage } from '@/api/User/edit-user'
+import { fetchUser } from '@/api/User/fetch-user'
+import { User } from '@/@types/user'
+import { LoadingScreen } from '@/components/Atom/Loading/Loading'
 
 function UserImageEdit() {
-  const [imagePreview, setImagePreview] = useState<string>("");
-  const [user, setUser] = useState<User.UserProps | null>(null);
-  const [userId, setUserID] = useState("fe3e25da-a60e-4122-a3ad-bb4d2fcafd3a");
+  const [imagePreview, setImagePreview] = useState<string>('')
+  const [user, setUser] = useState<User.UserProps | null>(null)
+  const [userId, setUserID] = useState('fe3e25da-a60e-4122-a3ad-bb4d2fcafd3a')
+  const [loading, setLoading] = useState(false)
 
   const {
     register,
@@ -23,63 +25,79 @@ function UserImageEdit() {
     setValue,
     watch,
     formState: { isSubmitting },
-  } = useForm<API.UserImageCreateFormProps>();
+  } = useForm<API.UserImageCreateFormProps>()
 
-  const watchImage = watch("image");
+  const watchImage = watch('img_profile')
 
   const validateFile = (file: File) => {
-    const maxFileSizeInBytes = 3 * 1024 * 1024; // 3 MB
+    const maxFileSizeInBytes = 3 * 1024 * 1024 // 3 MB
     if (file.size > maxFileSizeInBytes) {
-      notifyFailure("Maximum size exceeded (3 MB)");
-      setImagePreview("");
-      setValue("image", null);
-      return false;
+      notifyFailure('Maximum size exceeded (3 MB)')
+      setImagePreview('')
+      setValue('img_profile', null)
+      return false
     }
-    return true;
-  };
+    return true
+  }
 
   const onSubmit = async (data: API.UserImageCreateFormProps) => {
-    const currentDate = new Date();
-    let imageConverter = "";
+    setLoading(true)
+    let imageConverter = ''
 
-    if (data.image && data.image[0] instanceof File) {
-      const file = data.image[0];
+    if (data.img_profile && data.img_profile[0] instanceof File) {
+      const file = data.img_profile[0]
       if (validateFile(file)) {
-        imageConverter = await readFileToBase64(file);
+        imageConverter = await readFileToBase64(file)
       } else {
-        return;
+        return
       }
     }
 
     const requestBlogPostEditObject = {
       image: imageConverter,
-    };
+    }
 
     const response: API.CreateAndUpdateUserImageResponseProps =
-      await editUserImage(requestBlogPostEditObject, userId);
+      await editUserImage(requestBlogPostEditObject, userId)
     if (response && response.success) {
-      notifySuccess(response.message);
+      notifySuccess(response.message)
     } else {
-      notifyFailure("Failed editing description. Try again, please!");
+      notifyFailure('Failed updating profile image. Try again, please!')
     }
-  };
+
+    setLoading(false)
+  }
 
   useEffect(() => {
+    setLoading(true)
     const callUserData = async () => {
       try {
-        const response = await fetchUser();
-        setUser(response.data);
-        reset(response.data);
+        const response = await fetchUser()
+        setUser(response.data)
+        if (response.data.image) {
+          const file = await readBase64ToFile(response.data.image)
+          const previewURL = URL.createObjectURL(file)
+          if (previewURL) setImagePreview(previewURL)
+        }
       } catch (error) {
-        console.log(error);
+        console.log(error)
       }
-    };
+      setLoading(false)
+    }
 
-    callUserData();
-  }, [reset]);
+    callUserData()
+  }, [])
+
+  useEffect(() => {
+    if (watchImage && watchImage[0]) {
+      const previewURL = URL.createObjectURL(watchImage[0])
+      if (previewURL) setImagePreview(previewURL)
+    }
+  }, [watchImage])
 
   return (
     <>
+      <LoadingScreen loading={loading} />
       <form
         className="flex flex-col items-start justify-center gap-4"
         onSubmit={handleSubmit(onSubmit)}
@@ -90,7 +108,7 @@ function UserImageEdit() {
               id="file"
               type="file"
               accept=".jpg, .jpeg, .png"
-              {...register("image")}
+              {...register('img_profile')}
             />
           </Input>
           {imagePreview ? (
@@ -111,7 +129,7 @@ function UserImageEdit() {
         />
       </form>
     </>
-  );
+  )
 }
 
-export default UserImageEdit;
+export default UserImageEdit
