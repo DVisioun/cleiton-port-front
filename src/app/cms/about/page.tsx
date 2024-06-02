@@ -69,17 +69,6 @@ function page() {
           <ExperienceEducationEdit />
         </Segment>
       </Segment>
-      <Segment>
-        <Divider horizontal>
-          <Header
-            as="h4"
-            className="!sm-1:text-5xl !m-0 !text-center !font-alt !text-6xl !font-medium !text-secondary"
-          >
-            Links
-          </Header>
-        </Divider>
-        <LinksEdit />
-      </Segment>
     </div>
   )
 }
