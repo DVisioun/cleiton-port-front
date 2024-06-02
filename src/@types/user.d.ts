@@ -1,6 +1,5 @@
 export namespace User {
   export interface UserProps {
-    id: string
     name: string
     about: string
     email: string

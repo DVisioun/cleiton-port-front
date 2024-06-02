@@ -1,13 +1,13 @@
-"use client";
-import React, { useState } from "react";
-import { Divider, Header, Input, Segment } from "semantic-ui-react";
-import AboutEdit from "@/components/Molecule/AboutEdit/AboutEdit";
-import SkillsEdit from "@/components/Molecule/SkillsEdit/SkillsEdit";
-import SoftwareEdit from "@/components/Molecule/SoftwareEdit/SoftwareEdit";
-import { ExperienceEducationEdit } from "@/components/Molecule/ExperienceEducationEdit/ExperienceEducationEdit";
-import LinksEdit from "@/components/Molecule/LinksEdit/LinksEdit";
-import Image from "next/image";
-import UserImageEdit from "@/components/Molecule/UserImageEdit/UserImageEdit";
+'use client'
+import React, { useState } from 'react'
+import { Divider, Header, Input, Segment } from 'semantic-ui-react'
+import AboutEdit from '@/components/Molecule/AboutEdit/AboutEdit'
+import SkillsEdit from '@/components/Molecule/SkillsEdit/SkillsEdit'
+import SoftwareEdit from '@/components/Molecule/SoftwareEdit/SoftwareEdit'
+import { ExperienceEducationEdit } from '@/components/Molecule/ExperienceEducationEdit/ExperienceEducationEdit'
+import LinksEdit from '@/components/Molecule/LinksEdit/LinksEdit'
+import Image from 'next/image'
+import UserImageEdit from '@/components/Molecule/UserImageEdit/UserImageEdit'
 
 function page() {
   return (
@@ -69,19 +69,8 @@ function page() {
           <ExperienceEducationEdit />
         </Segment>
       </Segment>
-      <Segment>
-        <Divider horizontal>
-          <Header
-            as="h4"
-            className="!sm-1:text-5xl !m-0 !text-center !font-alt !text-6xl !font-medium !text-secondary"
-          >
-            Links
-          </Header>
-        </Divider>
-        <LinksEdit />
-      </Segment>
     </div>
-  );
+  )
 }
 
-export default page;
+export default page

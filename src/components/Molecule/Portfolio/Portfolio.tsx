@@ -36,7 +36,9 @@ const Portfolio = () => {
       <LoadingScreen loading={loading} />
       <main className="min-h-[calc(100%-90px)] w-full px-[80px] pt-40 sm-0:px-6 sm-1:pt-5">
         <Title title="Portfólio" />
-        <section className="flex flex-wrap justify-center gap-4 py-4">
+        <section
+          className={`flex flex-wrap ${portfolioProjects.length > 1 ? 'justify-center' : ''} items-start gap-4 py-4`}
+        >
           {portfolioProjects
             ? portfolioProjects?.map((project) => {
                 return (
