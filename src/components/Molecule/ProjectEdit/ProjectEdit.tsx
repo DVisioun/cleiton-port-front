@@ -47,7 +47,7 @@ const ProjectEdit = ({
 
   const watchImage = watch('image')
 
-  // completa os dados do formulário caso o usuário queira editar o project
+  // Preenche os dados do formulário caso o usuário queira editar o projeto
   const fillPortfolioProjectData = async () => {
     const portfolioProjectData = portfolioProject.find(
       (item) => item.id === projectId,
@@ -73,37 +73,38 @@ const ProjectEdit = ({
 
       setValue('name', portfolioProjectData.name)
       setValue('description', portfolioProjectData.description)
-      setValue('name', portfolioProjectData.name)
       setValue('softwares', selectedSoftwares)
+      setValue('image', imageConverted)
     }
   }
 
-  function validateFile() {
-    const input = document.getElementById('file') as HTMLInputElement
+  const validateFile = (file: File) => {
     const maxFileSizeInBytes = 3 * 1024 * 1024 // 3 MB
-    if (input.files && input.files[0]) {
-      const fileSize = input.files[0].size
-      if (fileSize > maxFileSizeInBytes) {
-        notifyFailure('Maximum size exceeded (3 MB)')
-        setImagePreview('')
-        setValue('image', null)
-        return null
-      }
+    if (file.size > maxFileSizeInBytes) {
+      notifyFailure('Maximum size exceeded (3 MB)')
+      setImagePreview('')
+      setValue('image', null)
+      return false
     }
+    return true
   }
 
   const onSubmit = async (data: Portfolio.CreatePortfolioProjectFormProps) => {
     const currentDate = new Date()
-    if (data.image[0]) {
-      validateFile()
-    }
-    if (editProject) {
-      const imageConverter = ''
+    let imageConverter = ''
 
-      if (data.image[0]) {
-        const imageConverter = await readFileToBase64(data.image[0])
+    if (data.image && data.image[0] instanceof File) {
+      const file = data.image[0]
+      if (validateFile(file)) {
+        imageConverter = await readFileToBase64(file)
+      } else {
+        return
       }
+    } else if (editProject && portfolioProject[portfolioIndex].image) {
+      imageConverter = portfolioProject[portfolioIndex].image
+    }
 
+    if (editProject) {
       const softwaresUsedInProject: API.SoftwareSchema[] = softwares.filter(
         (item) => data.softwares.some((software) => software === item.id),
       )
@@ -134,8 +135,6 @@ const ProjectEdit = ({
         notifyFailure('Failed to edit project, please try again..')
       }
     } else {
-      const imageConverted = await readFileToBase64(data.image[0])
-
       const softwaresArray = data.softwares.map((item) => {
         return { id: item }
       })
@@ -145,7 +144,7 @@ const ProjectEdit = ({
         description: data.description,
         content: data.content,
         softwares: softwaresArray,
-        image: imageConverted,
+        image: imageConverter,
         created_at: currentDate,
       }
 
@@ -173,7 +172,7 @@ const ProjectEdit = ({
   }, [editProject])
 
   useEffect(() => {
-    if (watchImage && watchImage[0]) {
+    if (watchImage && watchImage[0] instanceof File) {
       const previewURL = URL.createObjectURL(watchImage[0])
       if (previewURL) setImagePreview(previewURL)
     }
@@ -254,7 +253,7 @@ const ProjectEdit = ({
                 type="file"
                 accept=".jpg, .jpeg, .png"
                 placeholder="Enter image of your project..."
-                {...register('image', { required: 'Required field!' })}
+                {...register('image')}
               />
             </Input>
             {imagePreview ? (

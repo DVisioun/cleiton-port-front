@@ -44,7 +44,7 @@ const PostEdit = ({
 
   const watchImage = watch('image')
 
-  // completa os dados do formulário caso o usuário queira editar o post
+  // Completa os dados do formulário caso o usuário queira editar o post
   const fillBlogPostData = async () => {
     const blogPostData = blogPost.find((item) => item.id === postId)
     if (blogPostData) {
@@ -62,16 +62,37 @@ const PostEdit = ({
     }
   }
 
+  const validateFile = (file: File) => {
+    const maxFileSizeInBytes = 3 * 1024 * 1024 // 3 MB
+    if (file.size > maxFileSizeInBytes) {
+      notifyFailure('Maximum size exceeded (3 MB)')
+      setImagePreview('')
+      setValue('image', null)
+      return false
+    }
+    return true
+  }
+
   const onSubmit = async (data: API.BlogPostCreateFormProps) => {
     const currentDate = new Date()
+    let imageConverter = ''
+
+    if (data.image && data.image[0] instanceof File) {
+      const file = data.image[0]
+      if (validateFile(file)) {
+        imageConverter = await readFileToBase64(file)
+      } else {
+        return
+      }
+    } else if (editPost && blogPost[blogIndex].image) {
+      imageConverter = blogPost[blogIndex].image
+    }
 
     if (editPost) {
-      const imgConverted = await readFileToBase64(data.image[0])
-
       const requestBlogPostEditObject = {
         id: data.id,
         name: data.name,
-        image: imgConverted,
+        image: imageConverter,
         content: data.content,
         created_at: currentDate,
       }
@@ -88,12 +109,10 @@ const PostEdit = ({
         notifyFailure('Failed to edit post, please try again..')
       }
     } else {
-      const imgConverted = await readFileToBase64(data.image[0])
-
       const requestBlogPostCreateObject = {
         name: data.name,
         content: data.content,
-        image: imgConverted,
+        image: imageConverter,
         created_at: currentDate,
       }
 
@@ -167,7 +186,8 @@ const PostEdit = ({
               <input
                 id="file"
                 type="file"
-                {...register('image', { required: 'Required field!' })}
+                accept=".jpg, .jpeg, .png"
+                {...register('image')}
               />
             </Input>
             {imagePreview ? (
