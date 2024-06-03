@@ -8,11 +8,9 @@ import { useLanguage } from '@/hooks/LanguageContext'
 import React from 'react'
 
 function Page() {
-  const { language, setLanguage, refreshLanguage } = useLanguage()
-
   return (
     <div className="h-full bg-primary text-primary">
-      <Header lang={language} bgColor="bg-primary" />
+      <Header bgColor="bg-primary" />
       <ConfigContent />
       <Portfolio />
       <Footer position="" />
