@@ -18,11 +18,9 @@ export default function Home() {
     handleFetchLabels()
   }, [])
 
-  const { language, setLanguage, refreshLanguage } = useLanguage()
-
   return (
     <div className="text-primary">
-      <Header lang={language} bgColor="bg-opacity" />
+      <Header bgColor="bg-opacity" />
       <main>
         <Carousel />
         <ConfigContent />

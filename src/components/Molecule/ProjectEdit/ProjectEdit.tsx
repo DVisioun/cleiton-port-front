@@ -74,7 +74,6 @@ const ProjectEdit = ({
       setValue('name', portfolioProjectData.name)
       setValue('description', portfolioProjectData.description)
       setValue('softwares', selectedSoftwares)
-      setValue('image', imageConverted)
     }
   }
 
