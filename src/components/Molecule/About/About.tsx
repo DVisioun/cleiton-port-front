@@ -26,15 +26,15 @@ function About() {
               largeScreen={12}
               widescreen={13}
             >
-              <Title title="About" />
+              <Title title={language === 'en' ? 'About' : 'Sobre Mim'} />
               <TextAbout language={language} />
-              <Title title="Skills" />
+              <Title title={language === 'en' ? 'Skills' : 'Habilidades'} />
               <TextSkills />
-              <Title title="Softwares" />
+              <Title title={'Softwares'} />
               <Softwares />
-              <Title title="Experience" />
+              <Title title={language === 'en' ? 'Experience' : 'Experiência'} />
               <Experience language={language} />
-              <Title title="Education" />
+              <Title title={language === 'en' ? 'Education' : 'Educação'} />
               <Education language={language} />
             </GridColumn>
           </GridRow>

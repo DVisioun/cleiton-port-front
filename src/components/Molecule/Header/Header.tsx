@@ -9,26 +9,32 @@ import NavbarSocial from '@/components/Atom/NavbarSocial/NavbarSocial'
 
 interface HeaderProps {
   bgColor: string
-  lang: string
 }
 
-export default function Header({ lang, bgColor }: HeaderProps) {
-  const { theme } = useContext(ThemeContext) || {
+export default function Header({ bgColor }: HeaderProps) {
+  const { theme, setTheme } = useContext(ThemeContext) || {
     theme: 'light',
     setTheme: () => {},
   }
-  const [darkMode, setDarkMode] = useState(false)
 
   useEffect(() => {
-    setDarkMode(theme === 'dark')
-  }, [theme])
+    theme === 'light' ? setTheme('dark') : setTheme('light')
+  }, [])
 
   return (
     <div
       className={`absolute top-0 z-10 flex h-24 w-full items-center justify-between sm-1:h-16 ${bgColor} px-20 text-primary shadow-header duration-300 hover:bg-primary sm-0:px-8`}
     >
       <div className="flex items-center sm-1:w-full sm-1:justify-between">
-        {!darkMode && (
+        {theme === 'dark' ? (
+          <Image
+            src={WhiteLogo}
+            alt="Logo"
+            className="sm-1:h-10 sm-1:w-10"
+            height={64}
+            width={55}
+          />
+        ) : (
           <Image
             src={BlackLogo}
             alt="Logo"
@@ -37,16 +43,8 @@ export default function Header({ lang, bgColor }: HeaderProps) {
             width={55}
           />
         )}
-        {darkMode && (
-          <Image
-            src={WhiteLogo}
-            alt="Logo"
-            className="sm-1:h-10 sm-1:w-10"
-            height={64}
-            width={55}
-          />
-        )}
-        <Navbar lang={lang} />
+
+        <Navbar />
       </div>
       <NavbarSocial />
     </div>
