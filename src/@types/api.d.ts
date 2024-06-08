@@ -242,6 +242,18 @@ export namespace API {
     success: boolean
   }
 
+  export interface OtherInfoUpdateRequestProps extends FieldValues {
+    location: string
+    role: string
+    company: string
+  }
+
+  export interface UpdateOtherInfoResponseProps {
+    message: string
+    data: OtherInfoUpdateRequestProps
+    success: boolean
+  }
+
   export interface UserImageCreateFormProps extends FieldValues {
     id: string
     image: FileList
