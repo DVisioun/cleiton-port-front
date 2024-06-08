@@ -110,9 +110,8 @@ export function ExperienceEducationEdit() {
                     <TableRow key={item.id}>
                       <TableCell>
                         {label?.map((l) => {
-                          if (l.label === item.title) {
-                            return l.pt_content
-                          } else return ''
+                          if (l.label === item.title) return l.pt_content
+                          else return l.en_content
                         })}
                       </TableCell>
                       <TableCell textAlign="center">

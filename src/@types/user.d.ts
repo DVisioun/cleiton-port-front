@@ -1,5 +1,6 @@
 export namespace User {
   export interface UserProps {
+    id?: string
     name: string
     about: string
     email: string
@@ -8,12 +9,21 @@ export namespace User {
     artstation: string
     instagram: string
     linkedin: string
+    location: string
+    role: string
+    company: string
   }
 
   export interface LinksEditProps extends FieldValues {
     artstation: string
     instagram: string
     linkedin: string
+  }
+
+  export interface OtherInfoEditProps extends FieldValues {
+    location: string
+    role: string
+    company: string
   }
 
   export interface UserImageProps extends FieldValues {

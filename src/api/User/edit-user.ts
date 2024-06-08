@@ -34,3 +34,21 @@ export const editUserImage = async (
     console.log(error)
   }
 }
+
+export const editUserOtherInfo = async (
+  userUpdate: User.OtherInfoEditProps,
+  id: string,
+) => {
+  try {
+    console.log(userUpdate)
+    const response = await connection.put(`/user/${id}`, {
+      location: userUpdate.location,
+      role: userUpdate.role,
+      company: userUpdate.company,
+    })
+
+    return response.data
+  } catch (error) {
+    console.log(error)
+  }
+}

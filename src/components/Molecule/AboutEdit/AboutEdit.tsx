@@ -4,6 +4,7 @@ import { editLabel } from '@/api/Labels/edit-label'
 import { fetchLabels } from '@/api/Labels/fetch-labels'
 import { fetchAbout } from '@/api/User/fetch-about'
 import { LoadingScreen } from '@/components/Atom/Loading/Loading'
+import { getLabel } from '@/utils/getLabel'
 import { notifyFailure, notifySuccess } from '@/utils/toastify'
 import React, { useEffect } from 'react'
 import Flag from 'react-flagkit'
@@ -42,12 +43,8 @@ function AboutEdit() {
   }
 
   const handleFillLabels = () => {
-    const labelsData = localStorage.getItem('labels')
-    if (labelsData) {
-      const labels: API.LabelSchema[] = JSON.parse(labelsData)
-      setValue('pt_content', labels[0]?.pt_content)
-      setValue('en_content', labels[0]?.en_content)
-    }
+    setValue('pt_content', getLabel('about-me', 'pt'))
+    setValue('en_content', getLabel('about-me', 'en'))
   }
 
   useEffect(() => {

@@ -8,6 +8,7 @@ import { ExperienceEducationEdit } from '@/components/Molecule/ExperienceEducati
 import Image from 'next/image'
 import UserImageEdit from '@/components/Molecule/UserImageEdit/UserImageEdit'
 import LinksEdit from '@/components/Molecule/LinksEdit/LinksEdit'
+import OtherDataEdit from '@/components/Molecule/OtherDataEdit/OtherDataEdit'
 
 function page() {
   return (
@@ -78,6 +79,17 @@ function page() {
             </Header>
           </Divider>
           <LinksEdit />
+        </Segment>
+        <Segment>
+          <Divider horizontal>
+            <Header
+              as="h4"
+              className="!sm-1:text-5xl !m-0 !text-center !font-alt !text-6xl !font-medium !text-secondary"
+            >
+              Other Information
+            </Header>
+          </Divider>
+          <OtherDataEdit />
         </Segment>
       </Segment>
     </div>
