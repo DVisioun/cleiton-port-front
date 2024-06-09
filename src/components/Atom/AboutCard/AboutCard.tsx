@@ -44,6 +44,8 @@ const AboutCard = () => {
     }
   }, [user])
 
+  if (!user) return null
+
   return (
     <Card className={styleCard}>
       <div className="flex justify-center px-4 py-8 sm-1:px-0">

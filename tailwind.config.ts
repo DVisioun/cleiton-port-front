@@ -47,6 +47,7 @@ const config: Config = {
         'md-1': { max: '991px' },
         'md-1.5': { max: '1055px' },
         'md-2': { max: '1215px' },
+        'md-2.5': { max: '1400px' },
         'md-3': { min: '1400px' },
         'md-3.5': { min: '1800px' },
       },
