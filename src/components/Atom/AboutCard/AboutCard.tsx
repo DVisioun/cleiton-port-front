@@ -60,7 +60,9 @@ const AboutCard = () => {
       <CardContent>
         <CardHeader className="!text-primary">Cleiton Moreira</CardHeader>
         <CardMeta>
-          <span className="text-primary">3D Artist at Aden Interactive</span>
+          <span className="text-primary">
+            {user.role} at {user.company}
+          </span>
         </CardMeta>
         <CardDescription className="!mt-5 ">
           <div>
@@ -71,7 +73,7 @@ const AboutCard = () => {
       <CardContent extra>
         <div className="flex gap-2">
           <FontAwesomeIcon icon={faLocationDot} className="text-primary" />
-          <p className="text-primary">Porto - PT</p>
+          <p className="text-primary">{user.location}</p>
         </div>
       </CardContent>
     </Card>
