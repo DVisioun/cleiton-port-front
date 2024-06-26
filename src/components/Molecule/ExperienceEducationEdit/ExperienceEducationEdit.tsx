@@ -25,6 +25,7 @@ import { labelAtom } from '@/states/labelsAtom'
 import { removeExperience } from '@/api/Experience/remove-experience'
 import { removeEducation } from '@/api/Education/remove-education'
 import { LoadingScreen } from '@/components/Atom/Loading/Loading'
+import { getLabel } from '@/utils/getLabel'
 
 export function ExperienceEducationEdit() {
   const [isEditEducation, setIsEditEducation] = useState(false)
@@ -108,12 +109,7 @@ export function ExperienceEducationEdit() {
                 {experience?.map((item) => {
                   return (
                     <TableRow key={item.id}>
-                      <TableCell>
-                        {label?.map((l) => {
-                          if (l.label === item.title) return l.pt_content
-                          else return l.en_content
-                        })}
-                      </TableCell>
+                      <TableCell>{getLabel(item.title, 'en')}</TableCell>
                       <TableCell textAlign="center">
                         <button
                           onClick={() => {
@@ -160,12 +156,7 @@ export function ExperienceEducationEdit() {
                 {education?.map((item) => {
                   return (
                     <TableRow key={item.id}>
-                      <TableCell>
-                        {label.map((l) => {
-                          if (l.label === item.title) return l.pt_content
-                          else return ''
-                        })}
-                      </TableCell>
+                      <TableCell>{getLabel(item.title, 'en')}</TableCell>
                       <TableCell textAlign="center">
                         <button
                           onClick={() => {

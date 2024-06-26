@@ -4,7 +4,7 @@ import ThemeButton from '@/components/Atom/ThemeButton/ThemeButton'
 import { useLanguage } from '@/hooks/LanguageContext'
 
 function ConfigContent() {
-  const { language, setLanguage, refreshLanguage } = useLanguage()
+  const { language, setLanguage } = useLanguage()
 
   const changeLanguage = () => {
     const currentLanguage = localStorage.getItem('lang')

@@ -1,4 +1,5 @@
-import type { Metadata } from 'next'
+'use client'
+
 import { Poppins, Qwigley } from 'next/font/google'
 import '@/app/globals.css'
 import 'semantic-ui-css/semantic.min.css'
@@ -16,11 +17,6 @@ const qwigley = Qwigley({
   variable: '--font-qwigley',
 })
 
-export const metadata: Metadata = {
-  title: 'Kleytow Moreira | Portfolio',
-  description: 'Artista 3D',
-}
-
 export default function RootLayout({
   children,
 }: {
@@ -29,7 +25,7 @@ export default function RootLayout({
   return (
     <html>
       <body className={`${poppins.variable} ${qwigley.variable} font-sans`}>
-        <ThemeProvider initialTheme="light">
+        <ThemeProvider>
           <LanguageProvider>{children}</LanguageProvider>
         </ThemeProvider>
       </body>

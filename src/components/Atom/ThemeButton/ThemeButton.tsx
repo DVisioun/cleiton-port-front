@@ -1,22 +1,19 @@
 'use client'
-import React, { useContext } from 'react'
-import { ThemeContext } from '@/hooks/ThemeContext'
+import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMoon, faSun } from '@fortawesome/free-solid-svg-icons'
+import { useTheme } from '@/hooks/ThemeContext'
 
 function ThemeButton() {
-  const { theme, setTheme } = useContext(ThemeContext) || {
-    theme: 'light',
-    setTheme: () => {},
+  const { setTheme, theme } = useTheme()
+
+  const toggleTheme = () => {
+    const newTheme = theme === 'dark' ? 'light' : 'dark'
+    setTheme(newTheme)
   }
+
   return (
-    <button
-      onClick={() => {
-        setTheme(theme === 'dark' ? 'light' : 'dark')
-        document.documentElement.classList.toggle('dark')
-        document.documentElement.classList.toggle('light')
-      }}
-    >
+    <button onClick={toggleTheme}>
       {theme === 'dark' ? (
         <FontAwesomeIcon icon={faSun} className="solid text-2xl" />
       ) : (
