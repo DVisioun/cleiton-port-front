@@ -7,7 +7,7 @@ import ConfigContent from '@/components/Molecule/ConfigContent/ConfigContent'
 import { Footer } from '@/components/Molecule/Footer/Footer'
 import { useParams } from 'next/navigation'
 
-function Page({ params }: { params: { id: string } }) {
+function Page() {
   const { id } = useParams()
 
   return (
