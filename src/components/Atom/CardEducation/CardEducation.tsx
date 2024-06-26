@@ -19,7 +19,7 @@ function CardEducation({
     <div className="relative w-full px-4">
       <Segment
         raised
-        className="md-2.5:!h-72 !relative !h-64 !rounded-lg !bg-secondary sm-0:!h-72 sm-1.0:!h-64 sm-1:!h-60 sm-2:!h-56"
+        className="!relative !h-64 !rounded-lg !bg-secondary sm-0:!h-72 sm-1.0:!h-64 sm-1:!h-60 sm-2:!h-56 md-2.5:!h-72"
       >
         <Label
           as="a"

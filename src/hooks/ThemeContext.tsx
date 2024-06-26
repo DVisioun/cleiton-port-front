@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic'
 import { useContext, createContext, useState, useEffect } from 'react'
 
 interface ThemeContextProps {
@@ -7,7 +8,7 @@ interface ThemeContextProps {
 
 const ThemeContext = createContext({} as ThemeContextProps)
 
-export default function ThemeProvider({ children }) {
+function ThemeProvider({ children }) {
   const [theme, setTheme] = useState(localStorage.getItem('theme') ?? 'light')
 
   useEffect(() => {
@@ -31,3 +32,5 @@ export default function ThemeProvider({ children }) {
 export function useTheme() {
   return useContext(ThemeContext)
 }
+
+export default dynamic(() => Promise.resolve(ThemeProvider), { ssr: false })
