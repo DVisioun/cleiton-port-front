@@ -1,26 +1,18 @@
 'use client'
 
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
-import { ThemeContext } from '@/hooks/ThemeContext'
+import { useTheme } from '@/hooks/ThemeContext'
 
 export const TeamLogo = () => {
-  const { theme, setTheme } = useContext(ThemeContext) || {
-    theme: 'light',
-    setTheme: () => {},
-  }
-  const [darkMode, setDarkMode] = useState(false)
-
-  useEffect(() => {
-    setDarkMode(theme === 'dark')
-  }, [theme])
+  const { theme } = useTheme()
 
   return (
     <div className="flex items-center justify-center gap-3 pb-6 sm-0.2:flex-col sm-0.2:items-center sm-1:justify-center">
       <span className="text-lg sm-0:!text-xs sm-1:text-base">
         © 2024 - Developed by{' '}
       </span>
-      {darkMode ? (
+      {theme === 'dark' ? (
         <Image
           src="/images/dvision-logo-white.svg"
           alt=""

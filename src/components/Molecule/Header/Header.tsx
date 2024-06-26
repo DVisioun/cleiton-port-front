@@ -1,9 +1,9 @@
 'use client'
 import Image from 'next/image'
-import React, { useContext, useEffect, useState } from 'react'
+import React from 'react'
 import BlackLogo from '../../../../public/images/black_logo.svg'
 import WhiteLogo from '../../../../public/images/white_logo.svg'
-import { ThemeContext } from '@/hooks/ThemeContext'
+import { useTheme } from '@/hooks/ThemeContext'
 import Navbar from '@/components/Atom/Navbar/Navbar'
 import NavbarSocial from '@/components/Atom/NavbarSocial/NavbarSocial'
 
@@ -12,14 +12,7 @@ interface HeaderProps {
 }
 
 export default function Header({ bgColor }: HeaderProps) {
-  const { theme, setTheme } = useContext(ThemeContext) || {
-    theme: 'light',
-    setTheme: () => {},
-  }
-
-  useEffect(() => {
-    theme === 'light' ? setTheme('dark') : setTheme('light')
-  }, [])
+  const { theme } = useTheme()
 
   return (
     <div

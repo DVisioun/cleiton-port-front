@@ -22,7 +22,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="pt">
+    <html>
       <body className={`${poppins.variable} ${qwigley.variable} font-sans`}>
         <div className="flex">
           <ToastContainer
