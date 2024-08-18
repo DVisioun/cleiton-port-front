@@ -95,7 +95,7 @@ Modo Desktop 💻
 
 ## Deployment ☁
 
-Deploy realizado pela plataforma Vercel. Clique no botão abaixo e acesse o projeto.<br><br>
+Deploy realizado na DigitalOcean em uma VM. Clique no botão abaixo e acesse o projeto.<br><br>
 [![portfolio](https://img.shields.io/badge/-CLIQUE%20AQUI-yellowgreen)](https://www.kleytowmoreira.art/)
 
 ## Como rodar
